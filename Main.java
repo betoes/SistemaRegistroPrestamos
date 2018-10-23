@@ -16,7 +16,7 @@ import java.util.Scanner;
  */
 public class Main {
 
-    static final int AUMENTO = 1;
+    static final int AUMENTO = 12;
     static final int NUMMESES = 12;
     public static void main(String[] args) {
         int meses[]={0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};

@@ -1,4 +1,4 @@
-Integrantes del equipo:
--José Alberto Espinoza
--Angel Daniel Sanchez
--Jethran Gomez San Gabriel
+**Integrantes del equipo:**  
+-Josï¿½ Alberto Espinoza  
+-Angel Daniel Sanchez  
+-Jethran Gomez San Gabriel  
