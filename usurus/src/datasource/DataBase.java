@@ -1,48 +1,65 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package datasource;
 
+
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
  *
- * @author Ángel Sánchez
- * @version 1.0
- * @since 2018/10/23
+ * 
  */
 public class DataBase {
+    
+  public static Connection connection;
+  private Statement statement;
+  public static DataBase database;
 
-  private static Connection connection;
+  private DataBase() {
+  }
 
-  private static void makeConnection() {
+  private static void setConnection(){
+    Configuracion configuracion= new Configuracion();
+    Properties configuracionProperties = null;
     try {
-      String url = "jdbc:mysql//localhost/";
-      String dataBase = "usurus";
-      String userName = "equipoConstruccion";
-      String password = "9988774321";
-
-      connection = (Connection) DriverManager.getConnection(url + dataBase, userName, password);
-    } catch (SQLException excepcion) {
-      java.util.logging.Logger.getLogger(DataBase.class.getName()).log(Level.SEVERE, null, excepcion);
-    }
+      configuracionProperties = configuracion.loadConfiguration();
+      String url= "jdbc:mysql://"+configuracionProperties.getProperty("server")+"/";
+      String databaseName = configuracionProperties.getProperty("database");
+      String userName = configuracionProperties.getProperty("username");
+      String password = configuracionProperties.getProperty("password");
+       
+      connection = DriverManager.getConnection(url+databaseName,userName,password);
+    } catch (IOException | SQLException ex) {
+      java.util.logging.Logger.getLogger(DataBase.class.getName()).log(Level.SEVERE, null, ex);
+    }     
   }
-
-  public static Connection getDataBaseconnection() {
-    makeConnection();
-    return DataBase.connection;
+    
+  public static Connection getDataBaseConnection() {
+    setConnection();
+    return connection;
+ 
   }
-
-  public static void closeConnection() {
-    if (connection != null) {
+    
+  public static void closeConnection(){
+    if(connection!=null){
       try {
-        if (!connection.isClosed()) {
-          connection.close();
+        if(!connection.isClosed()){
+            connection.close();
         }
-      } catch (SQLException excepcion) {
-        Logger.getLogger(DataBase.class.getName()).log(Level.SEVERE, null, excepcion);
+      } catch (SQLException ex) {
+        Logger.getLogger(DataBase.class.getName()).log(Level.SEVERE, null, ex);
       }
     }
   }
+
 }
