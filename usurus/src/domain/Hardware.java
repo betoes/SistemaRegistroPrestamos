@@ -2,19 +2,19 @@ package domain;
 
 /**
  *
- * @author Ángel Sánchez
+ * @author Ã�ngel SÃ¡nchez
  */
 public class Hardware {
 
-  private int numeroSerie;
+  private String numeroSerie;
   private String tipo;
   private String modelo;
-  private int numeroInventario;
+  private String numeroInventario;
   private String estado;
   private String descripcion;
 
-  public Hardware(int numeroSerie, String tipo, String modelo, int numeroInventario, String estado,
-          String descripcion) {
+  public Hardware(String numeroSerie, String tipo, String modelo, String numeroInventario, 
+      String estado, String descripcion) {
     this.numeroSerie = numeroSerie;
     this.tipo = tipo;
     this.modelo = modelo;
@@ -23,24 +23,51 @@ public class Hardware {
     this.descripcion = descripcion;
   }
 
-  public void agregarHardware(Hardware nuevo) {
-    
+  public String getNumeroSerie() {
+    return numeroSerie;
   }
 
-  public void verRegistro() {
+	public void setNumeroSerie(String numeroSerie) {
+		this.numeroSerie = numeroSerie;
+	}
 
-  }
+	public String getTipo() {
+		return tipo;
+	}
 
-  public void modificarRegistro() {
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
 
-  }
+	public String getModelo() {
+		return modelo;
+	}
 
-  public void eliminarRegistro() {
+	public void setModelo(String modelo) {
+		this.modelo = modelo;
+	}
 
-  }
+	public String getNumeroInventario() {
+		return numeroInventario;
+	}
 
-  private boolean validarRegistro() {
+	public void setNumeroInventario(String numeroInventario) {
+		this.numeroInventario = numeroInventario;
+	}
 
-    return false;
-  }
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
 }
