@@ -3,11 +3,11 @@ package dao;
 import domain.Hardware;
 
 public interface IHardwareDao {
-  public boolean registrarHardware(Hardware nuevo);
+  boolean registrarHardware(Hardware nuevo);
   
-  public void verSoftware(Hardware hw);
+  void verSoftware(Hardware hw);
   
-  public void eliminarSoftware();
+  void eliminarSoftware();
   
-  public void modificarSoftware();
+  void modificarSoftware();
 }
