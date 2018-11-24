@@ -4,10 +4,10 @@ import domain.Hardware;
 
 public interface IHardwareDao {
   boolean registrarHardware(Hardware nuevo);
-  
-  void verSoftware(Hardware hw);
-  
-  void eliminarSoftware();
-  
-  void modificarSoftware();
+
+  void verHardware(Hardware hw);
+
+  void eliminarHardware();
+
+  void modificarHardware();
 }
