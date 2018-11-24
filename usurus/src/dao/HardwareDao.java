@@ -1,14 +1,12 @@
 package dao;
 
-import java.awt.List;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import datasource.DataBase;
 import domain.Hardware;
 
@@ -21,13 +19,13 @@ import domain.Hardware;
 public class HardwareDao implements IHardwareDao {
   private Connection connection;
   private String query;
-  List<Hardware> hardware = new ArrayList<Hardware>();
-  
+  ArrayList<Hardware> hardware = new ArrayList<Hardware>();
 
   public HardwareDao() {
     
   }
 
+  @Override
   public boolean registrarHardware(Hardware nuevo) {
     query = "INSERT INTO hardware VALUES (?,?,?,?,?,?)";
     connection = DataBase.getDataBaseConnection();
@@ -62,12 +60,12 @@ public class HardwareDao implements IHardwareDao {
 	    
 	    ResultSet result = statement.executeQuery();
 	    result.next();
-	    String numeroSerie = result.getString(columnIndex);
-	    private String tipo;
-	    private String modelo;
-	    private String numeroInventario;
-	    private String estado;
-	    private String descripcion;
+      String numeroSerie = result.getString("serie");
+	    String tipo = result.getString("tipo");
+	    String modelo = result.getString("modelo");
+	    String numeroInventario = result.getString("numeroInventario");
+	    String estado = result.getString("estado");
+	    String descripcion = result.getString("descripcion");
 	  } catch (SQLException ex) {
 	    Logger.getLogger(HardwareDao.class.getName()).log(Level.SEVERE, "Error en la consulta", ex);
 	  } finally {
