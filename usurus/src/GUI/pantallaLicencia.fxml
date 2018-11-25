@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.pantallaLicenciaControlador">
+   <children>
+      <AnchorPane layoutX="-1.0" prefHeight="589.0" prefWidth="936.0">
+         <children>
+            <TableView fx:id="tbvisualizar" layoutX="5.0" layoutY="19.0" prefHeight="540.0" prefWidth="749.0">
+               <columns>
+                <TableColumn prefWidth="36.0" text="ID">
+                	<cellValueFactory>
+                		<PropertyValueFactory property="id" />
+                	</cellValueFactory> 
+                </TableColumn>
+                <TableColumn prefWidth="113.0" text="NumeroLicencias">
+                	<cellValueFactory>
+                		<PropertyValueFactory property="numerolicencias" />
+                	</cellValueFactory>
+                </TableColumn>
+                <TableColumn prefWidth="96.0" text="FechaInicio">
+                	<cellValueFactory>
+                		<PropertyValueFactory property="fechainicio" />
+                	</cellValueFactory>
+                </TableColumn>
+                <TableColumn prefWidth="72.0" text="FechaFin">
+      					<cellValueFactory>
+                		<PropertyValueFactory property="fechafin" />
+                	</cellValueFactory>                
+                </TableColumn>
+                <TableColumn prefWidth="145.0" text="Clave">
+      					<cellValueFactory>
+                		<PropertyValueFactory property="clave" />
+                	</cellValueFactory>                
+                </TableColumn>
+                <TableColumn prefWidth="87.0" text="Proveedor">
+      					<cellValueFactory>
+                		<PropertyValueFactory property="proveedor" />
+                	</cellValueFactory>                
+                </TableColumn>
+                <TableColumn minWidth="6.0" prefWidth="91.0" text="Caracter">
+      					<cellValueFactory>
+                		<PropertyValueFactory property="caracter" />
+                	</cellValueFactory>                
+                </TableColumn>
+                <TableColumn prefWidth="108.0" text="Tipo">
+      					<cellValueFactory>
+                		<PropertyValueFactory property="tipo" />
+                	</cellValueFactory>                
+                </TableColumn>
+              </columns>
+            </TableView>
+            <Button fx:id="bAgregar" layoutX="760.0" layoutY="73.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="116.0" text="Agregar" />
+            <Button fx:id="bEliminar" layoutX="760.0" layoutY="142.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="116.0" text="Eliminar " />
+            <Button fx:id="bModificar" layoutX="760.0" layoutY="216.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="116.0" text="Modificar " />
+            <Button fx:id="bBuscar" layoutX="760.0" layoutY="284.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="116.0" text="Buscar" />
+            <Button fx:id="bSalir" layoutX="760.0" layoutY="355.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="116.0" text="Salir" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

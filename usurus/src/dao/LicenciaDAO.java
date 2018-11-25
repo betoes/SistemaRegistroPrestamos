@@ -39,6 +39,7 @@ public class LicenciaDAO implements ILicenciaDAO {
         licencia.setFechaInicio(result.getDate("fechaInicio"));
         licencia.setFechaFin(result.getDate("fechaFin"));
         licencia.setClave(result.getString("clave"));
+        licencia.setProveedor(result.getString("proveedor"));
         licencia.setCaracter(result.getString("caracter"));
         licencia.setTipoLicenciamiento(result.getString("tipoLicenciamiento"));
 
