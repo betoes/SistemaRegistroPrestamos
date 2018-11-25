@@ -14,7 +14,7 @@ import javafx.scene.control.TableView;
 public class pantallaLicenciaControlador implements Initializable {
 
   @FXML
-  private TableView<Licencia> tbvisualizar;
+  private TableView<Licencia> tbLicencia;
 
   @FXML
   private Button bAgregar;
@@ -37,8 +37,8 @@ public class pantallaLicenciaControlador implements Initializable {
     LicenciaDAO licenciaDao = new LicenciaDAO();
     ObservableList<Licencia> listaObservable =
         FXCollections.observableArrayList(licenciaDao.obtenerLicencias());
-    tbvisualizar.setItems(listaObservable);
-    tbvisualizar.setDisable(false);
+    tbLicencia.setItems(listaObservable);
+    tbLicencia.setDisable(false);
 
   }
 

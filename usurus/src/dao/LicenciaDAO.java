@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -16,6 +17,15 @@ public class LicenciaDAO implements ILicenciaDAO {
   private List<Licencia> listaLicencias;
   private String query;
   private Connection connection;
+  private Licencia licencia;
+  private Date fechaInicio;
+  private Date fechaFin;
+  private int numeroLicencias;
+  private String idLicencia;
+  private String clave;
+  private String proveedor;
+  private String caracter;
+  private String tipoLicenciamiento;
 
   public LicenciaDAO() {
 
@@ -33,15 +43,18 @@ public class LicenciaDAO implements ILicenciaDAO {
       ResultSet result = statement.executeQuery();
 
       while (result.next()) {
-        Licencia licencia = new Licencia();
-        licencia.setIdLicencia(result.getString("idLicencia"));
-        licencia.setNumeroLicencias(result.getInt("numeroLicencias"));
-        licencia.setFechaInicio(result.getDate("fechaInicio"));
-        licencia.setFechaFin(result.getDate("fechaFin"));
-        licencia.setClave(result.getString("clave"));
-        licencia.setProveedor(result.getString("proveedor"));
-        licencia.setCaracter(result.getString("caracter"));
-        licencia.setTipoLicenciamiento(result.getString("tipoLicenciamiento"));
+
+        idLicencia = result.getString("idLicencia");
+        numeroLicencias = result.getInt("numeroLicencias");
+        fechaInicio = result.getDate("fechaInicio");
+        fechaFin = result.getDate("fechaFin");
+        clave = result.getString("clave");
+        proveedor = result.getString("proveedor");
+        caracter = result.getString("caracter");
+        tipoLicenciamiento = result.getString("tipoLicenciamiento");
+
+        licencia = new Licencia(idLicencia, numeroLicencias, fechaInicio, fechaFin, clave,
+            proveedor, caracter, tipoLicenciamiento);
 
         listaLicencias.add(licencia);
       }

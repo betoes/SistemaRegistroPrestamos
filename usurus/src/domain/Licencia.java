@@ -4,18 +4,27 @@ package domain;
 import java.util.Date;
 
 public class Licencia {
+  private String idLicencia;
+  private int numeroLicencias;
   private Date fechaInicio;
   private Date fechaFin;
-  private int numeroLicencias;
-  private String idLicencia;
   private String clave;
   private String proveedor;
   private String caracter;
   private String tipoLicenciamiento;
 
 
-  public Licencia() {
 
+  public Licencia(String idLicencia, int numeroLicencias, Date fechaInicio, Date fechaFin,
+      String clave, String proveedor, String caracter, String tipoLicenciamiento) {
+    this.idLicencia = idLicencia;
+    this.numeroLicencias = numeroLicencias;
+    this.fechaInicio = fechaInicio;
+    this.fechaFin = fechaFin;
+    this.clave = clave;
+    this.proveedor = proveedor;
+    this.caracter = caracter;
+    this.tipoLicenciamiento = tipoLicenciamiento;
   }
 
   public String getIdLicencia() {
