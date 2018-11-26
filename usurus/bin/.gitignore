@@ -1,2 +1,5 @@
 /datasource/
 /GUI/
+/dao/
+/domain/
+/tests_folder/
