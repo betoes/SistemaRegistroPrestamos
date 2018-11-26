@@ -1,15 +1,22 @@
 package GUI;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import dao.LicenciaDAO;
 import domain.Licencia;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
+import javafx.stage.Stage;
 
 public class pantallaLicenciaControlador implements Initializable {
 
@@ -30,6 +37,22 @@ public class pantallaLicenciaControlador implements Initializable {
 
   @FXML
   private Button bSalir;
+
+  @FXML
+  public void cargarPantallaAgregarLicencia() {
+    Stage stage = new Stage();
+    try {
+      Parent root = FXMLLoader.load(getClass().getResource("pantallaLicenciaAgregar.fxml"));
+      Scene scene = new Scene(root);
+
+
+      stage.setScene(scene);
+      stage.show();
+
+    } catch (IOException ex) {
+      Logger.getLogger(pantallaLicenciaControlador.class.getName()).log(Level.SEVERE, null, ex);
+    }
+  }
 
   @Override
   public void initialize(URL arg0, ResourceBundle arg1) {

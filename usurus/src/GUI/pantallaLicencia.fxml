@@ -54,7 +54,7 @@
                 </TableColumn>
               </columns>
             </TableView>
-            <Button fx:id="bAgregar" layoutX="760.0" layoutY="73.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="116.0" text="Agregar" />
+            <Button fx:id="bAgregar" layoutX="760.0" layoutY="73.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="116.0" text="Agregar" onAction="#cargarPantallaAgregarLicencia" />
             <Button fx:id="bEliminar" layoutX="760.0" layoutY="142.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="116.0" text="Eliminar " />
             <Button fx:id="bModificar" layoutX="760.0" layoutY="216.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="116.0" text="Modificar " />
             <Button fx:id="bBuscar" layoutX="760.0" layoutY="284.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="116.0" text="Buscar" />
