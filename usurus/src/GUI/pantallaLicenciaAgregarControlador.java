@@ -18,10 +18,10 @@ public class pantallaLicenciaAgregarControlador implements Initializable {
   private TextField txtNoLicencias;
 
   @FXML
-  private DatePicker dpFechaInicio;
+  private DatePicker dpFechaAgregado;
 
   @FXML
-  private DatePicker dpFechaFin;
+  private DatePicker dpFechaExpiracion;
 
   @FXML
   private TextField txtClave;

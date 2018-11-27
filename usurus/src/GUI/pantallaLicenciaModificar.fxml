@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="364.0" prefWidth="620.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="30.0" layoutY="26.0" text="Modificar Licencia" textFill="#6531d7">
+         <font>
+            <Font name="Century" size="26.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtBuscarId" layoutX="336.0" layoutY="30.0" prefHeight="25.0" prefWidth="177.0" />
+      <Button fx:id="bBuscar" layoutX="523.0" layoutY="30.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="62.0" text="Buscar" />
+      <Label layoutX="30.0" layoutY="104.0" text="ID:" />
+      <Label layoutX="31.0" layoutY="162.0" text="No. de licencias:" />
+      <Label layoutX="31.0" layoutY="226.0" text="Fecha Agregado:" />
+      <Label layoutX="31.0" layoutY="286.0" text="Fecha expiración:" />
+      <Label layoutX="336.0" layoutY="104.0" text="Clave:" />
+      <Label layoutX="338.0" layoutY="162.0" text="Proveedor:" />
+      <Label layoutX="336.0" layoutY="226.0" text="Caracter:" />
+      <Label layoutX="338.0" layoutY="286.0" text="Tipo licencia:" />
+      <TextField fx:id="txtIdLicencia" layoutX="62.0" layoutY="100.0" prefHeight="25.0" prefWidth="234.0" />
+      <TextField fx:id="txtNoLicencia" layoutX="126.0" layoutY="158.0" prefHeight="25.0" prefWidth="171.0" />
+      <TextField fx:id="txtClave" layoutX="374.0" layoutY="100.0" prefHeight="25.0" prefWidth="223.0" />
+      <TextField fx:id="txtCaracter" layoutX="411.0" layoutY="222.0" prefHeight="25.0" prefWidth="185.0" />
+      <DatePicker fx:id="dpFechaAgregado" layoutX="125.0" layoutY="222.0" prefHeight="25.0" prefWidth="171.0" />
+      <DatePicker fx:id="dpFechaExpiracion" layoutX="125.0" layoutY="282.0" />
+      <ComboBox fx:id="cbProveedor" layoutX="411.0" layoutY="158.0" prefHeight="25.0" prefWidth="185.0" />
+      <ComboBox fx:id="cbTipoLicencia" layoutX="411.0" layoutY="282.0" prefHeight="25.0" prefWidth="185.0" />
+      <Button id="bGuardar" layoutX="537.0" layoutY="325.0" mnemonicParsing="false" text="Guardar" />
+      <Button id="bSalir" layoutX="471.0" layoutY="325.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="59.0" text="Salir" textFill="#ee4242" />
+   </children>
+</AnchorPane>
