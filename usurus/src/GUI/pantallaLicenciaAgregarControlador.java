@@ -99,11 +99,16 @@ public class pantallaLicenciaAgregarControlador implements Initializable {
 
   private Date regresarFecha(DatePicker date) throws ParseException {
 
-    Date fecha = null;
+    Date fecha;
     SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
     localDate = date.getValue();
-    String dateI = format.format(java.sql.Date.valueOf(localDate.toString()));
-    fecha = format.parse(dateI);
+
+    if (localDate == null) {
+      fecha = null;
+    } else {
+      String dateI = format.format(java.sql.Date.valueOf(localDate.toString()));
+      fecha = format.parse(dateI);
+    }
 
 
     return fecha;
@@ -115,7 +120,8 @@ public class pantallaLicenciaAgregarControlador implements Initializable {
 
     if (txtidLicencia.getText().equals("") || txtNoLicencias.getText().equals("")
         || txtClave.getText().equals("") || cbProveedor.getValue().toString().equals("")
-        || txtCaracter.getText().equals("") || cbTipoLicencia.getValue().toString().equals("")) {
+        || txtCaracter.getText().equals("") || cbTipoLicencia.getValue().toString().equals("")
+        || regresarFecha(dpFechaAgregado) == null || regresarFecha(dpFechaExpiracion) == null) {
 
       Alert alert = new Alert(Alert.AlertType.INFORMATION);
       alert.setTitle("Informacion");
