@@ -7,7 +7,7 @@ public interface ILicenciaDAO {
 
   List<Licencia> obtenerLicencias();
 
-  Licencia obtenerLicencia(int id);
+  Licencia obtenerLicencia(String id);
 
   boolean agregarLicencia(Licencia licencia);
 

@@ -54,6 +54,22 @@ public class pantallaLicenciaControlador implements Initializable {
     }
   }
 
+  @FXML
+  public void cargarPantallaBuscarLicencia() {
+    Stage stage = new Stage();
+    try {
+      Parent root = FXMLLoader.load(getClass().getResource("pantallaLicenciaBuscar.fxml"));
+      Scene scene = new Scene(root);
+
+
+      stage.setScene(scene);
+      stage.show();
+
+    } catch (IOException ex) {
+      Logger.getLogger(pantallaLicenciaControlador.class.getName()).log(Level.SEVERE, null, ex);
+    }
+  }
+
   @Override
   public void initialize(URL arg0, ResourceBundle arg1) {
 

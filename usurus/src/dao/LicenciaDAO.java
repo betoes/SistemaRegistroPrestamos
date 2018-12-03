@@ -70,19 +70,18 @@ public class LicenciaDAO implements ILicenciaDAO {
   }
 
   @Override
-  public Licencia obtenerLicencia(int id) {
+  public Licencia obtenerLicencia(String id) {
 
     query = "Select * from licencia where idLicencia = ?";
     connection = DataBase.getDataBaseConnection();
-    licencia = null;
 
     try {
       PreparedStatement statement = connection.prepareStatement(query);
-      statement.setInt(1, id);
+      statement.setString(0, id);
 
       ResultSet result = statement.executeQuery();
+      result.next();
 
-      idLicencia = Integer.toString(id);
       numeroLicencias = result.getInt("numeroLicencias");
       fechaInicio = result.getDate("fechaInicio");
       fechaFin = result.getDate("fechaFin");
@@ -91,7 +90,8 @@ public class LicenciaDAO implements ILicenciaDAO {
       caracter = result.getString("caracter");
       tipoLicenciamiento = result.getString("tipoLicenciamiento");
 
-      licencia = new Licencia(idLicencia, numeroLicencias, fechaInicio, fechaFin, clave, proveedor,
+
+      licencia = new Licencia(id, numeroLicencias, fechaInicio, fechaFin, clave, proveedor,
           caracter, tipoLicenciamiento);
 
 
