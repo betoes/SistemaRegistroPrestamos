@@ -13,6 +13,6 @@ public interface ILicenciaDAO {
 
   boolean modficarLicencia(Licencia licencia);
 
-  boolean eliminarLicencia(int idLicencia);
+  boolean eliminarLicencia(String id);
 
 }

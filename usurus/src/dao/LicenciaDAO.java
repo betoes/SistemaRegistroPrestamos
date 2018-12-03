@@ -144,9 +144,27 @@ public class LicenciaDAO implements ILicenciaDAO {
   }
 
   @Override
-  public boolean eliminarLicencia(int idLicencia) {
-    // TODO Auto-generated method stub
-    return false;
+  public boolean eliminarLicencia(String id) {
+
+    boolean borrado = false;
+    query = "Delete from licencia where idLicencia = ?";
+    connection = DataBase.getDataBaseConnection();
+
+    try {
+      PreparedStatement statement = connection.prepareStatement(query);
+      statement.setString(1, id);
+
+      statement.executeUpdate();
+
+      borrado = true;
+    } catch (SQLException ex) {
+      Logger.getLogger(LicenciaDAO.class.getName()).log(Level.SEVERE, null, ex);
+    } finally {
+      DataBase.closeConnection();
+    }
+
+
+    return borrado;
   }
 
 }

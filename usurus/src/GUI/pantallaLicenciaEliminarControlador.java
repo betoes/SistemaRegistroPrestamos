@@ -11,7 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
-public class pantallaLicenciaBuscarControlador implements Initializable {
+public class pantallaLicenciaEliminarControlador implements Initializable {
 
   private LicenciaDAO licenciaDao = new LicenciaDAO();
 
@@ -43,14 +43,16 @@ public class pantallaLicenciaBuscarControlador implements Initializable {
   private TextField txtTipoLicencia;
 
   @FXML
-  private Button bRegresar;
+  private Button bSalir;
 
   @FXML
   private Button bBuscar;
 
   @FXML
-  public void buscarLicencia() {
+  private Button bEliminar;
 
+  @FXML
+  public void BuscarLicencia() {
     String id = txtBuscarId.getText();
 
     Licencia licencia = licenciaDao.obtenerLicencia(id);
@@ -65,6 +67,14 @@ public class pantallaLicenciaBuscarControlador implements Initializable {
     txtTipoLicencia.setText(licencia.getTipoLicenciamiento());
 
   }
+
+  @FXML
+  public void eliminarLicencia() {
+    String id = txtIdLicencia.getText();
+
+    licenciaDao.eliminarLicencia(id);
+  }
+
 
   public String regresarFecha(Date fecha) {
 
