@@ -77,7 +77,7 @@ public class LicenciaDAO implements ILicenciaDAO {
 
     try {
       PreparedStatement statement = connection.prepareStatement(query);
-      statement.setString(0, id);
+      statement.setString(1, id);
 
       ResultSet result = statement.executeQuery();
       result.next();

@@ -13,7 +13,7 @@ import javafx.scene.control.TextField;
 
 public class pantallaLicenciaBuscarControlador implements Initializable {
 
-  private LicenciaDAO licenciaDao;
+  private LicenciaDAO licenciaDao = new LicenciaDAO();
 
   @FXML
   private TextField txtBuscarId;
