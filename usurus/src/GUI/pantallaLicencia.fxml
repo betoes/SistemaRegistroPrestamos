@@ -56,7 +56,7 @@
             </TableView>
             <Button fx:id="bAgregar" layoutX="760.0" layoutY="73.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="116.0" text="Agregar" onAction="#cargarPantallaAgregarLicencia" />
             <Button fx:id="bEliminar" layoutX="760.0" layoutY="142.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="116.0" text="Eliminar " onAction="#cargarPantallaElimanarLicencia"/>
-            <Button fx:id="bModificar" layoutX="760.0" layoutY="216.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="116.0" text="Modificar " />
+            <Button fx:id="bModificar" layoutX="760.0" layoutY="216.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="116.0" text="Modificar " onAction="#cargarPantallaModificarLicencia" />
             <Button fx:id="bBuscar" layoutX="760.0" layoutY="284.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="116.0" text="Buscar" onAction="#cargarPantallaBuscarLicencia" />
             <Button fx:id="bSalir" layoutX="760.0" layoutY="355.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="116.0" text="Salir" />
          </children>

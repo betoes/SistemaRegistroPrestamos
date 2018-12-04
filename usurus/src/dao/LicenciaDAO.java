@@ -139,8 +139,37 @@ public class LicenciaDAO implements ILicenciaDAO {
 
   @Override
   public boolean modficarLicencia(Licencia licencia) {
-    // TODO Auto-generated method stub
-    return false;
+
+    boolean editado = false;
+    query =
+        "UPDATE licencia set numeroLicencias = ?, fechaInicio = ?, fechaFin = ?, clave = ?, proveedor = ?, caracter = ?, tipoLicenciamiento = ? where idLicencia = ?";
+    connection = DataBase.getDataBaseConnection();
+    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+
+    try {
+      PreparedStatement statement = connection.prepareStatement(query);
+      String dateF = format.format(licencia.getFechaFin());
+      String dateI = format.format(licencia.getFechaInicio());
+
+      statement.setInt(1, licencia.getNumeroLicencias());
+      statement.setDate(2, java.sql.Date.valueOf(dateI));
+      statement.setDate(3, java.sql.Date.valueOf(dateF));
+      statement.setString(4, licencia.getClave());
+      statement.setString(5, licencia.getProveedor());
+      statement.setString(6, licencia.getCaracter());
+      statement.setString(7, licencia.getTipoLicenciamiento());
+      statement.setString(8, licencia.getIdLicencia());
+
+      statement.executeUpdate();
+
+      editado = true;
+    } catch (SQLException ex) {
+      Logger.getLogger(LicenciaDAO.class.getName()).log(Level.SEVERE, null, ex);
+    } finally {
+      DataBase.closeConnection();
+    }
+
+    return editado;
   }
 
   @Override
