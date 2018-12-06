@@ -1,13 +1,18 @@
 package dao;
 
+import java.util.List;
+
 import domain.Hardware;
 
 public interface IHardwareDao {
-  boolean registrarHardware(Hardware nuevo);
+  
+  List<Hardware> obtenerHardware(); 
 
-  void verHardware(Hardware hw);
+  Hardware obtenerHardware(String noInventario); //ya
 
-  void eliminarHardware();
+  boolean registrarHardware(Hardware nuevo); //ya
 
-  void modificarHardware();
+  boolean eliminarHardware(String noInventario);
+
+  boolean modificarHardware(Hardware hardware);
 }

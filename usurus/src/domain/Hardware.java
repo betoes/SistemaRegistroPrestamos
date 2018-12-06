@@ -12,6 +12,10 @@ public class Hardware {
   private String numeroInventario;
   private String estado;
   private String descripcion;
+  
+  public Hardware() {
+    
+  }
 
   public Hardware(String numeroSerie, String tipo, String modelo, String numeroInventario, 
       String estado, String descripcion) {
