@@ -10,45 +10,40 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.control.cell.PropertyValueFactory ?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.pantallaLicenciaControlador">
-   <children>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+	   <children>
       <AnchorPane layoutX="-1.0" prefHeight="589.0" prefWidth="936.0">
          <children>
-            <TableView fx:id="tbLicencia" layoutX="5.0" layoutY="19.0" prefHeight="540.0" prefWidth="749.0">
+            <TableView fx:id="tbHardware" layoutX="5.0" layoutY="19.0" prefHeight="540.0" prefWidth="749.0">
                <columns>
-                <TableColumn prefWidth="120.0" text="No. de inventario">
+                <TableColumn prefWidth="36.0" text="No. serie">
                 	<cellValueFactory>
-                		<PropertyValueFactory property="idLicencia" />
+                		<PropertyValueFactory property="numeroSerie" />
                 	</cellValueFactory> 
                 </TableColumn>
-                <TableColumn prefWidth="77.0" text="Tipo">
+                <TableColumn prefWidth="113.0" text="Tipo">
                 	<cellValueFactory>
-                		<PropertyValueFactory property="numeroLicencias" />
+                		<PropertyValueFactory property="tipo" />
                 	</cellValueFactory>
                 </TableColumn>
-                <TableColumn prefWidth="63.0" text="Modelo">
+                <TableColumn prefWidth="96.0" text="Modelo">
                 	<cellValueFactory>
-                		<PropertyValueFactory property="fechaInicio" />
+                		<PropertyValueFactory property="modelo" />
                 	</cellValueFactory>
                 </TableColumn>
-                <TableColumn prefWidth="57.0" text="No. serie">
+                <TableColumn prefWidth="162.0" text="No. inventario">
       					<cellValueFactory>
-                		<PropertyValueFactory property="fechaFin" />
+                		<PropertyValueFactory property="numeroInventario" />
                 	</cellValueFactory>                
                 </TableColumn>
-                <TableColumn prefWidth="162.0" text="Ubicación">
+                <TableColumn prefWidth="126.0" text="Estado">
       					<cellValueFactory>
-                		<PropertyValueFactory property="clave" />
+                		<PropertyValueFactory property="estado" />
                 	</cellValueFactory>                
                 </TableColumn>
-                <TableColumn minWidth="7.0" prefWidth="104.0" text="Estado">
+                <TableColumn minWidth="7.0" prefWidth="215.0" text="Descripción">
       					<cellValueFactory>
-                		<PropertyValueFactory property="proveedor" />
-                	</cellValueFactory>                
-                </TableColumn>
-                <TableColumn minWidth="6.0" prefWidth="164.0" text="Descripción">
-      					<cellValueFactory>
-                		<PropertyValueFactory property="caracter" />
+                		<PropertyValueFactory property="descripcion" />
                 	</cellValueFactory>                
                 </TableColumn>
               </columns>

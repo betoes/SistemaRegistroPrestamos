@@ -12,9 +12,9 @@ public class Hardware {
   private String numeroInventario;
   private String estado;
   private String descripcion;
-  
+
   public Hardware() {
-    
+
   }
 
   public Hardware(String numeroSerie, String tipo, String modelo, String numeroInventario, 
@@ -31,47 +31,47 @@ public class Hardware {
     return numeroSerie;
   }
 
-	public void setNumeroSerie(String numeroSerie) {
-		this.numeroSerie = numeroSerie;
-	}
+  public void setNumeroSerie(String numeroSerie) {
+    this.numeroSerie = numeroSerie;
+  }
 
-	public String getTipo() {
-		return tipo;
-	}
+  public String getTipo() {
+    return tipo;
+  }
 
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
-	}
+  public void setTipo(String tipo) {
+    this.tipo = tipo;
+  }
 
-	public String getModelo() {
-		return modelo;
-	}
+  public String getModelo() {
+    return modelo;
+  }
 
-	public void setModelo(String modelo) {
-		this.modelo = modelo;
-	}
+  public void setModelo(String modelo) {
+    this.modelo = modelo;
+  }
 
-	public String getNumeroInventario() {
-		return numeroInventario;
-	}
+  public String getNumeroInventario() {
+    return numeroInventario;
+  }
 
-	public void setNumeroInventario(String numeroInventario) {
-		this.numeroInventario = numeroInventario;
-	}
+  public void setNumeroInventario(String numeroInventario) {
+    this.numeroInventario = numeroInventario;
+  }
 
-	public String getEstado() {
-		return estado;
-	}
+  public String getEstado() {
+    return estado;
+  }
 
-	public void setEstado(String estado) {
-		this.estado = estado;
-	}
+  public void setEstado(String estado) {
+    this.estado = estado;
+  }
 
-	public String getDescripcion() {
-		return descripcion;
-	}
+  public String getDescripcion() {
+    return descripcion;
+  }
 
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
+  public void setDescripcion(String descripcion) {
+    this.descripcion = descripcion;
+  }
 }

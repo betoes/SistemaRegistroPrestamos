@@ -15,4 +15,6 @@ public interface IHardwareDao {
   boolean eliminarHardware(String noInventario);
 
   boolean modificarHardware(Hardware hardware);
+  
+  boolean validar(String noInventario);
 }
