@@ -39,6 +39,14 @@ public class pantallaLicenciaControlador implements Initializable {
   private Button bSalir;
 
   @FXML
+  private void closeButtonAction() {
+
+    Stage stage = (Stage) bBuscar.getScene().getWindow();
+
+    stage.close();
+  }
+
+  @FXML
   public void cargarPantallaAgregarLicencia() {
     Stage stage = new Stage();
     try {
@@ -48,6 +56,7 @@ public class pantallaLicenciaControlador implements Initializable {
 
       stage.setScene(scene);
       stage.show();
+      closeButtonAction();
 
     } catch (IOException ex) {
       Logger.getLogger(pantallaLicenciaControlador.class.getName()).log(Level.SEVERE, null, ex);
@@ -64,6 +73,7 @@ public class pantallaLicenciaControlador implements Initializable {
 
       stage.setScene(scene);
       stage.show();
+      closeButtonAction();
 
     } catch (IOException ex) {
       Logger.getLogger(pantallaLicenciaControlador.class.getName()).log(Level.SEVERE, null, ex);
@@ -80,6 +90,7 @@ public class pantallaLicenciaControlador implements Initializable {
 
       stage.setScene(scene);
       stage.show();
+      closeButtonAction();
 
     } catch (IOException ex) {
       Logger.getLogger(pantallaLicenciaControlador.class.getName()).log(Level.SEVERE, null, ex);
@@ -96,6 +107,7 @@ public class pantallaLicenciaControlador implements Initializable {
 
       stage.setScene(scene);
       stage.show();
+      closeButtonAction();
 
     } catch (IOException ex) {
       Logger.getLogger(pantallaLicenciaControlador.class.getName()).log(Level.SEVERE, null, ex);

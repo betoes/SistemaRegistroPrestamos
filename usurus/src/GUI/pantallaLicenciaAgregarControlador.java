@@ -1,20 +1,27 @@
 package GUI;
 
+import java.io.IOException;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import dao.LicenciaDAO;
 import domain.Licencia;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 public class pantallaLicenciaAgregarControlador implements Initializable {
 
@@ -60,6 +67,32 @@ public class pantallaLicenciaAgregarControlador implements Initializable {
   @FXML
   private Button bSalir;
 
+  @FXML
+  public void cargarPantallaLicencia() {
+    Stage stage = new Stage();
+    try {
+      Parent root = FXMLLoader.load(getClass().getResource("pantallaLicencia.fxml"));
+      Scene scene = new Scene(root);
+
+
+      stage.setScene(scene);
+      stage.show();
+      closeButtonAction();
+
+    } catch (IOException ex) {
+      Logger.getLogger(pantallaLicenciaAgregarControlador.class.getName()).log(Level.SEVERE, null,
+          ex);
+    }
+  }
+
+  @FXML
+  private void closeButtonAction() {
+
+    Stage stage = (Stage) bSalir.getScene().getWindow();
+
+    stage.close();
+  }
+
 
   @FXML
   public boolean agregarLicencia() throws ParseException {
@@ -88,7 +121,7 @@ public class pantallaLicenciaAgregarControlador implements Initializable {
           Alert alert = new Alert(Alert.AlertType.INFORMATION);
           alert.setTitle("Informacion");
           alert.setHeaderText("Fecha incorrecta");
-          alert.setContentText("Revise las fechas ingresadas");
+          alert.setContentText("Revise las fechas ingresadas\n" + "Al menos un mes de diferencia");
 
           alert.showAndWait();
         }

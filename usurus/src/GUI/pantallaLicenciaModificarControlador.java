@@ -1,20 +1,28 @@
 package GUI;
 
+import java.io.IOException;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import dao.LicenciaDAO;
 import domain.Licencia;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 public class pantallaLicenciaModificarControlador implements Initializable {
 
@@ -67,11 +75,37 @@ public class pantallaLicenciaModificarControlador implements Initializable {
   private Button bSalir;
 
   @FXML
+  public void cargarPantallaLicencia() {
+    Stage stage = new Stage();
+    try {
+      Parent root = FXMLLoader.load(getClass().getResource("pantallaLicencia.fxml"));
+      Scene scene = new Scene(root);
+
+
+      stage.setScene(scene);
+      stage.show();
+      closeButtonAction();
+
+    } catch (IOException ex) {
+      Logger.getLogger(pantallaLicenciaModificarControlador.class.getName()).log(Level.SEVERE, null,
+          ex);
+    }
+  }
+
+  @FXML
+  private void closeButtonAction() {
+
+    Stage stage = (Stage) bBuscar.getScene().getWindow();
+
+    stage.close();
+  }
+
+
+  @FXML
   public void BuscarLicencia() {
     String id = txtBuscarId.getText();
 
     licencia = licenciaDao.obtenerLicencia(id);
-
 
     txtIdLicencia.setText(licencia.getIdLicencia());
     txtNoLicencia.setText(Integer.toString(licencia.getNumeroLicencias()));
@@ -151,10 +185,9 @@ public class pantallaLicenciaModificarControlador implements Initializable {
     boolean vacio = true;
 
     if (txtIdLicencia.getText().equals("") || txtNoLicencia.getText().equals("")
-        || txtClave.getText().equals("")
-        || cbProveedor.getSelectionModel().getSelectedItem().equals(null)
+        || txtClave.getText().equals("") || cbProveedor.getValue().toString().equals("Seleccion..")
         || txtCaracter.getText().equals("")
-        || cbTipoLicencia.getSelectionModel().getSelectedItem().equals(null)
+        || cbTipoLicencia.getValue().toString().equals("Seleccion..")
         || regresarFecha(dpFechaAgregado) == null || regresarFecha(dpFechaExpiracion) == null) {
 
       Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -170,12 +203,35 @@ public class pantallaLicenciaModificarControlador implements Initializable {
     return vacio;
   }
 
+  public void tamañoCampo(TextField textField, int tamaño) {
+    textField.setOnKeyTyped(event -> {
+      int maxCaracter = tamaño;
+      if (textField.getText().length() > maxCaracter)
+        event.consume();
+    });
+  }
+
+  public void tipoTexto(TextField textField) {
+    textField.textProperty().addListener(
+        (ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
+          if (!newValue.matches("[0-9]")) {
+            textField.setText(newValue.replaceAll("[^0-9]", ""));
+          }
+        });
+  }
 
   @Override
   public void initialize(URL arg0, ResourceBundle arg1) {
     // TODO Auto-generated method stub
     cbProveedor.getItems().addAll("Microsoft", "Apple");
     cbTipoLicencia.getItems().addAll("Hardware", "Software");
+
+    cbProveedor.setValue("Seleccion..");
+    cbTipoLicencia.setValue("Seleccion..");
+
+    dpFechaAgregado.setEditable(false);
+    dpFechaExpiracion.setEditable(false);
+
   }
 
 }

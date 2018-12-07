@@ -34,6 +34,6 @@
       <ComboBox fx:id="cbProveedor" layoutX="411.0" layoutY="158.0" prefHeight="25.0" prefWidth="185.0" />
       <ComboBox fx:id="cbTipoLicencia" layoutX="411.0" layoutY="282.0" prefHeight="25.0" prefWidth="185.0" />
       <Button fx:id="bGuardar" layoutX="537.0" layoutY="325.0" mnemonicParsing="false" text="Guardar" onAction="#modificarLicencia" />
-      <Button fx:id="bSalir" layoutX="471.0" layoutY="325.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="59.0" text="Salir" textFill="#ee4242" />
+      <Button fx:id="bSalir" layoutX="471.0" layoutY="325.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="59.0" text="Salir" textFill="#ee4242" onAction="#cargarPantallaLicencia"/>
    </children>
 </AnchorPane>
