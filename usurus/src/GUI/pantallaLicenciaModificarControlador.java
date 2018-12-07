@@ -151,8 +151,10 @@ public class pantallaLicenciaModificarControlador implements Initializable {
     boolean vacio = true;
 
     if (txtIdLicencia.getText().equals("") || txtNoLicencia.getText().equals("")
-        || txtClave.getText().equals("") || cbProveedor.getValue().toString().equals("")
-        || txtCaracter.getText().equals("") || cbTipoLicencia.getValue().toString().equals("")
+        || txtClave.getText().equals("")
+        || cbProveedor.getSelectionModel().getSelectedItem().equals(null)
+        || txtCaracter.getText().equals("")
+        || cbTipoLicencia.getSelectionModel().getSelectedItem().equals(null)
         || regresarFecha(dpFechaAgregado) == null || regresarFecha(dpFechaExpiracion) == null) {
 
       Alert alert = new Alert(Alert.AlertType.INFORMATION);

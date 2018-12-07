@@ -196,4 +196,31 @@ public class LicenciaDAO implements ILicenciaDAO {
     return borrado;
   }
 
+  @Override
+  public boolean existe(String id) {
+
+    boolean existe = false;
+    query = "Select * from licencia where idLicencia = ?";
+    connection = DataBase.getDataBaseConnection();
+
+    try {
+      PreparedStatement statement = connection.prepareStatement(query);
+      statement.setString(1, id);
+
+      ResultSet result = statement.executeQuery();
+
+      existe = result.next();
+
+
+    } catch (SQLException ex) {
+      Logger.getLogger(LicenciaDAO.class.getName()).log(Level.SEVERE, null, ex);
+    } finally {
+      DataBase.closeConnection();
+    }
+
+    return existe;
+  }
+
+
+
 }

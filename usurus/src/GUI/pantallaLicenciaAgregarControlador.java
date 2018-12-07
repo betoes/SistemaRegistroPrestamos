@@ -68,22 +68,32 @@ public class pantallaLicenciaAgregarControlador implements Initializable {
 
     if (validarTextoVacio() == false) {
 
-      idLicencia = txtidLicencia.getText();
-      numeroLicencias = Integer.parseInt(txtNoLicencias.getText());
-      fechaInicio = regresarFecha(dpFechaAgregado);
-      fechaFin = regresarFecha(dpFechaExpiracion);
-      clave = txtClave.getText();
-      proveedor = cbProveedor.getValue().toString();
-      caracter = txtCaracter.getText();
-      tipoLicenciamiento = cbTipoLicencia.getValue().toString();
+      if (licenciaDao.existe(txtidLicencia.getText()) == false) {
+        idLicencia = txtidLicencia.getText();
+        numeroLicencias = Integer.parseInt(txtNoLicencias.getText());
+        fechaInicio = regresarFecha(dpFechaAgregado);
+        fechaFin = regresarFecha(dpFechaExpiracion);
+        clave = txtClave.getText();
+        proveedor = cbProveedor.getValue().toString();
+        caracter = txtCaracter.getText();
+        tipoLicenciamiento = cbTipoLicencia.getValue().toString();
 
-      licencia = new Licencia(idLicencia, numeroLicencias, fechaInicio, fechaFin, clave, proveedor,
-          caracter, tipoLicenciamiento);
+        licencia = new Licencia(idLicencia, numeroLicencias, fechaInicio, fechaFin, clave,
+            proveedor, caracter, tipoLicenciamiento);
 
-      licenciaDao.agregarLicencia(licencia);
-      agregado = true;
+        licenciaDao.agregarLicencia(licencia);
+        agregado = true;
+      } else {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Informacion");
+        alert.setHeaderText("Ya existe");
+        alert.setContentText("La licencia ya existe en el registro");
+
+        alert.showAndWait();
+      }
 
     }
+
 
     if (agregado == true) {
       Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -119,8 +129,10 @@ public class pantallaLicenciaAgregarControlador implements Initializable {
     boolean vacio = true;
 
     if (txtidLicencia.getText().equals("") || txtNoLicencias.getText().equals("")
-        || txtClave.getText().equals("") || cbProveedor.getValue().toString().equals("")
-        || txtCaracter.getText().equals("") || cbTipoLicencia.getValue().toString().equals("")
+        || txtClave.getText().equals("")
+        || cbProveedor.getSelectionModel().getSelectedItem().equals(null)
+        || txtCaracter.getText().equals("")
+        || cbTipoLicencia.getSelectionModel().getSelectedItem().equals(null)
         || regresarFecha(dpFechaAgregado) == null || regresarFecha(dpFechaExpiracion) == null) {
 
       Alert alert = new Alert(Alert.AlertType.INFORMATION);

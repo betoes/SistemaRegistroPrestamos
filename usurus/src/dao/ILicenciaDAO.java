@@ -15,4 +15,6 @@ public interface ILicenciaDAO {
 
   boolean eliminarLicencia(String id);
 
+  boolean existe(String id);
+
 }
