@@ -1,12 +1,12 @@
 package GUI;
 
-import dao.HardwareDao;
-import domain.Hardware;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import dao.HardwareDao;
+import domain.Hardware;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -18,7 +18,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 
-public class PantallaHardwareControlador {
+public class PantallaHardwareControlador implements Initializable {
 
   @FXML
   private TableView<Hardware> tbHardware;
@@ -102,7 +102,7 @@ public class PantallaHardwareControlador {
   public void initialize(URL arg0, ResourceBundle arg1) {
 
     HardwareDao hardwareDao = new HardwareDao();
-    ObservableList<Hardware> listaObservable = 
+    ObservableList<Hardware> listaObservable =
         FXCollections.observableArrayList(hardwareDao.obtenerHardware());
     tbHardware.setItems(listaObservable);
     tbHardware.setDisable(false);

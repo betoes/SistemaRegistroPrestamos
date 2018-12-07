@@ -1,10 +1,9 @@
 package GUI;
 
+import java.net.URL;
+import java.util.ResourceBundle;
 import dao.HardwareDao;
 import domain.Hardware;
-import java.net.URL;
-import java.text.ParseException;
-import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -12,7 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
-public class PantallaHardwareAgregarControlador {
+public class PantallaHardwareAgregarControlador implements Initializable {
 
   private String numeroSerie;
   private String tipo;
@@ -93,10 +92,9 @@ public class PantallaHardwareAgregarControlador {
 
     boolean vacio = true;
 
-    if (txtNumeroSerie.getText().equals("") 
+    if (txtNumeroSerie.getText().equals("")
         || cbTipo.getSelectionModel().getSelectedItem().equals(null)
-        || txtModelo.getText().equals("") 
-        || txtNumeroInventario.getText().equals("") 
+        || txtModelo.getText().equals("") || txtNumeroInventario.getText().equals("")
         || cbEstado.getValue().equals("")) {
 
       Alert alert = new Alert(Alert.AlertType.INFORMATION);

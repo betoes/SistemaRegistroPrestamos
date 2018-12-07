@@ -1,8 +1,6 @@
 package GUI;
 
 import java.net.URL;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.ResourceBundle;
 import dao.HardwareDao;
 import domain.Hardware;
@@ -11,7 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
-public class PantallaHardwareBuscarControlador implements Inizializable {
+public class PantallaHardwareBuscarControlador implements Initializable {
   private HardwareDao hardwareDao = new HardwareDao();
 
   @FXML
