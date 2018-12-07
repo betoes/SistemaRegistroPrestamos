@@ -19,6 +19,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+/**
+ * Clase para controla eliminar una licencia
+ * 
+ * @author Jethran Gomez
+ *
+ */
 public class pantallaLicenciaEliminarControlador implements Initializable {
 
   private LicenciaDAO licenciaDao = new LicenciaDAO();
@@ -59,6 +65,9 @@ public class pantallaLicenciaEliminarControlador implements Initializable {
   @FXML
   private Button bEliminar;
 
+  /**
+   * Metodo para cargar la pantalla licencia
+   */
   @FXML
   public void cargarPantallaLicencia() {
     Stage stage = new Stage();
@@ -85,6 +94,9 @@ public class pantallaLicenciaEliminarControlador implements Initializable {
     stage.close();
   }
 
+  /**
+   * Metodo para buscar una licencia ingresada
+   */
   @FXML
   public void BuscarLicencia() {
     String id = txtBuscarId.getText();
@@ -122,6 +134,9 @@ public class pantallaLicenciaEliminarControlador implements Initializable {
 
   }
 
+  /**
+   * Metodo para eliminar una licencia buscada
+   */
   @FXML
   public void eliminarLicencia() {
     String id = txtIdLicencia.getText();
@@ -147,7 +162,7 @@ public class pantallaLicenciaEliminarControlador implements Initializable {
   }
 
 
-  public String regresarFecha(Date fecha) {
+  private String regresarFecha(Date fecha) {
 
     String fechaR;
     SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");

@@ -11,6 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import dao.LicenciaDAO;
 import domain.Licencia;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -23,6 +24,12 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+/**
+ * Esta clase es el controlador de la pantalla para agregar una licencia
+ * 
+ * @author Jethran Gomez
+ *
+ */
 public class pantallaLicenciaAgregarControlador implements Initializable {
 
   private String idLicencia;
@@ -67,6 +74,10 @@ public class pantallaLicenciaAgregarControlador implements Initializable {
   @FXML
   private Button bSalir;
 
+  /**
+   * Esta clase sirve para poder cargar la pantalla principal de licencia
+   * 
+   */
   @FXML
   public void cargarPantallaLicencia() {
     Stage stage = new Stage();
@@ -93,7 +104,12 @@ public class pantallaLicenciaAgregarControlador implements Initializable {
     stage.close();
   }
 
-
+  /**
+   * Este metodo sirve para agregar una licencia
+   * 
+   * @return boolean para ver si fue agregado
+   * @throws ParseException por el cambio de string a date
+   */
   @FXML
   public boolean agregarLicencia() throws ParseException {
 
@@ -167,6 +183,12 @@ public class pantallaLicenciaAgregarControlador implements Initializable {
     return fecha;
   }
 
+  /**
+   * Metodo para validar si los campos se encuentran vacios
+   * 
+   * @return boolean para ver si estan vacios o no los campos
+   * @throws ParseException cambio de variable string a date
+   */
   public boolean validarTextoVacio() throws ParseException {
 
     boolean vacio = true;
@@ -190,6 +212,11 @@ public class pantallaLicenciaAgregarControlador implements Initializable {
     return vacio;
   }
 
+  /**
+   * Metodo para validar la fecha y calcular cuantos dias tiene de expiracion
+   * 
+   * @return int los dias que tiene la licencia
+   */
   public int calcularDias() {
     int diasARentar = 0;
 
@@ -218,16 +245,82 @@ public class pantallaLicenciaAgregarControlador implements Initializable {
     return diasARentar;
   }
 
+  /**
+   * Metodo para definir la logintud del textfield
+   * 
+   * @param textField el textfield que se ocupara
+   * @param tamaño la longitud del textfield
+   */
+  public void tamañoCampo(TextField textField, int tamaño) {
+    textField.setOnKeyTyped(event -> {
+      int maxCaracter = tamaño;
+      if (textField.getText().length() > maxCaracter)
+        event.consume();
+    });
+  }
+
+  /**
+   * Metodo para validar que solo permitira numero en el textfield
+   * 
+   * @param textField el textfield que se ocupara
+   */
+  public void tipoTextoNumerico(TextField textField) {
+    textField.textProperty().addListener(
+        (ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
+          if (!newValue.matches("[0-9]")) {
+            textField.setText(newValue.replaceAll("[^0-9]", ""));
+          }
+        });
+  }
+
+  /**
+   * Metodo para validar que solo permitira letras en el textfield
+   * 
+   * @param textField el textfield que se ocupara
+   */
+  public void tipoTextoString(TextField textField) {
+    textField.textProperty().addListener(
+        (ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
+          if (!newValue.matches("[A-z]")) {
+            textField.setText(newValue.replaceAll("[^A-z]", ""));
+          }
+        });
+  }
+
+  /**
+   * Metodo para validar que solo permitira letras y numeros el textfield
+   * 
+   * @param textField el textfield que se ocupara
+   */
+  public void tipoTextoStringNumerico(TextField textField) {
+    textField.textProperty().addListener(
+        (ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
+          if (!newValue.matches("[\\w]")) {
+            textField.setText(newValue.replaceAll("[^\\w]", ""));
+          }
+        });
+  }
+
   @Override
   public void initialize(URL arg0, ResourceBundle arg1) {
 
     cbProveedor.getItems().addAll("Microsoft", "Apple");
-    cbTipoLicencia.getItems().addAll("Hardware", "Software");
+    cbTipoLicencia.getItems().addAll("FPP", "OEM", "VL");
+
     cbProveedor.setValue("Seleccion..");
     cbTipoLicencia.setValue("Seleccion..");
 
     dpFechaAgregado.setEditable(false);
     dpFechaExpiracion.setEditable(false);
-  }
 
+    tamañoCampo(txtidLicencia, 9);
+    tamañoCampo(txtNoLicencias, 10);
+    tamañoCampo(txtClave, 39);
+    tamañoCampo(txtCaracter, 20);
+
+    tipoTextoStringNumerico(txtidLicencia);
+    tipoTextoNumerico(txtNoLicencias);
+    tipoTextoStringNumerico(txtClave);
+    tipoTextoString(txtCaracter);
+  }
 }

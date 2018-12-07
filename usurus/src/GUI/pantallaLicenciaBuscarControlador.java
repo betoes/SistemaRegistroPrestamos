@@ -19,6 +19,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+/**
+ * Clase controlador para la pantalla buscar licencia
+ * 
+ * @author Jethran Gomez
+ *
+ */
 public class pantallaLicenciaBuscarControlador implements Initializable {
 
   private LicenciaDAO licenciaDao = new LicenciaDAO();
@@ -56,6 +62,9 @@ public class pantallaLicenciaBuscarControlador implements Initializable {
   @FXML
   private Button bBuscar;
 
+  /**
+   * Metodo para cargar la pantalla licencia
+   */
   @FXML
   public void cargarPantallaLicencia() {
     Stage stage = new Stage();
@@ -82,6 +91,9 @@ public class pantallaLicenciaBuscarControlador implements Initializable {
     stage.close();
   }
 
+  /**
+   * Metodo para buscar una licencia
+   */
   @FXML
   public void buscarLicencia() {
 
@@ -116,7 +128,7 @@ public class pantallaLicenciaBuscarControlador implements Initializable {
     }
   }
 
-  public String regresarFecha(Date fecha) {
+  private String regresarFecha(Date fecha) {
 
     String fechaR;
     SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
