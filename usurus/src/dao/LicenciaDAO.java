@@ -13,6 +13,13 @@ import java.util.logging.Logger;
 import datasource.DataBase;
 import domain.Licencia;
 
+/**
+ * Clase que implementa los metodos de la interfaz ILicenciaDAO para dar el funcionamiento adecuado
+ * a la conexión con la base de datos.
+ * 
+ * @author Jethran Gomez
+ *
+ */
 public class LicenciaDAO implements ILicenciaDAO {
 
   private List<Licencia> listaLicencias;
@@ -32,6 +39,9 @@ public class LicenciaDAO implements ILicenciaDAO {
 
   }
 
+  /**
+   * Metodo para recupera las licencias de la base de datos
+   */
   @Override
   public List<Licencia> obtenerLicencias() {
 
@@ -69,6 +79,11 @@ public class LicenciaDAO implements ILicenciaDAO {
     return listaLicencias;
   }
 
+  /**
+   * Metodo para recupera una licencia de la base de datos
+   * 
+   * @param String id de la licencia a recuperar
+   */
   @Override
   public Licencia obtenerLicencia(String id) {
 
@@ -104,6 +119,11 @@ public class LicenciaDAO implements ILicenciaDAO {
     return licencia;
   }
 
+  /**
+   * Metodo para agregar una licencia a la base de datos
+   * 
+   * @param licencia objeto de tipo Licencia
+   */
   @Override
   public boolean agregarLicencia(Licencia licencia) {
 
@@ -137,6 +157,11 @@ public class LicenciaDAO implements ILicenciaDAO {
     return agregado;
   }
 
+  /**
+   * Metodo para modificar una licencia de la base de datos
+   * 
+   * @param licencia objeto de tipo licencia
+   */
   @Override
   public boolean modficarLicencia(Licencia licencia) {
 
@@ -172,6 +197,11 @@ public class LicenciaDAO implements ILicenciaDAO {
     return editado;
   }
 
+  /**
+   * metodo para eliminar una licencia de la base de datos
+   * 
+   * @param String id de la licencia a eliminar
+   */
   @Override
   public boolean eliminarLicencia(String id) {
 
@@ -196,6 +226,11 @@ public class LicenciaDAO implements ILicenciaDAO {
     return borrado;
   }
 
+  /**
+   * Metodo para verificar si existe una licencia
+   * 
+   * @param String id de la licencia
+   */
   @Override
   public boolean existe(String id) {
 
