@@ -1,15 +1,14 @@
 package GUI;
 
-import dao.HardwareDao;
-import domain.Hardware;
 import java.net.URL;
 import java.util.ResourceBundle;
+import dao.HardwareDao;
+import domain.Hardware;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 
 public class pantallaHardwareModificarControlador implements Initializable {
@@ -43,7 +42,7 @@ public class pantallaHardwareModificarControlador implements Initializable {
 
   @FXML
   private ComboBox<String> cbEstado;
-  
+
   @FXML
   private TextField txtDescripcion;
 
@@ -101,10 +100,9 @@ public class pantallaHardwareModificarControlador implements Initializable {
   public boolean validarTextoVacio() {
     boolean vacio = true;
 
-    if (txtNumeroSerie.getText().equals("") 
+    if (txtNumeroSerie.getText().equals("")
         || cbTipo.getSelectionModel().getSelectedItem().equals(null)
-        || txtModelo.getText().equals("") 
-        || txtNumeroInventario.getText().equals("") 
+        || txtModelo.getText().equals("") || txtNumeroInventario.getText().equals("")
         || cbEstado.getValue().equals("")) {
 
       Alert alert = new Alert(Alert.AlertType.INFORMATION);

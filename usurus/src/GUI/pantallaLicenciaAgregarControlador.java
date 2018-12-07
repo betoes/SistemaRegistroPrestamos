@@ -67,22 +67,32 @@ public class pantallaLicenciaAgregarControlador implements Initializable {
     boolean agregado = false;
 
     if (validarTextoVacio() == false) {
-
       if (licenciaDao.existe(txtidLicencia.getText()) == false) {
-        idLicencia = txtidLicencia.getText();
-        numeroLicencias = Integer.parseInt(txtNoLicencias.getText());
-        fechaInicio = regresarFecha(dpFechaAgregado);
-        fechaFin = regresarFecha(dpFechaExpiracion);
-        clave = txtClave.getText();
-        proveedor = cbProveedor.getValue().toString();
-        caracter = txtCaracter.getText();
-        tipoLicenciamiento = cbTipoLicencia.getValue().toString();
+        if (calcularDias() > 0) {
 
-        licencia = new Licencia(idLicencia, numeroLicencias, fechaInicio, fechaFin, clave,
-            proveedor, caracter, tipoLicenciamiento);
+          idLicencia = txtidLicencia.getText();
+          numeroLicencias = Integer.parseInt(txtNoLicencias.getText());
+          fechaInicio = regresarFecha(dpFechaAgregado);
+          fechaFin = regresarFecha(dpFechaExpiracion);
+          clave = txtClave.getText();
+          proveedor = cbProveedor.getValue().toString();
+          caracter = txtCaracter.getText();
+          tipoLicenciamiento = cbTipoLicencia.getValue().toString();
 
-        licenciaDao.agregarLicencia(licencia);
-        agregado = true;
+          licencia = new Licencia(idLicencia, numeroLicencias, fechaInicio, fechaFin, clave,
+              proveedor, caracter, tipoLicenciamiento);
+
+          licenciaDao.agregarLicencia(licencia);
+          agregado = true;
+        } else {
+          Alert alert = new Alert(Alert.AlertType.INFORMATION);
+          alert.setTitle("Informacion");
+          alert.setHeaderText("Fecha incorrecta");
+          alert.setContentText("Revise las fechas ingresadas");
+
+          alert.showAndWait();
+        }
+
       } else {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Informacion");
@@ -129,10 +139,9 @@ public class pantallaLicenciaAgregarControlador implements Initializable {
     boolean vacio = true;
 
     if (txtidLicencia.getText().equals("") || txtNoLicencias.getText().equals("")
-        || txtClave.getText().equals("")
-        || cbProveedor.getSelectionModel().getSelectedItem().equals(null)
+        || txtClave.getText().equals("") || cbProveedor.getValue().toString().equals("Seleccion..")
         || txtCaracter.getText().equals("")
-        || cbTipoLicencia.getSelectionModel().getSelectedItem().equals(null)
+        || cbTipoLicencia.getValue().toString().equals("Seleccion..")
         || regresarFecha(dpFechaAgregado) == null || regresarFecha(dpFechaExpiracion) == null) {
 
       Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -148,12 +157,44 @@ public class pantallaLicenciaAgregarControlador implements Initializable {
     return vacio;
   }
 
+  public int calcularDias() {
+    int diasARentar = 0;
+
+    LocalDate fechaA = dpFechaAgregado.getValue();
+    LocalDate fechaE = dpFechaExpiracion.getValue();
+
+    int anioInicio = fechaA.getYear();
+    int anioFin = fechaE.getYear();
+    int diaInicio = fechaA.getDayOfYear();
+    int diaFin = fechaE.getDayOfYear();
+
+    if (anioInicio < anioFin) {
+      diasARentar = 365 - diaInicio;
+      for (int i = anioInicio; i < anioFin; i++) {
+        diasARentar += 365;
+      }
+      diasARentar += diaFin;
+
+    } else if (anioInicio < LocalDate.now().getYear() || (diaInicio < LocalDate.now().getDayOfYear()
+        && anioInicio == LocalDate.now().getYear())) {
+      diasARentar = -1;
+    } else {
+      diasARentar = diaFin - diaInicio;
+    }
+
+    return diasARentar;
+  }
+
   @Override
   public void initialize(URL arg0, ResourceBundle arg1) {
 
     cbProveedor.getItems().addAll("Microsoft", "Apple");
     cbTipoLicencia.getItems().addAll("Hardware", "Software");
+    cbProveedor.setValue("Seleccion..");
+    cbTipoLicencia.setValue("Seleccion..");
 
+    dpFechaAgregado.setEditable(false);
+    dpFechaExpiracion.setEditable(false);
   }
 
 }

@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.control.cell.PropertyValueFactory ?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:controller ="GUI.pantallaLicenciaControlador">
 	   <children>
       <AnchorPane layoutX="-1.0" prefHeight="589.0" prefWidth="936.0">
          <children>
