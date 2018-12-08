@@ -1,7 +1,5 @@
 package dao;
 
-import datasource.DataBase;
-import domain.Licencia;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -12,13 +10,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import datasource.DataBase;
+import domain.Licencia;
 
 /**
  * Clase que implementa los metodos de la interfaz ILicenciaDAO para dar el funcionamiento adecuado
  * a la conexión con la base de datos.
  * 
- *@author Jethran Gomez
- *@version 1.0
+ * @author Jethran Gomez
+ * @version 1.0
  */
 public class LicenciaDao implements ILicenciaDao {
 
@@ -166,10 +166,8 @@ public class LicenciaDao implements ILicenciaDao {
   public boolean modficarLicencia(Licencia licencia) {
 
     boolean editado = false;
-    query =
-        "UPDATE licencia set numeroLicencias = ?, fechaInicio = ?, fechaFin = ?, clave = ?,"
-        + " proveedor = ?, caracter = ?, "
-        + "tipoLicenciamiento = ? where idLicencia = ?";
+    query = "UPDATE licencia set numeroLicencias = ?, fechaInicio = ?, fechaFin = ?, clave = ?,"
+        + " proveedor = ?, caracter = ?, " + "tipoLicenciamiento = ? where idLicencia = ?";
     connection = DataBase.getDataBaseConnection();
     SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -236,7 +234,7 @@ public class LicenciaDao implements ILicenciaDao {
   @Override
   public boolean existe(String id) {
 
-    boolean existe = false;
+    boolean existe = true;
     query = "Select * from licencia where idLicencia = ?";
     connection = DataBase.getDataBaseConnection();
 
@@ -247,7 +245,6 @@ public class LicenciaDao implements ILicenciaDao {
       ResultSet result = statement.executeQuery();
 
       existe = result.next();
-
 
     } catch (SQLException ex) {
       Logger.getLogger(LicenciaDao.class.getName()).log(Level.SEVERE, null, ex);
