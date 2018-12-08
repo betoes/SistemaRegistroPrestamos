@@ -1,5 +1,7 @@
-package GUI;
+package gui;
 
+import dao.LicenciaDao;
+import domain.Licencia;
 import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
@@ -7,8 +9,6 @@ import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import dao.LicenciaDAO;
-import domain.Licencia;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -19,15 +19,16 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-/**
- * Clase controlador para la pantalla buscar licencia
+/*
+ * Clase para controla eliminar una licencia.
  * 
  * @author Jethran Gomez
+ * @version 1.0
  *
  */
-public class pantallaLicenciaBuscarControlador implements Initializable {
+public class PantallaLicenciaEliminarControlador implements Initializable {
 
-  private LicenciaDAO licenciaDao = new LicenciaDAO();
+  private LicenciaDao licenciaDao = new LicenciaDao();
 
   @FXML
   private TextField txtBuscarId;
@@ -57,13 +58,16 @@ public class pantallaLicenciaBuscarControlador implements Initializable {
   private TextField txtTipoLicencia;
 
   @FXML
-  private Button bRegresar;
+  private Button bsalir;
 
   @FXML
-  private Button bBuscar;
+  private Button bbuscar;
+
+  @FXML
+  private Button beliminar;
 
   /**
-   * Metodo para cargar la pantalla licencia
+   * Metodo para cargar la pantalla licencia.
    */
   @FXML
   public void cargarPantallaLicencia() {
@@ -78,7 +82,7 @@ public class pantallaLicenciaBuscarControlador implements Initializable {
       closeButtonAction();
 
     } catch (IOException ex) {
-      Logger.getLogger(pantallaLicenciaBuscarControlador.class.getName()).log(Level.SEVERE, null,
+      Logger.getLogger(PantallaLicenciaEliminarControlador.class.getName()).log(Level.SEVERE, null,
           ex);
     }
   }
@@ -86,18 +90,18 @@ public class pantallaLicenciaBuscarControlador implements Initializable {
   @FXML
   private void closeButtonAction() {
 
-    Stage stage = (Stage) bBuscar.getScene().getWindow();
+    Stage stage = (Stage) bbuscar.getScene().getWindow();
 
     stage.close();
   }
 
   /**
-   * Metodo para buscar una licencia
+   * Metodo para buscar una licencia ingresada.
    */
   @FXML
   public void buscarLicencia() {
-
     String id = txtBuscarId.getText();
+
     if (!id.equals("")) {
       if (licenciaDao.existe(id) == true) {
         Licencia licencia = licenciaDao.obtenerLicencia(id);
@@ -110,6 +114,8 @@ public class pantallaLicenciaBuscarControlador implements Initializable {
         txtProveedor.setText(licencia.getProveedor());
         txtCaracter.setText(licencia.getCaracter());
         txtTipoLicencia.setText(licencia.getTipoLicenciamiento());
+
+
       } else {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Informacion");
@@ -122,11 +128,40 @@ public class pantallaLicenciaBuscarControlador implements Initializable {
       Alert alert = new Alert(Alert.AlertType.INFORMATION);
       alert.setTitle("Informacion");
       alert.setHeaderText("Campo vacio");
+      alert.setContentText("Ingrese un id para buscar y realize la accion buscar");
+
+      alert.showAndWait();
+    }
+
+  }
+
+  /**
+   * Metodo para eliminar una licencia buscada.
+   */
+  @FXML
+  public void eliminarLicencia() {
+    String id = txtIdLicencia.getText();
+
+    if (!id.equals("")) {
+      licenciaDao.eliminarLicencia(id);
+
+      Alert alert = new Alert(Alert.AlertType.INFORMATION);
+      alert.setTitle("Informacion");
+      alert.setHeaderText("Licencia Eliminada");
+      alert.setContentText("La licencia ha sido eliminada");
+
+      alert.showAndWait();
+    } else {
+      Alert alert = new Alert(Alert.AlertType.INFORMATION);
+      alert.setTitle("Informacion");
+      alert.setHeaderText("Campo vacio");
       alert.setContentText("Ingrese un id para buscar");
 
       alert.showAndWait();
     }
+
   }
+
 
   private String regresarFecha(Date fecha) {
 

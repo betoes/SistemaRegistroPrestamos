@@ -3,7 +3,7 @@ package dao;
 import java.util.List;
 import domain.Licencia;
 
-public interface ILicenciaDAO {
+public interface ILicenciaDao {
 
   List<Licencia> obtenerLicencias();
 

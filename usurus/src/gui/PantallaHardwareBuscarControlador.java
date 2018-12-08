@@ -1,16 +1,15 @@
-package GUI;
+package gui;
 
-import dao.HardwareDao;
-import domain.Hardware;
 import java.net.URL;
 import java.util.ResourceBundle;
+import dao.HardwareDao;
+import domain.Hardware;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
-public class PantallaHardwareEliminarControlador implements Initializable {
-
+public class PantallaHardwareBuscarControlador implements Initializable {
   private HardwareDao hardwareDao = new HardwareDao();
 
   @FXML
@@ -21,10 +20,7 @@ public class PantallaHardwareEliminarControlador implements Initializable {
 
   @FXML
   private TextField txtModelo;
-  
-  @FXML
-  private TextField txtBuscarNumeroInventario;
-  
+
   @FXML
   private TextField txtNumeroInventario;
 
@@ -35,18 +31,15 @@ public class PantallaHardwareEliminarControlador implements Initializable {
   private TextField txtDescripcion;
 
   @FXML
-  private Button bSalir;
+  private Button bRegresar;
 
   @FXML
   private Button bBuscar;
 
   @FXML
-  private Button bEliminar;
-
-  @FXML
   public void buscarHardware() {
-    String numeroInventario = txtBuscarNumeroInventario.getText();
-    Hardware hardware = hardwareDao.obtenerHardware(numeroInventario);
+    String noInventario = txtNumeroInventario.getText();
+    Hardware hardware = hardwareDao.obtenerHardware(noInventario);
 
     txtNumeroSerie.setText(hardware.getNumeroSerie());
     txtTipo.setText(hardware.getTipo());
@@ -56,16 +49,8 @@ public class PantallaHardwareEliminarControlador implements Initializable {
     txtDescripcion.setText(hardware.getDescripcion());
   }
 
-  @FXML
-  public void eliminarHardware() {
-    String numeroInventario = txtNumeroInventario.getText();
-
-    hardwareDao.eliminarHardware(numeroInventario);
-  }
-
   @Override
   public void initialize(URL arg0, ResourceBundle arg1) {
-    // TODO Auto-generated method stub
-  }
 
+  }
 }

@@ -1,4 +1,4 @@
-package GUI;
+package gui;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -11,7 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
-public class PantallaHardwareAgregarControlador implements Initializable {
+public class PantallaHardwareModificarControlador implements Initializable {
 
   private String numeroSerie;
   private String tipo;
@@ -21,6 +21,12 @@ public class PantallaHardwareAgregarControlador implements Initializable {
   private String descripcion;
   private Hardware hardware;
   private HardwareDao hardwareDao = new HardwareDao();
+
+  @FXML
+  private TextField txtBuscarNumeroInventario;
+
+  @FXML
+  private Button bBuscar;
 
   @FXML
   private TextField txtNumeroSerie;
@@ -47,36 +53,40 @@ public class PantallaHardwareAgregarControlador implements Initializable {
   private Button bSalir;
 
   @FXML
-  public boolean agregarHardware() {
+  public void buscarHardware() {
+    String numeroInventario = txtBuscarNumeroInventario.getText();
+    hardware = hardwareDao.obtenerHardware(numeroInventario);
 
-    boolean agregado = false;
+    txtNumeroSerie.setText(hardware.getNumeroSerie());
+    cbTipo.setPromptText(hardware.getTipo());
+    txtModelo.setText(hardware.getModelo());
+    txtNumeroInventario.setText(hardware.getNumeroInventario());
+    cbEstado.setPromptText(hardware.getEstado());
+    txtDescripcion.setText(hardware.getDescripcion());
+
+  }
+
+  @FXML
+  public void modificarHardware() {
+    boolean modificado = false;
 
     if (validarTextoVacio() == false) {
 
-      if (hardwareDao.validar(txtNumeroInventario.getText()) == false) {
-        numeroSerie = txtNumeroSerie.getText();
-        tipo = cbTipo.getValue();
-        modelo = txtModelo.getText();
-        numeroInventario = txtNumeroInventario.getText();
-        estado = cbEstado.getValue();
-        descripcion = txtDescripcion.getText();
+      numeroSerie = txtNumeroSerie.getText();
+      tipo = cbTipo.getValue();
+      modelo = txtModelo.getText();
+      numeroInventario = txtNumeroInventario.getText();
+      estado = cbEstado.getValue();
+      descripcion = txtDescripcion.getText();
 
-        hardware = new Hardware(numeroSerie, tipo, modelo, numeroInventario, estado, descripcion);
+      hardware = new Hardware(numeroSerie, tipo, modelo, numeroInventario, estado, descripcion);
 
-        hardwareDao.registrarHardware(hardware);
-        agregado = true;
-      } else {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Informacion");
-        alert.setHeaderText("Ya existe");
-        alert.setContentText("El hardware ya existe en el registro");
-
-        alert.showAndWait();
-      }
+      hardwareDao.modificarHardware(hardware);
+      modificado = true;
 
     }
 
-    if (agregado == true) {
+    if (modificado == true) {
       Alert alert = new Alert(Alert.AlertType.INFORMATION);
       alert.setTitle("Informacion");
       alert.setHeaderText("Agregado");
@@ -85,11 +95,9 @@ public class PantallaHardwareAgregarControlador implements Initializable {
       alert.showAndWait();
     }
 
-    return agregado;
   }
 
   public boolean validarTextoVacio() {
-
     boolean vacio = true;
 
     if (txtNumeroSerie.getText().equals("")
@@ -112,10 +120,8 @@ public class PantallaHardwareAgregarControlador implements Initializable {
 
   @Override
   public void initialize(URL arg0, ResourceBundle arg1) {
-
-    cbEstado.getItems().addAll("Nuevo", "En resguardo", "De baja", "En mantenimiento");
-    cbTipo.getItems().addAll("CPU", "Video proyector", "LAPTOP", "Impresora");
-
+    cbTipo.getItems().addAll("Nuevo", "En resguardo", "De baja", "En mantenimiento");
+    cbEstado.getItems().addAll("CPU", "Video proyector", "LAPTOP", "Impresora");
   }
 
 }

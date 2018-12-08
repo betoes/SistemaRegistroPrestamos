@@ -225,7 +225,7 @@ public class HardwareDao implements IHardwareDao {
       existe = true;
       return existe;
     } catch (SQLException ex) {
-      Logger.getLogger(LicenciaDAO.class.getName()).log(Level.SEVERE, null, ex);
+      Logger.getLogger(LicenciaDao.class.getName()).log(Level.SEVERE, null, ex);
     } finally {
       DataBase.closeConnection();
     }

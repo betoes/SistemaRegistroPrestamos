@@ -1,5 +1,7 @@
-package GUI;
+package gui;
 
+import dao.LicenciaDao;
+import domain.Licencia;
 import java.io.IOException;
 import java.net.URL;
 import java.text.ParseException;
@@ -9,8 +11,6 @@ import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import dao.LicenciaDAO;
-import domain.Licencia;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -25,11 +25,13 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 /**
- * Esta clase es el controlador de la pantalla modificar licencia
+ * Esta clase es el controlador de la pantalla para agregar una licencia.
  * 
  * @author Jethran Gomez
+ * @version 1.0
+ *
  */
-public class pantallaLicenciaModificarControlador implements Initializable {
+public class PantallaLicenciaAgregarControlador implements Initializable {
 
   private String idLicencia;
   private int numeroLicencias;
@@ -41,19 +43,13 @@ public class pantallaLicenciaModificarControlador implements Initializable {
   private String caracter;
   private String tipoLicenciamiento;
   private Licencia licencia;
-  private LicenciaDAO licenciaDao = new LicenciaDAO();
+  private LicenciaDao licenciaDao = new LicenciaDao();
 
   @FXML
-  private TextField txtBuscarId;
+  private TextField txtidLicencia;
 
   @FXML
-  private Button bBuscar;
-
-  @FXML
-  private TextField txtIdLicencia;
-
-  @FXML
-  private TextField txtNoLicencia;
+  private TextField txtNoLicencias;
 
   @FXML
   private DatePicker dpFechaAgregado;
@@ -80,7 +76,8 @@ public class pantallaLicenciaModificarControlador implements Initializable {
   private Button bSalir;
 
   /**
-   * Metodo para cargar la pantalla licencia
+   * Esta clase sirve para poder cargar la pantalla principal de licencia.
+   * 
    */
   @FXML
   public void cargarPantallaLicencia() {
@@ -95,7 +92,7 @@ public class pantallaLicenciaModificarControlador implements Initializable {
       closeButtonAction();
 
     } catch (IOException ex) {
-      Logger.getLogger(pantallaLicenciaModificarControlador.class.getName()).log(Level.SEVERE, null,
+      Logger.getLogger(PantallaLicenciaAgregarControlador.class.getName()).log(Level.SEVERE, null,
           ex);
     }
   }
@@ -103,31 +100,40 @@ public class pantallaLicenciaModificarControlador implements Initializable {
   @FXML
   private void closeButtonAction() {
 
-    Stage stage = (Stage) bBuscar.getScene().getWindow();
+    Stage stage = (Stage) bSalir.getScene().getWindow();
 
     stage.close();
   }
 
   /**
-   * Metodo para buscar una licencia ingresada por el id
+   * Este metodo sirve para agregar una licencia.
+   * 
+   * @return boolean para ver si fue agregado
+   * @throws ParseException por el cambio de string a date
    */
   @FXML
-  public void BuscarLicencia() {
-    String id = txtBuscarId.getText();
+  public boolean agregarLicencia() throws ParseException {
 
-    if (!id.equals("")) {
-      if (licenciaDao.existe(id) == true) {
+    boolean agregado = false;
+
+    if (validarTextoVacio() == false) {
+      if (licenciaDao.existe(txtidLicencia.getText()) == false) {
         if (calcularDias() > 0) {
-          licencia = licenciaDao.obtenerLicencia(id);
 
-          txtIdLicencia.setText(licencia.getIdLicencia());
-          txtNoLicencia.setText(Integer.toString(licencia.getNumeroLicencias()));
-          txtClave.setText(licencia.getClave());
-          dpFechaAgregado.setValue(LocalDate.parse(regresarFechaString(licencia.getFechaInicio())));
-          dpFechaExpiracion.setValue(LocalDate.parse(regresarFechaString(licencia.getFechaFin())));
-          cbProveedor.setPromptText(licencia.getProveedor());
-          txtCaracter.setText(licencia.getCaracter());
-          cbTipoLicencia.setPromptText(licencia.getTipoLicenciamiento());
+          idLicencia = txtidLicencia.getText();
+          numeroLicencias = Integer.parseInt(txtNoLicencias.getText());
+          fechaInicio = regresarFecha(dpFechaAgregado);
+          fechaFin = regresarFecha(dpFechaExpiracion);
+          clave = txtClave.getText();
+          proveedor = cbProveedor.getValue().toString();
+          caracter = txtCaracter.getText();
+          tipoLicenciamiento = cbTipoLicencia.getValue().toString();
+
+          licencia = new Licencia(idLicencia, numeroLicencias, fechaInicio, fechaFin, clave,
+              proveedor, caracter, tipoLicenciamiento);
+
+          licenciaDao.agregarLicencia(licencia);
+          agregado = true;
         } else {
           Alert alert = new Alert(Alert.AlertType.INFORMATION);
           alert.setTitle("Informacion");
@@ -140,45 +146,16 @@ public class pantallaLicenciaModificarControlador implements Initializable {
       } else {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Informacion");
-        alert.setHeaderText("Sin existencia");
-        alert.setContentText("No se cuenta con ningun registro de ese ID: " + id);
+        alert.setHeaderText("Ya existe");
+        alert.setContentText("La licencia ya existe en el registro");
 
         alert.showAndWait();
       }
-    } else {
-      Alert alert = new Alert(Alert.AlertType.INFORMATION);
-      alert.setTitle("Informacion");
-      alert.setHeaderText("Campo vacio");
-      alert.setContentText("Ingrese un id para buscar y realize la accion buscar");
 
-      alert.showAndWait();
     }
-  }
 
-  /**
-   * Metodo para modificar una licencia ya buscada
-   * 
-   * @throws ParseException por el cambio de string a date
-   */
-  @FXML
-  public void modificarLicencia() throws ParseException {
 
-    if (validarTextoVacio() == false) {
-
-      idLicencia = txtIdLicencia.getText();
-      numeroLicencias = Integer.parseInt(txtNoLicencia.getText());
-      fechaInicio = regresarFecha(dpFechaAgregado);
-      fechaFin = regresarFecha(dpFechaExpiracion);
-      clave = txtClave.getText();
-      proveedor = cbProveedor.getValue().toString();
-      caracter = txtCaracter.getText();
-      tipoLicenciamiento = cbTipoLicencia.getValue().toString();
-
-      licencia = new Licencia(idLicencia, numeroLicencias, fechaInicio, fechaFin, clave, proveedor,
-          caracter, tipoLicenciamiento);
-
-      licenciaDao.modficarLicencia(licencia);
-
+    if (agregado == true) {
       Alert alert = new Alert(Alert.AlertType.INFORMATION);
       alert.setTitle("Informacion");
       alert.setHeaderText("Agregado");
@@ -186,6 +163,8 @@ public class pantallaLicenciaModificarControlador implements Initializable {
 
       alert.showAndWait();
     }
+
+    return agregado;
   }
 
   private Date regresarFecha(DatePicker date) throws ParseException {
@@ -205,28 +184,17 @@ public class pantallaLicenciaModificarControlador implements Initializable {
     return fecha;
   }
 
-
-  private String regresarFechaString(Date fecha) {
-
-    String fechaR;
-    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-
-    fechaR = format.format(fecha);
-
-    return fechaR;
-  }
-
   /**
-   * Metodo para verificar que los campos estan vacios
+   * Metodo para validar si los campos se encuentran vacios.
    * 
-   * @return boolean para verficar si esta vacio o no los textos
-   * @throws ParseException
+   * @return boolean para ver si estan vacios o no los campos
+   * @throws ParseException cambio de variable string a date
    */
   public boolean validarTextoVacio() throws ParseException {
 
     boolean vacio = true;
 
-    if (txtIdLicencia.getText().equals("") || txtNoLicencia.getText().equals("")
+    if (txtidLicencia.getText().equals("") || txtNoLicencias.getText().equals("")
         || txtClave.getText().equals("") || cbProveedor.getValue().toString().equals("Seleccion..")
         || txtCaracter.getText().equals("")
         || cbTipoLicencia.getValue().toString().equals("Seleccion..")
@@ -246,9 +214,9 @@ public class pantallaLicenciaModificarControlador implements Initializable {
   }
 
   /**
-   * Metodo para calcular los dia que hay entre las fechas
+   * Metodo para validar la fecha y calcular cuantos dias tiene de expiracion.
    * 
-   * @return int regresa los dias entre las fechas
+   * @return int los dias que tiene la licencia
    */
   public int calcularDias() {
     int diasARentar = 0;
@@ -279,7 +247,7 @@ public class pantallaLicenciaModificarControlador implements Initializable {
   }
 
   /**
-   * Metodo para definir la logintud del textfield
+   * Metodo para definir la logintud del textfield.
    * 
    * @param textField el textfield que se ocupara
    * @param tamaño la longitud del textfield
@@ -293,7 +261,7 @@ public class pantallaLicenciaModificarControlador implements Initializable {
   }
 
   /**
-   * Metodo para validar que solo permitira numero en el textfield
+   * Metodo para validar que solo permitira numero en el textfield.
    * 
    * @param textField el textfield que se ocupara
    */
@@ -307,7 +275,7 @@ public class pantallaLicenciaModificarControlador implements Initializable {
   }
 
   /**
-   * Metodo para validar que solo permitira letras en el textfield
+   * Metodo para validar que solo permitira letras en el textfield.
    * 
    * @param textField el textfield que se ocupara
    */
@@ -334,9 +302,9 @@ public class pantallaLicenciaModificarControlador implements Initializable {
         });
   }
 
-
   @Override
   public void initialize(URL arg0, ResourceBundle arg1) {
+
     cbProveedor.getItems().addAll("Microsoft", "Apple");
     cbTipoLicencia.getItems().addAll("FPP", "OEM", "VL");
 
@@ -346,18 +314,14 @@ public class pantallaLicenciaModificarControlador implements Initializable {
     dpFechaAgregado.setEditable(false);
     dpFechaExpiracion.setEditable(false);
 
-    tamañoCampo(txtBuscarId, 9);
-    tamañoCampo(txtIdLicencia, 9);
-    tamañoCampo(txtNoLicencia, 10);
+    tamañoCampo(txtidLicencia, 9);
+    tamañoCampo(txtNoLicencias, 10);
     tamañoCampo(txtClave, 39);
     tamañoCampo(txtCaracter, 20);
 
-    tipoTextoStringNumerico(txtBuscarId);
-    tipoTextoStringNumerico(txtIdLicencia);
-    tipoTextoNumerico(txtNoLicencia);
+    tipoTextoStringNumerico(txtidLicencia);
+    tipoTextoNumerico(txtNoLicencias);
     tipoTextoStringNumerico(txtClave);
     tipoTextoString(txtCaracter);
-
   }
-
 }

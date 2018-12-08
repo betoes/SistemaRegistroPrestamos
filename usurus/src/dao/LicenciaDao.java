@@ -1,5 +1,7 @@
 package dao;
 
+import datasource.DataBase;
+import domain.Licencia;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -10,17 +12,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import datasource.DataBase;
-import domain.Licencia;
 
 /**
  * Clase que implementa los metodos de la interfaz ILicenciaDAO para dar el funcionamiento adecuado
  * a la conexión con la base de datos.
  * 
- * @author Jethran Gomez
- *
+ *@author Jethran Gomez
+ *@version 1.0
  */
-public class LicenciaDAO implements ILicenciaDAO {
+public class LicenciaDao implements ILicenciaDao {
 
   private List<Licencia> listaLicencias;
   private String query;
@@ -35,12 +35,12 @@ public class LicenciaDAO implements ILicenciaDAO {
   private String caracter;
   private String tipoLicenciamiento;
 
-  public LicenciaDAO() {
+  public LicenciaDao() {
 
   }
 
   /**
-   * Metodo para recupera las licencias de la base de datos
+   * Metodo para recupera las licencias de la base de datos.
    */
   @Override
   public List<Licencia> obtenerLicencias() {
@@ -71,7 +71,7 @@ public class LicenciaDAO implements ILicenciaDAO {
       }
 
     } catch (SQLException ex) {
-      Logger.getLogger(LicenciaDAO.class.getName()).log(Level.SEVERE, null, ex);
+      Logger.getLogger(LicenciaDao.class.getName()).log(Level.SEVERE, null, ex);
     } finally {
       DataBase.closeConnection();
     }
@@ -80,9 +80,9 @@ public class LicenciaDAO implements ILicenciaDAO {
   }
 
   /**
-   * Metodo para recupera una licencia de la base de datos
+   * Metodo para recupera una licencia de la base de datos.
    * 
-   * @param String id de la licencia a recuperar
+   * @param id de la licencia a recuperar
    */
   @Override
   public Licencia obtenerLicencia(String id) {
@@ -111,7 +111,7 @@ public class LicenciaDAO implements ILicenciaDAO {
 
 
     } catch (SQLException ex) {
-      Logger.getLogger(LicenciaDAO.class.getName()).log(Level.SEVERE, null, ex);
+      Logger.getLogger(LicenciaDao.class.getName()).log(Level.SEVERE, null, ex);
     } finally {
       DataBase.closeConnection();
     }
@@ -120,7 +120,7 @@ public class LicenciaDAO implements ILicenciaDAO {
   }
 
   /**
-   * Metodo para agregar una licencia a la base de datos
+   * Metodo para agregar una licencia a la base de datos.
    * 
    * @param licencia objeto de tipo Licencia
    */
@@ -150,7 +150,7 @@ public class LicenciaDAO implements ILicenciaDAO {
       statement.execute();
       agregado = true;
     } catch (SQLException ex) {
-      Logger.getLogger(LicenciaDAO.class.getName()).log(Level.SEVERE, null, ex);
+      Logger.getLogger(LicenciaDao.class.getName()).log(Level.SEVERE, null, ex);
     } finally {
       DataBase.closeConnection();
     }
@@ -158,7 +158,7 @@ public class LicenciaDAO implements ILicenciaDAO {
   }
 
   /**
-   * Metodo para modificar una licencia de la base de datos
+   * Metodo para modificar una licencia de la base de datos.
    * 
    * @param licencia objeto de tipo licencia
    */
@@ -167,7 +167,9 @@ public class LicenciaDAO implements ILicenciaDAO {
 
     boolean editado = false;
     query =
-        "UPDATE licencia set numeroLicencias = ?, fechaInicio = ?, fechaFin = ?, clave = ?, proveedor = ?, caracter = ?, tipoLicenciamiento = ? where idLicencia = ?";
+        "UPDATE licencia set numeroLicencias = ?, fechaInicio = ?, fechaFin = ?, clave = ?,"
+        + " proveedor = ?, caracter = ?, "
+        + "tipoLicenciamiento = ? where idLicencia = ?";
     connection = DataBase.getDataBaseConnection();
     SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -189,7 +191,7 @@ public class LicenciaDAO implements ILicenciaDAO {
 
       editado = true;
     } catch (SQLException ex) {
-      Logger.getLogger(LicenciaDAO.class.getName()).log(Level.SEVERE, null, ex);
+      Logger.getLogger(LicenciaDao.class.getName()).log(Level.SEVERE, null, ex);
     } finally {
       DataBase.closeConnection();
     }
@@ -198,9 +200,9 @@ public class LicenciaDAO implements ILicenciaDAO {
   }
 
   /**
-   * metodo para eliminar una licencia de la base de datos
+   * metodo para eliminar una licencia de la base de datos.
    * 
-   * @param String id de la licencia a eliminar
+   * @param id de la licencia a eliminar
    */
   @Override
   public boolean eliminarLicencia(String id) {
@@ -217,7 +219,7 @@ public class LicenciaDAO implements ILicenciaDAO {
 
       borrado = true;
     } catch (SQLException ex) {
-      Logger.getLogger(LicenciaDAO.class.getName()).log(Level.SEVERE, null, ex);
+      Logger.getLogger(LicenciaDao.class.getName()).log(Level.SEVERE, null, ex);
     } finally {
       DataBase.closeConnection();
     }
@@ -227,9 +229,9 @@ public class LicenciaDAO implements ILicenciaDAO {
   }
 
   /**
-   * Metodo para verificar si existe una licencia
+   * Metodo para verificar si existe una licencia.
    * 
-   * @param String id de la licencia
+   * @param id de la licencia
    */
   @Override
   public boolean existe(String id) {
@@ -248,7 +250,7 @@ public class LicenciaDAO implements ILicenciaDAO {
 
 
     } catch (SQLException ex) {
-      Logger.getLogger(LicenciaDAO.class.getName()).log(Level.SEVERE, null, ex);
+      Logger.getLogger(LicenciaDao.class.getName()).log(Level.SEVERE, null, ex);
     } finally {
       DataBase.closeConnection();
     }

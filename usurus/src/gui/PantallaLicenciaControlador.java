@@ -1,12 +1,12 @@
-package GUI;
+package gui;
 
+import dao.LicenciaDao;
+import domain.Licencia;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import dao.LicenciaDAO;
-import domain.Licencia;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -18,34 +18,46 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 
-public class pantallaLicenciaControlador implements Initializable {
+
+/*
+ * Esta class controla la pantalla principal de licencia.
+ * 
+ * @author: Jethran Gomez
+ * @version: 1.0
+ *
+ */
+public class PantallaLicenciaControlador implements Initializable {
 
   @FXML
   private TableView<Licencia> tbLicencia;
 
   @FXML
-  private Button bAgregar;
+  private Button bagregar;
 
   @FXML
-  private Button bEliminar;
+  private Button beliminar;
 
   @FXML
-  private Button bModificar;
+  private Button bmodificar;
 
   @FXML
-  private Button bBuscar;
+  private Button bbuscar;
 
   @FXML
-  private Button bSalir;
+  private Button bsalir;
 
   @FXML
   private void closeButtonAction() {
 
-    Stage stage = (Stage) bBuscar.getScene().getWindow();
+    Stage stage = (Stage) bbuscar.getScene().getWindow();
 
     stage.close();
   }
 
+  /**
+   * Metodo para cargar la pantalla para agregar un licencia.
+   * 
+   */
   @FXML
   public void cargarPantallaAgregarLicencia() {
     Stage stage = new Stage();
@@ -59,10 +71,13 @@ public class pantallaLicenciaControlador implements Initializable {
       closeButtonAction();
 
     } catch (IOException ex) {
-      Logger.getLogger(pantallaLicenciaControlador.class.getName()).log(Level.SEVERE, null, ex);
+      Logger.getLogger(PantallaLicenciaControlador.class.getName()).log(Level.SEVERE, null, ex);
     }
   }
 
+  /**
+   * Metodo para cargar la pantalla de buscar licencia.
+   */
   @FXML
   public void cargarPantallaBuscarLicencia() {
     Stage stage = new Stage();
@@ -76,10 +91,13 @@ public class pantallaLicenciaControlador implements Initializable {
       closeButtonAction();
 
     } catch (IOException ex) {
-      Logger.getLogger(pantallaLicenciaControlador.class.getName()).log(Level.SEVERE, null, ex);
+      Logger.getLogger(PantallaLicenciaControlador.class.getName()).log(Level.SEVERE, null, ex);
     }
   }
 
+  /**
+   * Metodo para cargar la pantalla de eliminar licencia.
+   */
   @FXML
   public void cargarPantallaElimanarLicencia() {
     Stage stage = new Stage();
@@ -93,10 +111,13 @@ public class pantallaLicenciaControlador implements Initializable {
       closeButtonAction();
 
     } catch (IOException ex) {
-      Logger.getLogger(pantallaLicenciaControlador.class.getName()).log(Level.SEVERE, null, ex);
+      Logger.getLogger(PantallaLicenciaControlador.class.getName()).log(Level.SEVERE, null, ex);
     }
   }
 
+  /**
+   * Metodo para cargar la pantalla de modificar licencia.
+   */
   @FXML
   public void cargarPantallaModificarLicencia() {
     Stage stage = new Stage();
@@ -110,14 +131,14 @@ public class pantallaLicenciaControlador implements Initializable {
       closeButtonAction();
 
     } catch (IOException ex) {
-      Logger.getLogger(pantallaLicenciaControlador.class.getName()).log(Level.SEVERE, null, ex);
+      Logger.getLogger(PantallaLicenciaControlador.class.getName()).log(Level.SEVERE, null, ex);
     }
   }
 
   @Override
   public void initialize(URL arg0, ResourceBundle arg1) {
 
-    LicenciaDAO licenciaDao = new LicenciaDAO();
+    LicenciaDao licenciaDao = new LicenciaDao();
     ObservableList<Licencia> listaObservable =
         FXCollections.observableArrayList(licenciaDao.obtenerLicencias());
     tbLicencia.setItems(listaObservable);
