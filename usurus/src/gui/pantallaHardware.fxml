@@ -10,18 +10,18 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.control.cell.PropertyValueFactory ?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
 	   <children>
       <AnchorPane layoutX="-1.0" prefHeight="589.0" prefWidth="936.0">
          <children>
             <TableView fx:id="tbHardware" layoutX="5.0" layoutY="19.0" prefHeight="540.0" prefWidth="749.0">
                <columns>
-                <TableColumn prefWidth="36.0" text="No. serie">
+                <TableColumn prefWidth="68.0" text="No. serie">
                 	<cellValueFactory>
                 		<PropertyValueFactory property="numeroSerie" />
                 	</cellValueFactory> 
                 </TableColumn>
-                <TableColumn prefWidth="113.0" text="Tipo">
+                <TableColumn prefWidth="81.0" text="Tipo">
                 	<cellValueFactory>
                 		<PropertyValueFactory property="tipo" />
                 	</cellValueFactory>
