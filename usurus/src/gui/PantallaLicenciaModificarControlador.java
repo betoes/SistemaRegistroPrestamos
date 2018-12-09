@@ -1,7 +1,5 @@
 package gui;
 
-import dao.LicenciaDao;
-import domain.Licencia;
 import java.io.IOException;
 import java.net.URL;
 import java.text.ParseException;
@@ -11,6 +9,8 @@ import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import dao.LicenciaDao;
+import domain.Licencia;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -33,17 +33,10 @@ import javafx.stage.Stage;
  */
 public class PantallaLicenciaModificarControlador implements Initializable {
 
-  private String idLicencia;
-  private int numeroLicencias;
-  private Date fechaInicio;
-  private Date fechaFin;
-  private LocalDate localDate;
-  private String clave;
-  private String proveedor;
-  private String caracter;
-  private String tipoLicenciamiento;
   private Licencia licencia;
   private LicenciaDao licenciaDao = new LicenciaDao();
+  private static final String INFORMACION = "Informacion";
+  private static final String SELECCION = "Seleccion..";
 
   @FXML
   private TextField txtBuscarId;
@@ -118,7 +111,7 @@ public class PantallaLicenciaModificarControlador implements Initializable {
     String id = txtBuscarId.getText();
 
     if (!id.equals("")) {
-      if (licenciaDao.existe(id) == true) {
+      if (licenciaDao.existe(id)) {
         licencia = licenciaDao.obtenerLicencia(id);
 
         txtIdLicencia.setText(licencia.getIdLicencia());
@@ -129,18 +122,20 @@ public class PantallaLicenciaModificarControlador implements Initializable {
         cbProveedor.setPromptText(licencia.getProveedor());
         txtCaracter.setText(licencia.getCaracter());
         cbTipoLicencia.setPromptText(licencia.getTipoLicenciamiento());
+
       } else {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Informacion");
+        alert.setTitle(INFORMACION);
         alert.setHeaderText("Sin existencia");
         alert.setContentText("No se cuenta con ningun registro de ese ID: " + id);
 
         alert.showAndWait();
+
       }
 
     } else {
       Alert alert = new Alert(Alert.AlertType.INFORMATION);
-      alert.setTitle("Informacion");
+      alert.setTitle(INFORMACION);
       alert.setHeaderText("Campo vacio");
       alert.setContentText("Agregue un id para buscar");
 
@@ -157,16 +152,16 @@ public class PantallaLicenciaModificarControlador implements Initializable {
   @FXML
   public void modificarLicencia() throws ParseException {
 
-    if (validarTextoVacio() == false) {
+    if (validarTextoVacio()) {
       if (calcularDias() > 0) {
-        idLicencia = txtIdLicencia.getText();
-        numeroLicencias = Integer.parseInt(txtNoLicencia.getText());
-        fechaInicio = regresarFecha(dpFechaAgregado);
-        fechaFin = regresarFecha(dpFechaExpiracion);
-        clave = txtClave.getText();
-        proveedor = cbProveedor.getValue().toString();
-        caracter = txtCaracter.getText();
-        tipoLicenciamiento = cbTipoLicencia.getValue().toString();
+        String idLicencia = txtIdLicencia.getText();
+        int numeroLicencias = Integer.parseInt(txtNoLicencia.getText());
+        Date fechaInicio = regresarFecha(dpFechaAgregado);
+        Date fechaFin = regresarFecha(dpFechaExpiracion);
+        String clave = txtClave.getText();
+        String proveedor = cbProveedor.getValue();
+        String caracter = txtCaracter.getText();
+        String tipoLicenciamiento = cbTipoLicencia.getValue();
 
         licencia = new Licencia(idLicencia, numeroLicencias, fechaInicio, fechaFin, clave,
             proveedor, caracter, tipoLicenciamiento);
@@ -174,14 +169,14 @@ public class PantallaLicenciaModificarControlador implements Initializable {
         licenciaDao.modficarLicencia(licencia);
 
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Informacion");
+        alert.setTitle(INFORMACION);
         alert.setHeaderText("Agregado");
         alert.setContentText("La licencia se ha agregado");
 
         alert.showAndWait();
       } else {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Informacion");
+        alert.setTitle(INFORMACION);
         alert.setHeaderText("Fecha incorrecta");
         alert.setContentText("Revise las fechas ingresadas\n" + "Al menos un mes de diferencia");
 
@@ -194,7 +189,7 @@ public class PantallaLicenciaModificarControlador implements Initializable {
 
     Date fecha;
     SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-    localDate = date.getValue();
+    LocalDate localDate = date.getValue();
 
     if (localDate == null) {
       fecha = null;
@@ -226,22 +221,21 @@ public class PantallaLicenciaModificarControlador implements Initializable {
    */
   public boolean validarTextoVacio() throws ParseException {
 
-    boolean vacio = true;
+    boolean vacio = false;
 
     if (txtIdLicencia.getText().equals("") || txtNoLicencia.getText().equals("")
-        || txtClave.getText().equals("") || cbProveedor.getValue().toString().equals("Seleccion..")
-        || txtCaracter.getText().equals("")
-        || cbTipoLicencia.getValue().toString().equals("Seleccion..")
+        || txtClave.getText().equals("") || cbProveedor.getValue().equals(SELECCION)
+        || txtCaracter.getText().equals("") || cbTipoLicencia.getValue().equals(SELECCION)
         || regresarFecha(dpFechaAgregado) == null || regresarFecha(dpFechaExpiracion) == null) {
 
       Alert alert = new Alert(Alert.AlertType.INFORMATION);
-      alert.setTitle("Informacion");
+      alert.setTitle(INFORMACION);
       alert.setHeaderText("Campos vacios");
       alert.setContentText("No puede dejar ningun campo vacio");
 
       alert.showAndWait();
     } else {
-      vacio = false;
+      vacio = true;
     }
 
     return vacio;
@@ -286,9 +280,9 @@ public class PantallaLicenciaModificarControlador implements Initializable {
    * @param textField el textfield que se ocupara
    * @param tamaño la longitud del textfield
    */
-  public void tamañoCampo(TextField textField, int tamaño) {
+  public void tamanioCampo(TextField textField, int tamanio) {
     textField.setOnKeyTyped(event -> {
-      int maxCaracter = tamaño;
+      int maxCaracter = tamanio;
       if (textField.getText().length() > maxCaracter)
         event.consume();
     });
@@ -342,17 +336,17 @@ public class PantallaLicenciaModificarControlador implements Initializable {
     cbProveedor.getItems().addAll("Microsoft", "Apple");
     cbTipoLicencia.getItems().addAll("FPP", "OEM", "VL");
 
-    cbProveedor.setValue("Seleccion..");
-    cbTipoLicencia.setValue("Seleccion..");
+    cbProveedor.setValue(SELECCION);
+    cbTipoLicencia.setValue(SELECCION);
 
     dpFechaAgregado.setEditable(false);
     dpFechaExpiracion.setEditable(false);
 
-    tamañoCampo(txtBuscarId, 9);
-    tamañoCampo(txtIdLicencia, 9);
-    tamañoCampo(txtNoLicencia, 10);
-    tamañoCampo(txtClave, 39);
-    tamañoCampo(txtCaracter, 20);
+    tamanioCampo(txtBuscarId, 9);
+    tamanioCampo(txtIdLicencia, 9);
+    tamanioCampo(txtNoLicencia, 10);
+    tamanioCampo(txtClave, 39);
+    tamanioCampo(txtCaracter, 20);
 
     tipoTextoStringNumerico(txtBuscarId);
     tipoTextoStringNumerico(txtIdLicencia);

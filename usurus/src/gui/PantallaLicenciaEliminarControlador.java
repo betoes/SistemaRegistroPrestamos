@@ -1,7 +1,5 @@
 package gui;
 
-import dao.LicenciaDao;
-import domain.Licencia;
 import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
@@ -9,6 +7,8 @@ import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import dao.LicenciaDao;
+import domain.Licencia;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -23,12 +23,14 @@ import javafx.stage.Stage;
  * Clase para controla eliminar una licencia.
  * 
  * @author Jethran Gomez
+ * 
  * @version 1.0
  *
  */
 public class PantallaLicenciaEliminarControlador implements Initializable {
 
   private LicenciaDao licenciaDao = new LicenciaDao();
+  private static final String INFORMACION = "Informacion";
 
   @FXML
   private TextField txtBuscarId;
@@ -103,7 +105,7 @@ public class PantallaLicenciaEliminarControlador implements Initializable {
     String id = txtBuscarId.getText();
 
     if (!id.equals("")) {
-      if (licenciaDao.existe(id) == true) {
+      if (licenciaDao.existe(id)) {
         Licencia licencia = licenciaDao.obtenerLicencia(id);
 
         txtIdLicencia.setText(licencia.getIdLicencia());
@@ -114,19 +116,19 @@ public class PantallaLicenciaEliminarControlador implements Initializable {
         txtProveedor.setText(licencia.getProveedor());
         txtCaracter.setText(licencia.getCaracter());
         txtTipoLicencia.setText(licencia.getTipoLicenciamiento());
-
-
       } else {
+
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Informacion");
+        alert.setTitle(INFORMACION);
         alert.setHeaderText("Sin existencia");
         alert.setContentText("No se cuenta con ningun registro de ese ID: " + id);
 
         alert.showAndWait();
+
       }
     } else {
       Alert alert = new Alert(Alert.AlertType.INFORMATION);
-      alert.setTitle("Informacion");
+      alert.setTitle(INFORMACION);
       alert.setHeaderText("Campo vacio");
       alert.setContentText("Ingrese un id para buscar y realize la accion buscar");
 
@@ -146,14 +148,14 @@ public class PantallaLicenciaEliminarControlador implements Initializable {
       licenciaDao.eliminarLicencia(id);
 
       Alert alert = new Alert(Alert.AlertType.INFORMATION);
-      alert.setTitle("Informacion");
+      alert.setTitle(INFORMACION);
       alert.setHeaderText("Licencia Eliminada");
       alert.setContentText("La licencia ha sido eliminada");
 
       alert.showAndWait();
     } else {
       Alert alert = new Alert(Alert.AlertType.INFORMATION);
-      alert.setTitle("Informacion");
+      alert.setTitle(INFORMACION);
       alert.setHeaderText("Campo vacio");
       alert.setContentText("Ingrese un id para buscar");
 

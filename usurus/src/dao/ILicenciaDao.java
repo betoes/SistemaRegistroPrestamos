@@ -9,11 +9,11 @@ public interface ILicenciaDao {
 
   Licencia obtenerLicencia(String id);
 
-  boolean agregarLicencia(Licencia licencia);
+  void agregarLicencia(Licencia licencia);
 
-  boolean modficarLicencia(Licencia licencia);
+  void modficarLicencia(Licencia licencia);
 
-  boolean eliminarLicencia(String id);
+  void eliminarLicencia(String id);
 
   boolean existe(String id);
 
