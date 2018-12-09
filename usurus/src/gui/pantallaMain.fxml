@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="136.0" prefWidth="313.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Main">
+   <children>
+      <Button fx:id="bmantenimiento" layoutX="50.0" layoutY="43.0" mnemonicParsing="false" text="Mantenimiento" />
+      <Button fx:id="blicencia" layoutX="186.0" layoutY="43.0" mnemonicParsing="false" text="Licencia" onAction="#cargarPantallaLicencia" />
+      <Button fx:id="bhardware" layoutX="65.0" layoutY="84.0" mnemonicParsing="false" text="Hardware" />
+      <Button fx:id="bsoftware" layoutX="186.0" layoutY="84.0" mnemonicParsing="false" text="Software " />
+   </children>
+</AnchorPane>

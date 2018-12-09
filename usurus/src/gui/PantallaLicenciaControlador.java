@@ -1,12 +1,12 @@
 package gui;
 
-import dao.LicenciaDao;
-import domain.Licencia;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import dao.LicenciaDao;
+import domain.Licencia;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -23,6 +23,7 @@ import javafx.stage.Stage;
  * Esta class controla la pantalla principal de licencia.
  * 
  * @author: Jethran Gomez
+ * 
  * @version: 1.0
  *
  */
@@ -123,6 +124,23 @@ public class PantallaLicenciaControlador implements Initializable {
     Stage stage = new Stage();
     try {
       Parent root = FXMLLoader.load(getClass().getResource("pantallaLicenciaModificar.fxml"));
+      Scene scene = new Scene(root);
+
+
+      stage.setScene(scene);
+      stage.show();
+      closeButtonAction();
+
+    } catch (IOException ex) {
+      Logger.getLogger(PantallaLicenciaControlador.class.getName()).log(Level.SEVERE, null, ex);
+    }
+  }
+
+  @FXML
+  public void cargarPantallaMain() {
+    Stage stage = new Stage();
+    try {
+      Parent root = FXMLLoader.load(getClass().getResource("pantallaMain.fxml"));
       Scene scene = new Scene(root);
 
 

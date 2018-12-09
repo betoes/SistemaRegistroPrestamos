@@ -3,6 +3,12 @@ package domain;
 
 import java.util.Date;
 
+/**
+ * Clase licencia.
+ * 
+ * @author Jethran Gomez.
+ * @version 1.0
+ */
 public class Licencia {
   private String idLicencia;
   private int numeroLicencias;
