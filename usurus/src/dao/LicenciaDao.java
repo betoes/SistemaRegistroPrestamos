@@ -1,7 +1,5 @@
 package dao;
 
-import datasource.DataBase;
-import domain.Licencia;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -12,28 +10,21 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import datasource.DataBase;
+import domain.Licencia;
 
 /**
  * Clase que implementa los metodos de la interfaz ILicenciaDAO para dar el funcionamiento adecuado
  * a la conexión con la base de datos.
  * 
- *@author Jethran Gomez
- *@version 1.0
+ * @author Jethran Gomez
+ * @version 1.0
  */
 public class LicenciaDao implements ILicenciaDao {
 
-  private List<Licencia> listaLicencias;
   private String query;
   private Connection connection;
-  private Licencia licencia;
-  private Date fechaInicio;
-  private Date fechaFin;
-  private int numeroLicencias;
-  private String idLicencia;
-  private String clave;
-  private String proveedor;
-  private String caracter;
-  private String tipoLicenciamiento;
+
 
   public LicenciaDao() {
 
@@ -45,7 +36,7 @@ public class LicenciaDao implements ILicenciaDao {
   @Override
   public List<Licencia> obtenerLicencias() {
 
-    listaLicencias = new ArrayList<>();
+    List<Licencia> listaLicencias = new ArrayList<>();
     query = "Select * from licencia";
     connection = DataBase.getDataBaseConnection();
 
@@ -55,16 +46,16 @@ public class LicenciaDao implements ILicenciaDao {
 
       while (result.next()) {
 
-        idLicencia = result.getString("idLicencia");
-        numeroLicencias = result.getInt("numeroLicencias");
-        fechaInicio = result.getDate("fechaInicio");
-        fechaFin = result.getDate("fechaFin");
-        clave = result.getString("clave");
-        proveedor = result.getString("proveedor");
-        caracter = result.getString("caracter");
-        tipoLicenciamiento = result.getString("tipoLicenciamiento");
+        String idLicencia = result.getString("idLicencia");
+        int numeroLicencias = result.getInt("numeroLicencias");
+        Date fechaInicio = result.getDate("fechaInicio");
+        Date fechaFin = result.getDate("fechaFin");
+        String clave = result.getString("clave");
+        String proveedor = result.getString("proveedor");
+        String caracter = result.getString("caracter");
+        String tipoLicenciamiento = result.getString("tipoLicenciamiento");
 
-        licencia = new Licencia(idLicencia, numeroLicencias, fechaInicio, fechaFin, clave,
+        Licencia licencia = new Licencia(idLicencia, numeroLicencias, fechaInicio, fechaFin, clave,
             proveedor, caracter, tipoLicenciamiento);
 
         listaLicencias.add(licencia);
@@ -87,6 +78,7 @@ public class LicenciaDao implements ILicenciaDao {
   @Override
   public Licencia obtenerLicencia(String id) {
 
+    Licencia licencia = null;
     query = "Select * from licencia where idLicencia = ?";
     connection = DataBase.getDataBaseConnection();
 
@@ -97,13 +89,13 @@ public class LicenciaDao implements ILicenciaDao {
       ResultSet result = statement.executeQuery();
       result.next();
 
-      numeroLicencias = result.getInt("numeroLicencias");
-      fechaInicio = result.getDate("fechaInicio");
-      fechaFin = result.getDate("fechaFin");
-      clave = result.getString("clave");
-      proveedor = result.getString("proveedor");
-      caracter = result.getString("caracter");
-      tipoLicenciamiento = result.getString("tipoLicenciamiento");
+      int numeroLicencias = result.getInt("numeroLicencias");
+      Date fechaInicio = result.getDate("fechaInicio");
+      Date fechaFin = result.getDate("fechaFin");
+      String clave = result.getString("clave");
+      String proveedor = result.getString("proveedor");
+      String caracter = result.getString("caracter");
+      String tipoLicenciamiento = result.getString("tipoLicenciamiento");
 
 
       licencia = new Licencia(id, numeroLicencias, fechaInicio, fechaFin, clave, proveedor,
@@ -125,9 +117,8 @@ public class LicenciaDao implements ILicenciaDao {
    * @param licencia objeto de tipo Licencia
    */
   @Override
-  public boolean agregarLicencia(Licencia licencia) {
+  public void agregarLicencia(Licencia licencia) {
 
-    boolean agregado = true;
     query = "insert into licencia values (?, ?, ?, ?, ?, ?, ?, ?)";
     connection = DataBase.getDataBaseConnection();
     SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
@@ -148,13 +139,13 @@ public class LicenciaDao implements ILicenciaDao {
       statement.setString(8, licencia.getTipoLicenciamiento());
 
       statement.execute();
-      agregado = true;
+
     } catch (SQLException ex) {
       Logger.getLogger(LicenciaDao.class.getName()).log(Level.SEVERE, null, ex);
     } finally {
       DataBase.closeConnection();
     }
-    return agregado;
+
   }
 
   /**
@@ -163,13 +154,10 @@ public class LicenciaDao implements ILicenciaDao {
    * @param licencia objeto de tipo licencia
    */
   @Override
-  public boolean modficarLicencia(Licencia licencia) {
+  public void modficarLicencia(Licencia licencia) {
 
-    boolean editado = false;
-    query =
-        "UPDATE licencia set numeroLicencias = ?, fechaInicio = ?, fechaFin = ?, clave = ?,"
-        + " proveedor = ?, caracter = ?, "
-        + "tipoLicenciamiento = ? where idLicencia = ?";
+    query = "UPDATE licencia set numeroLicencias = ?, fechaInicio = ?, fechaFin = ?, clave = ?,"
+        + " proveedor = ?, caracter = ?, " + "tipoLicenciamiento = ? where idLicencia = ?";
     connection = DataBase.getDataBaseConnection();
     SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -189,14 +177,12 @@ public class LicenciaDao implements ILicenciaDao {
 
       statement.executeUpdate();
 
-      editado = true;
     } catch (SQLException ex) {
       Logger.getLogger(LicenciaDao.class.getName()).log(Level.SEVERE, null, ex);
     } finally {
       DataBase.closeConnection();
     }
 
-    return editado;
   }
 
   /**
@@ -205,9 +191,8 @@ public class LicenciaDao implements ILicenciaDao {
    * @param id de la licencia a eliminar
    */
   @Override
-  public boolean eliminarLicencia(String id) {
+  public void eliminarLicencia(String id) {
 
-    boolean borrado = false;
     query = "Delete from licencia where idLicencia = ?";
     connection = DataBase.getDataBaseConnection();
 
@@ -217,15 +202,11 @@ public class LicenciaDao implements ILicenciaDao {
 
       statement.executeUpdate();
 
-      borrado = true;
     } catch (SQLException ex) {
       Logger.getLogger(LicenciaDao.class.getName()).log(Level.SEVERE, null, ex);
     } finally {
       DataBase.closeConnection();
     }
-
-
-    return borrado;
   }
 
   /**
@@ -247,7 +228,6 @@ public class LicenciaDao implements ILicenciaDao {
       ResultSet result = statement.executeQuery();
 
       existe = result.next();
-
 
     } catch (SQLException ex) {
       Logger.getLogger(LicenciaDao.class.getName()).log(Level.SEVERE, null, ex);

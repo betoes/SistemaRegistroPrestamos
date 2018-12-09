@@ -1,7 +1,5 @@
 package gui;
 
-import dao.LicenciaDao;
-import domain.Licencia;
 import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
@@ -9,6 +7,8 @@ import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import dao.LicenciaDao;
+import domain.Licencia;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -100,7 +100,7 @@ public class PantallaLicenciaBuscarControlador implements Initializable {
 
     String id = txtBuscarId.getText();
     if (!id.equals("")) {
-      if (licenciaDao.existe(id) == true) {
+      if (licenciaDao.existe(id)) {
         Licencia licencia = licenciaDao.obtenerLicencia(id);
 
         txtIdLicencia.setText(licencia.getIdLicencia());
@@ -112,6 +112,7 @@ public class PantallaLicenciaBuscarControlador implements Initializable {
         txtCaracter.setText(licencia.getCaracter());
         txtTipoLicencia.setText(licencia.getTipoLicenciamiento());
       } else {
+
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Informacion");
         alert.setHeaderText("Sin existencia");
