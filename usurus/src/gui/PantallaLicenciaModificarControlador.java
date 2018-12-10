@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import dao.ILicenciaDao;
 import dao.LicenciaDao;
 import domain.Licencia;
 import javafx.beans.value.ObservableValue;
@@ -34,7 +35,7 @@ import javafx.stage.Stage;
 public class PantallaLicenciaModificarControlador implements Initializable {
 
   private Licencia licencia;
-  private LicenciaDao licenciaDao = new LicenciaDao();
+  private ILicenciaDao licenciaDao = new LicenciaDao();
   private static final String INFORMACION = "Informacion";
   private static final String SELECCION = "Seleccion..";
 
@@ -217,7 +218,7 @@ public class PantallaLicenciaModificarControlador implements Initializable {
    * Metodo para verificar que los campos estan vacios.
    * 
    * @return boolean para verficar si esta vacio o no los textos
-   * @throws ParseException
+   * @throws ParseException cambiar string a date
    */
   public boolean validarTextoVacio() throws ParseException {
 
@@ -278,13 +279,14 @@ public class PantallaLicenciaModificarControlador implements Initializable {
    * Metodo para definir la logintud del textfield.
    * 
    * @param textField el textfield que se ocupara
-   * @param tamaño la longitud del textfield
+   * @param tamanio la longitud del textfield
    */
   public void tamanioCampo(TextField textField, int tamanio) {
     textField.setOnKeyTyped(event -> {
       int maxCaracter = tamanio;
-      if (textField.getText().length() > maxCaracter)
+      if (textField.getText().length() > maxCaracter) {
         event.consume();
+      }
     });
   }
 
@@ -317,7 +319,7 @@ public class PantallaLicenciaModificarControlador implements Initializable {
   }
 
   /**
-   * Metodo para validar que solo permitira letras y numeros el textfield
+   * Metodo para validar que solo permitira letras y numeros el textfield.
    * 
    * @param textField el textfield que se ocupara
    */

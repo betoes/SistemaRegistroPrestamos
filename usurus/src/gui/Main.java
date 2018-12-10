@@ -38,9 +38,6 @@ public class Main extends Application {
   }
 
   @FXML
-
-
-
   private void closeButtonAction() {
 
     Stage stage = (Stage) btSoftware.getScene().getWindow();

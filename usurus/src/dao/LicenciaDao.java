@@ -110,6 +110,12 @@ public class LicenciaDao implements ILicenciaDao {
     return licencia;
   }
 
+  /**
+   * Metodo para recuperar licencia de la base de datos.
+   * 
+   * @return listaLicencia regresa una lista con todas las licencias de la BD
+   * 
+   */
   public List<String> obtenerIdLicencia() {
     List<String> listaIdLicencia = new ArrayList<>();
     query = "Select idLicencia from licencia";

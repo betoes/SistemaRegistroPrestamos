@@ -1,8 +1,5 @@
 package gui;
 
-import dao.ILicenciaDao;
-import dao.LicenciaDao;
-import domain.Licencia;
 import java.io.IOException;
 import java.net.URL;
 import java.text.ParseException;
@@ -12,6 +9,9 @@ import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import dao.ILicenciaDao;
+import dao.LicenciaDao;
+import domain.Licencia;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -244,13 +244,14 @@ public class PantallaLicenciaAgregarControlador implements Initializable {
    * Metodo para definir la logintud del textfield.
    * 
    * @param textField el textfield que se ocupara
-   * @param tamaño la longitud del textfield
+   * @param tam la longitud del textfield
    */
   public void tamanioCampo(TextField textField, int tam) {
     textField.setOnKeyTyped(event -> {
       int maxCaracter = tam;
-      if (textField.getText().length() > maxCaracter)
+      if (textField.getText().length() > maxCaracter) {
         event.consume();
+      }
     });
   }
 
@@ -283,7 +284,7 @@ public class PantallaLicenciaAgregarControlador implements Initializable {
   }
 
   /**
-   * Metodo para validar que solo permitira letras y numeros el textfield
+   * Metodo para validar que solo permitira letras y numeros el textfield.
    * 
    * @param textField el textfield que se ocupara
    */

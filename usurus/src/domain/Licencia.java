@@ -20,7 +20,7 @@ public class Licencia {
   private String tipoLicenciamiento;
 
   /**
-   * Constructor de licencia
+   * Constructor de licencia.
    * 
    * @param idLicencia id de la licencia
    * @param numeroLicencias numero de licencias

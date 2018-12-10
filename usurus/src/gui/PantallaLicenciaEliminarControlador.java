@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import dao.ILicenciaDao;
 import dao.LicenciaDao;
 import domain.Licencia;
 import javafx.fxml.FXML;
@@ -29,7 +30,7 @@ import javafx.stage.Stage;
  */
 public class PantallaLicenciaEliminarControlador implements Initializable {
 
-  private LicenciaDao licenciaDao = new LicenciaDao();
+  private ILicenciaDao licenciaDao = new LicenciaDao();
   private static final String INFORMACION = "Informacion";
 
   @FXML
