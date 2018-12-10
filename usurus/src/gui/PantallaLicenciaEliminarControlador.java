@@ -60,13 +60,13 @@ public class PantallaLicenciaEliminarControlador implements Initializable {
   private TextField txtTipoLicencia;
 
   @FXML
-  private Button bsalir;
+  private Button btSalir;
 
   @FXML
-  private Button bbuscar;
+  private Button btBuscar;
 
   @FXML
-  private Button beliminar;
+  private Button btEliminar;
 
   /**
    * Metodo para cargar la pantalla licencia.
@@ -92,7 +92,7 @@ public class PantallaLicenciaEliminarControlador implements Initializable {
   @FXML
   private void closeButtonAction() {
 
-    Stage stage = (Stage) bbuscar.getScene().getWindow();
+    Stage stage = (Stage) btBuscar.getScene().getWindow();
 
     stage.close();
   }

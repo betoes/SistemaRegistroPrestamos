@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.PantallaLicenciaAgregarControlador">
+<AnchorPane xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.PantallaLicenciaAgregarControlador">
    <children>
       <AnchorPane layoutX="2.0" prefHeight="431.0" prefWidth="646.0">
          <children>
@@ -33,8 +33,8 @@
             <TextField fx:id="txtCaracter" layoutX="404.0" layoutY="242.0" prefHeight="25.0" prefWidth="211.0" style="-fx-border-radius: 15;" />
             <ComboBox fx:id="cbProveedor" layoutX="407.0" layoutY="168.0" prefHeight="25.0" prefWidth="211.0" />
             <ComboBox fx:id="cbTipoLicencia" layoutX="414.0" layoutY="323.0" prefHeight="25.0" prefWidth="203.0" />
-            <Button fx:id="bGuardar" layoutX="546.0" layoutY="383.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="69.0" text="Guardar" onAction="#agregarLicencia" />
-            <Button fx:id="bSalir" layoutX="461.0" layoutY="383.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="69.0" text="Salir" textFill="#a83636" onAction="#cargarPantallaLicencia"/>
+            <Button fx:id="btGuardar" layoutX="546.0" layoutY="383.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="69.0" text="Guardar" onAction="#agregarLicencia" />
+            <Button fx:id="btSalir" layoutX="461.0" layoutY="383.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="69.0" text="Salir" textFill="#a83636" onAction="#cargarPantallaLicencia"/>
             
          </children>
       </AnchorPane>

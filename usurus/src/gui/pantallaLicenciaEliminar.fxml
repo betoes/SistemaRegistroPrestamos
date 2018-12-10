@@ -14,7 +14,7 @@
          </font>
       </Label>
       <TextField fx:id="txtBuscarId" layoutX="336.0" layoutY="30.0" prefHeight="25.0" prefWidth="177.0" />
-      <Button fx:id="bbuscar" layoutX="523.0" layoutY="30.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="62.0" text="Buscar" onAction="#buscarLicencia"/>
+      <Button fx:id="btBuscar" layoutX="523.0" layoutY="30.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="62.0" text="Buscar" onAction="#buscarLicencia"/>
       <Label layoutX="30.0" layoutY="104.0" text="ID:" />
       <Label layoutX="31.0" layoutY="162.0" text="No. de licencias:" />
       <Label layoutX="31.0" layoutY="226.0" text="Fecha Agregado:" />
@@ -31,7 +31,7 @@
       <TextField fx:id="txtProveedor" layoutX="411.0" layoutY="158.0" prefHeight="25.0" prefWidth="185.0" />
       <TextField fx:id="txtCaracter" layoutX="411.0" layoutY="222.0" prefHeight="25.0" prefWidth="185.0" />
       <TextField fx:id="txtTipoLicencia" layoutX="411.0" layoutY="282.0" prefHeight="25.0" prefWidth="185.0" />
-      <Button fx:id="beliminar" layoutX="528.0" layoutY="341.0" mnemonicParsing="false" text="Eliminar" onAction="#eliminarLicencia" />
-      <Button fx:id="bsalir" layoutX="458.0" layoutY="341.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="47.0" text="Salir" textFill="#e11111" onAction="#cargarPantallaLicencia" />
+      <Button fx:id="btEliminar" layoutX="528.0" layoutY="341.0" mnemonicParsing="false" text="Eliminar" onAction="#eliminarLicencia" />
+      <Button fx:id="btSalir" layoutX="458.0" layoutY="341.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="47.0" text="Salir" textFill="#e11111" onAction="#cargarPantallaLicencia" />
    </children>
 </AnchorPane>

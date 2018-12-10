@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.control.cell.PropertyValueFactory ?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:controller ="GUI.PantallaLicenciaControlador">
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:controller ="gui.PantallaLicenciaControlador">
 	   <children>
       <AnchorPane layoutX="-1.0" prefHeight="589.0" prefWidth="936.0">
          <children>
@@ -54,11 +54,11 @@
                 </TableColumn>
               </columns>
             </TableView>
-            <Button fx:id="bagregar" layoutX="760.0" layoutY="73.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="116.0" text="Agregar" onAction="#cargarPantallaAgregarLicencia" />
-            <Button fx:id="beliminar" layoutX="760.0" layoutY="142.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="116.0" text="Eliminar " onAction="#cargarPantallaElimanarLicencia"/>
-            <Button fx:id="bmodificar" layoutX="760.0" layoutY="216.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="116.0" text="Modificar " onAction="#cargarPantallaModificarLicencia" />
-            <Button fx:id="bbuscar" layoutX="760.0" layoutY="284.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="116.0" text="Buscar" onAction="#cargarPantallaBuscarLicencia" />
-            <Button fx:id="bsalir" layoutX="760.0" layoutY="355.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="116.0" text="Salir" />
+            <Button fx:id="btAgregar" layoutX="760.0" layoutY="73.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="116.0" text="Agregar" onAction="#cargarPantallaAgregarLicencia" />
+            <Button fx:id="btEliminar" layoutX="760.0" layoutY="142.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="116.0" text="Eliminar " onAction="#cargarPantallaElimanarLicencia"/>
+            <Button fx:id="btModificar" layoutX="760.0" layoutY="216.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="116.0" text="Modificar " onAction="#cargarPantallaModificarLicencia" />
+            <Button fx:id="btBuscar" layoutX="760.0" layoutY="284.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="116.0" text="Buscar" onAction="#cargarPantallaBuscarLicencia" />
+            <Button fx:id="btSalir" layoutX="760.0" layoutY="355.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="116.0" text="Salir" />
          </children>
       </AnchorPane>
    </children>

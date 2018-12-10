@@ -33,24 +33,24 @@ public class PantallaLicenciaControlador implements Initializable {
   private TableView<Licencia> tbLicencia;
 
   @FXML
-  private Button bagregar;
+  private Button btAgregar;
 
   @FXML
-  private Button beliminar;
+  private Button btEliminar;
 
   @FXML
-  private Button bmodificar;
+  private Button btModificar;
 
   @FXML
-  private Button bbuscar;
+  private Button btBuscar;
 
   @FXML
-  private Button bsalir;
+  private Button btSalir;
 
   @FXML
   private void closeButtonAction() {
 
-    Stage stage = (Stage) bbuscar.getScene().getWindow();
+    Stage stage = (Stage) btBuscar.getScene().getWindow();
 
     stage.close();
   }
@@ -136,6 +136,9 @@ public class PantallaLicenciaControlador implements Initializable {
     }
   }
 
+  /**
+   * Metodo para cargar la pantalla main
+   */
   @FXML
   public void cargarPantallaMain() {
     Stage stage = new Stage();

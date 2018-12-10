@@ -1,5 +1,8 @@
 package gui;
 
+import dao.ILicenciaDao;
+import dao.LicenciaDao;
+import domain.Licencia;
 import java.io.IOException;
 import java.net.URL;
 import java.text.ParseException;
@@ -9,8 +12,6 @@ import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import dao.LicenciaDao;
-import domain.Licencia;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -33,7 +34,7 @@ import javafx.stage.Stage;
  */
 public class PantallaLicenciaAgregarControlador implements Initializable {
 
-  private LicenciaDao licenciaDao = new LicenciaDao();
+  private ILicenciaDao licenciaDao = new LicenciaDao();
   private static final String INFORMATION = "Informacion";
   private static final String SELECCTION = "Seleccion..";
 
@@ -62,10 +63,10 @@ public class PantallaLicenciaAgregarControlador implements Initializable {
   private ComboBox<String> cbTipoLicencia;
 
   @FXML
-  private Button bGuardar;
+  private Button btGuardar;
 
   @FXML
-  private Button bSalir;
+  private Button btSalir;
 
   /**
    * Esta clase sirve para poder cargar la pantalla principal de licencia.
@@ -92,7 +93,7 @@ public class PantallaLicenciaAgregarControlador implements Initializable {
   @FXML
   private void closeButtonAction() {
 
-    Stage stage = (Stage) bSalir.getScene().getWindow();
+    Stage stage = (Stage) btSalir.getScene().getWindow();
 
     stage.close();
   }

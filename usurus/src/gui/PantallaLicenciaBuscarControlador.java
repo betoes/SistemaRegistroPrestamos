@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import dao.ILicenciaDao;
 import dao.LicenciaDao;
 import domain.Licencia;
 import javafx.fxml.FXML;
@@ -28,7 +29,7 @@ import javafx.stage.Stage;
  */
 public class PantallaLicenciaBuscarControlador implements Initializable {
 
-  private LicenciaDao licenciaDao = new LicenciaDao();
+  private ILicenciaDao licenciaDao = new LicenciaDao();
 
   @FXML
   private TextField txtBuscarId;
@@ -58,10 +59,10 @@ public class PantallaLicenciaBuscarControlador implements Initializable {
   private TextField txtTipoLicencia;
 
   @FXML
-  private Button bregresar;
+  private Button btRegresar;
 
   @FXML
-  private Button bbuscar;
+  private Button btBuscar;
 
   /**
    * Metodo para cargar la pantalla licencia.
@@ -87,7 +88,7 @@ public class PantallaLicenciaBuscarControlador implements Initializable {
   @FXML
   private void closeButtonAction() {
 
-    Stage stage = (Stage) bbuscar.getScene().getWindow();
+    Stage stage = (Stage) btBuscar.getScene().getWindow();
 
     stage.close();
   }

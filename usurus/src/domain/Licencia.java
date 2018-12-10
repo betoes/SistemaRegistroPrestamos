@@ -19,8 +19,18 @@ public class Licencia {
   private String caracter;
   private String tipoLicenciamiento;
 
-
-
+  /**
+   * Constructor de licencia
+   * 
+   * @param idLicencia id de la licencia
+   * @param numeroLicencias numero de licencias
+   * @param fechaInicio fecha agregada de la licencia
+   * @param fechaFin fecha de expirqacion de la licencia
+   * @param clave clave de la licencia
+   * @param proveedor proveedor de la licencia ligado al software o hardware
+   * @param caracter carcter de la licencia
+   * @param tipoLicenciamiento tipo de licencia
+   */
   public Licencia(String idLicencia, int numeroLicencias, Date fechaInicio, Date fechaFin,
       String clave, String proveedor, String caracter, String tipoLicenciamiento) {
     this.idLicencia = idLicencia;

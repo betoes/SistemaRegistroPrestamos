@@ -42,7 +42,7 @@ public class PantallaLicenciaModificarControlador implements Initializable {
   private TextField txtBuscarId;
 
   @FXML
-  private Button bBuscar;
+  private Button btBuscar;
 
   @FXML
   private TextField txtIdLicencia;
@@ -69,10 +69,10 @@ public class PantallaLicenciaModificarControlador implements Initializable {
   private ComboBox<String> cbTipoLicencia;
 
   @FXML
-  private Button bGuardar;
+  private Button btGuardar;
 
   @FXML
-  private Button bSalir;
+  private Button btSalir;
 
   /**
    * Metodo para cargar la pantalla licencia.
@@ -98,7 +98,7 @@ public class PantallaLicenciaModificarControlador implements Initializable {
   @FXML
   private void closeButtonAction() {
 
-    Stage stage = (Stage) bBuscar.getScene().getWindow();
+    Stage stage = (Stage) btBuscar.getScene().getWindow();
 
     stage.close();
   }
