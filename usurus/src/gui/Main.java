@@ -79,7 +79,7 @@ public class Main extends Application {
       closeButtonAction();
 
     } catch (IOException ex) {
-      Logger.getLogger(PantallaLicenciaControlador.class.getName()).log(Level.SEVERE, null, ex);
+      Logger.getLogger(PantallaSoftwareControlador.class.getName()).log(Level.SEVERE, null, ex);
     }
   }
 

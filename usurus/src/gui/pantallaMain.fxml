@@ -7,7 +7,7 @@
    <children>
       <Button fx:id="btMantenimiento" layoutX="50.0" layoutY="43.0" mnemonicParsing="false" text="Mantenimiento" />
       <Button fx:id="btLicencia" layoutX="186.0" layoutY="43.0" mnemonicParsing="false" text="Licencia" onAction="#cargarPantallaLicencia" />
-      <Button fx:id="btHardware" layoutX="65.0" layoutY="84.0" mnemonicParsing="false" text="Hardware" />
+      <Button fx:id="btHardware" layoutX="65.0" layoutY="84.0" mnemonicParsing="false" text="Hardware" onAction="#cargarPantallaHardware"/>
       <Button fx:id="btSoftware" layoutX="186.0" layoutY="84.0" mnemonicParsing="false" text="Software" onAction="#cargarPantallaSoftware" />
    </children>
 </AnchorPane>
