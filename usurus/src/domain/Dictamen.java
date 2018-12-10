@@ -1,54 +1,60 @@
 package domain;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Dictamen {
-	
-  private Date fechaDictamen;
-  private String tipo;
-  private String observacion;
-  private String descripcion;
-  
-  public Dictamen(Date fechaDictamen, String tipo, String observacion, String descripcion) {
-	this.fechaDictamen = fechaDictamen;
-	this.tipo = tipo;
-	this.observacion = observacion;
-	this.descripcion = descripcion;
-  }
+	private String idDictamen;
+	private Date fechaDictamen;
+	private String tipo;
+	private String observacion;
+	private String descripcion;
 
-  public Date getFechaDictamen() {
-	return fechaDictamen;
-  }
+	public Dictamen(String idDictamen, Date fechaDictamen, String tipo, String observacion, String descripcion) {
+		this.idDictamen = idDictamen;
+		this.fechaDictamen = fechaDictamen;
+		this.tipo = tipo;
+		this.observacion = observacion;
+		this.descripcion = descripcion;
+	}
 
-  public void setFechaDictamen(Date fechaDictamen) {
-	this.fechaDictamen = fechaDictamen;
-  }
+	public Date getFechaDictamen() {
+		return fechaDictamen;
+	}
 
-  public String getTipo() {
-	return tipo;
-  }
+	public void setFechaDictamen(Date fechaDictamen) {
+		this.fechaDictamen = fechaDictamen;
+	}
 
-  public void setTipo(String tipo) {
-	this.tipo = tipo;
-  }
+	public String getTipo() {
+		return tipo;
+	}
 
-  public String getObservacion() {
-	return observacion;
-  }
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
 
-  public void setObservacion(String observacion) {
-	this.observacion = observacion;
-  }
+	public String getObservacion() {
+		return observacion;
+	}
 
-public String getDescripcion() {
-	return descripcion;
-}
+	public void setObservacion(String observacion) {
+		this.observacion = observacion;
+	}
 
-public void setDescripcion(String descripcion) {
-	this.descripcion = descripcion;
-}
-  
-  
-  
-  
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+
+	public String getIdDictamen() {
+		return idDictamen;
+	}
+
+	public void setIdDictamen(String idDictamen) {
+		this.idDictamen = idDictamen;
+	}
+
 }

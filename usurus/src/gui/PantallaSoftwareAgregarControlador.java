@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import dao.ISoftwareDao;
 import dao.LicenciaDao;
 import dao.SoftwareDao;
@@ -26,230 +27,229 @@ import javafx.stage.Stage;
 
 public class PantallaSoftwareAgregarControlador implements Initializable {
 
-  private Software software;
-  private ISoftwareDao softwareDao = new SoftwareDao();
+	private Software software;
+	private ISoftwareDao softwareDao = new SoftwareDao();
 
-  @FXML
-  private TextField txtnombre;
-  @FXML
-  private TextField txtVersion;
-  @FXML
-  private TextField txtId;
-  @FXML
-  private TextField txtMonto;
-  @FXML
-  private TextArea txtDescripcion;
-  @FXML
-  private TextField txtIdioma;
-  @FXML
-  private TextField txtMarca;
-  @FXML
-  private ComboBox<String> cbTipo;
-  @FXML
-  private ComboBox<String> cbOrigen;
-  @FXML
-  private ComboBox<String> cbLicencia;
-  @FXML
-  private Button bGuardar;
-  @FXML
-  private Button bSalir;
+	@FXML
+	private TextField txtnombre;
+	@FXML
+	private TextField txtVersion;
+	@FXML
+	private TextField txtId;
+	@FXML
+	private TextField txtMonto;
+	@FXML
+	private TextArea txtDescripcion;
+	@FXML
+	private TextField txtIdioma;
+	@FXML
+	private TextField txtMarca;
+	@FXML
+	private ComboBox<String> cbTipo;
+	@FXML
+	private ComboBox<String> cbOrigen;
+	@FXML
+	private ComboBox<String> cbLicencia;
+	@FXML
+	private Button bGuardar;
+	@FXML
+	private Button bSalir;
 
-  @FXML
-  public void cargarPantallaSoftware() {
-    Stage stage = new Stage();
-    try {
-      Parent root = FXMLLoader.load(getClass().getResource("pantallaSoftware.fxml"));
-      Scene scene = new Scene(root);
+	/*
+	 * Metodo para cargar pantalla Principal de Administración de Software
+	 */
+	@FXML
+	public void cargarPantallaSoftware() {
+		Stage stage = new Stage();
+		try {
+			Parent root = FXMLLoader.load(getClass().getResource("pantallaSoftware.fxml"));
+			Scene scene = new Scene(root);
 
+			stage.setScene(scene);
+			stage.show();
+			closeButtonAction();
 
-      stage.setScene(scene);
-      stage.show();
-      closeButtonAction();
+		} catch (IOException ex) {
+			Logger.getLogger(PantallaLicenciaAgregarControlador.class.getName()).log(Level.SEVERE, null, ex);
+		}
+	}
 
-    } catch (IOException ex) {
-      Logger.getLogger(PantallaLicenciaAgregarControlador.class.getName()).log(Level.SEVERE, null,
-          ex);
-    }
-  }
+	/*
+	 * Metodo para cerrar ventana
+	 */
+	@FXML
+	private void closeButtonAction() {
 
-  @FXML
-  private void closeButtonAction() {
+		Stage stage = (Stage) bSalir.getScene().getWindow();
 
-    Stage stage = (Stage) bSalir.getScene().getWindow();
+		stage.close();
+	}
 
-    stage.close();
-  }
+	/**
+	 * Metodo para definir la logintud del textfield.
+	 * 
+	 * @param textField el textfield que se ocupara
+	 * @param tamaño    la longitud del textfield
+	 */
+	public void tamañoCampo(TextField textField, int tamaño) {
+		textField.setOnKeyTyped(event -> {
+			int maxCaracter = tamaño;
+			if (textField.getText().length() > maxCaracter)
+				event.consume();
+		});
+	}
 
+	/**
+	 * Metodo para validar que solo permitira numero en el textfield.
+	 * 
+	 * @param textField el textfield que se ocupara
+	 */
+	public void tipoTextoNumerico(TextField textField) {
+		textField.textProperty()
+				.addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
+					if (!newValue.matches("[0-9]")) {
+						textField.setText(newValue.replaceAll("[^0-9]", ""));
+					}
+				});
+	}
 
-  /**
-   * Metodo para definir la logintud del textfield.
-   * 
-   * @param textField el textfield que se ocupara
-   * @param tamaño la longitud del textfield
-   */
-  public void tamañoCampo(TextField textField, int tamaño) {
-    textField.setOnKeyTyped(event -> {
-      int maxCaracter = tamaño;
-      if (textField.getText().length() > maxCaracter)
-        event.consume();
-    });
-  }
+	/**
+	 * Metodo para validar que solo permitira letras en el textfield.
+	 * 
+	 * @param textField el textfield que se ocupara
+	 */
+	public void tipoTextoString(TextField textField) {
+		textField.textProperty()
+				.addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
+					if (!newValue.matches("[A-z\\s]")) {
+						textField.setText(newValue.replaceAll("[^A-z\\s]", ""));
+					}
+				});
+	}
 
-  /**
-   * Metodo para validar que solo permitira numero en el textfield.
-   * 
-   * @param textField el textfield que se ocupara
-   */
-  public void tipoTextoNumerico(TextField textField) {
-    textField.textProperty().addListener(
-        (ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
-          if (!newValue.matches("[0-9]")) {
-            textField.setText(newValue.replaceAll("[^0-9]", ""));
-          }
-        });
-  }
+	/**
+	 * Metodo para validar que solo permitira letras y numeros el textfield
+	 * 
+	 * @param textField el textfield que se ocupara
+	 */
+	public void tipoTextoStringNumerico(TextField textField) {
+		textField.textProperty()
+				.addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
+					if (!newValue.matches("[\\w]")) {
+						textField.setText(newValue.replaceAll("[^\\w]", ""));
+					}
+				});
+	}
 
-  /**
-   * Metodo para validar que solo permitira letras en el textfield.
-   * 
-   * @param textField el textfield que se ocupara
-   */
-  public void tipoTextoString(TextField textField) {
-    textField.textProperty().addListener(
-        (ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
-          if (!newValue.matches("[A-z\\s]")) {
-            textField.setText(newValue.replaceAll("[^A-z\\s]", ""));
-          }
-        });
-  }
+	/**
+	 * Este metodo sirve para agregar un nuevo Software.
+	 * 
+	 * @return boolean para ver si fue agregado
+	 * @throws ParseException por el cambio de string a date
+	 */
+	@FXML
+	public boolean agregarSoftware() throws ParseException {
 
-  /**
-   * Metodo para validar que solo permitira letras y numeros el textfield
-   * 
-   * @param textField el textfield que se ocupara
-   */
-  public void tipoTextoStringNumerico(TextField textField) {
-    textField.textProperty().addListener(
-        (ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
-          if (!newValue.matches("[\\w]")) {
-            textField.setText(newValue.replaceAll("[^\\w]", ""));
-          }
-        });
-  }
+		boolean agregado = false;
 
-  /**
-   * Este metodo sirve para agregar un nuevo Software.
-   * 
-   * @return boolean para ver si fue agregado
-   * @throws ParseException por el cambio de string a date
-   */
-  @FXML
-  public boolean agregarSoftware() throws ParseException {
+		if (validarTextoVacio() == false) {
+			if (softwareDao.existe(txtId.getText()) == false) {
 
-    boolean agregado = false;
+				software = new Software(txtId.getText(), txtnombre.getText(), txtVersion.getText(),
+						Double.parseDouble(txtMonto.getText()), txtMarca.getText(), txtIdioma.getText(),
+						txtDescripcion.getText(), cbOrigen.getValue(), cbTipo.getValue());
+				agregado = softwareDao.agregarSoftware(software, cbLicencia.getValue().toString());
 
-    if (validarTextoVacio() == false) {
-      if (softwareDao.existe(txtId.getText()) == false) {
+			} else {
+				Alert alert = new Alert(Alert.AlertType.INFORMATION);
+				alert.setTitle("Informacion");
+				alert.setHeaderText("Ya existe");
+				alert.setContentText("El Software ya existe en 	el registro");
 
-        software = new Software(txtId.getText(), txtnombre.getText(), txtVersion.getText(),
-            Double.parseDouble(txtMonto.getText()), txtMarca.getText(), txtIdioma.getText(),
-            txtDescripcion.getText(), cbOrigen.getValue(), cbTipo.getValue());
-        agregado = softwareDao.agregarSoftware(software, cbLicencia.getValue().toString());
+				alert.showAndWait();
+			}
 
-      } else {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Informacion");
-        alert.setHeaderText("Ya existe");
-        alert.setContentText("El Software ya existe en 	el registro");
+		}
 
-        alert.showAndWait();
-      }
+		if (agregado) {
+			Alert alert = new Alert(Alert.AlertType.INFORMATION);
+			alert.setTitle("Informacion");
+			alert.setHeaderText("Agregado");
+			alert.setContentText("El software se ha agregado");
 
-    }
+			alert.showAndWait();
 
+			cargarPantallaSoftware();
+		} else {
+			Alert alert = new Alert(Alert.AlertType.INFORMATION);
+			alert.setTitle("Informacion");
+			alert.setHeaderText("Software no agregado");
+			alert.setContentText("El software no se ha podido agregado");
+		}
 
-    if (agregado) {
-      Alert alert = new Alert(Alert.AlertType.INFORMATION);
-      alert.setTitle("Informacion");
-      alert.setHeaderText("Agregado");
-      alert.setContentText("El software se ha agregado");
+		return agregado;
+	}
 
-      alert.showAndWait();
+	/**
+	 * Metodo para validar si los campos se encuentran vacios.
+	 * 
+	 * @return boolean para ver si estan vacios o no los campos
+	 * @throws ParseException cambio de variable string a date
+	 */
+	public boolean validarTextoVacio() throws ParseException {
 
-      cargarPantallaSoftware();
-    } else {
-      Alert alert = new Alert(Alert.AlertType.INFORMATION);
-      alert.setTitle("Informacion");
-      alert.setHeaderText("Software no agregado");
-      alert.setContentText("El software no se ha podido agregado");
-    }
+		boolean vacio = true;
 
-    return agregado;
-  }
+		if (txtnombre.getText().equals("") || txtVersion.getText().equals("") || txtIdioma.getText().equals("")
+				|| txtId.getText().equals("") || cbTipo.getValue().toString().equals("Seleccion..")
+				|| txtMonto.getText().equals("") || txtDescripcion.equals("")
+				|| cbOrigen.getValue().toString().equals("Seleccion..")
+				|| cbLicencia.getValue().toString().equals("Seleccion..")) {
 
+			Alert alert = new Alert(Alert.AlertType.INFORMATION);
+			alert.setTitle("Informacion");
+			alert.setHeaderText("Campos vacios");
+			alert.setContentText("No puede dejar ningun campo vacio");
 
-  /**
-   * Metodo para validar si los campos se encuentran vacios.
-   * 
-   * @return boolean para ver si estan vacios o no los campos
-   * @throws ParseException cambio de variable string a date
-   */
-  public boolean validarTextoVacio() throws ParseException {
+			alert.showAndWait();
+		} else {
+			vacio = false;
+		}
 
-    boolean vacio = true;
+		return vacio;
+	}
 
-    if (txtnombre.getText().equals("") || txtVersion.getText().equals("")
-        || txtIdioma.getText().equals("") || txtId.getText().equals("")
-        || cbTipo.getValue().toString().equals("Seleccion..") || txtMonto.getText().equals("")
-        || txtDescripcion.equals("") || cbOrigen.getValue().toString().equals("Seleccion..")
-        || cbLicencia.getValue().toString().equals("Seleccion..")) {
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
 
-      Alert alert = new Alert(Alert.AlertType.INFORMATION);
-      alert.setTitle("Informacion");
-      alert.setHeaderText("Campos vacios");
-      alert.setContentText("No puede dejar ningun campo vacio");
+		cbTipo.getItems().addAll("adquirido", "desarrollado", "donado", "particular", "asociado");
+		cbOrigen.getItems().addAll("tecnico", "laboratorio", "administrativo", "investigacion");
 
-      alert.showAndWait();
-    } else {
-      vacio = false;
-    }
+		LicenciaDao lic = new LicenciaDao();
+		List<String> listaIdLicencia = lic.obtenerIdLicencia();
 
-    return vacio;
-  }
+		for (String id : listaIdLicencia) {
+			cbLicencia.getItems().add(id);
+		}
 
+		cbTipo.setValue("Seleccion..");
+		cbOrigen.setValue("Seleccion..");
+		cbLicencia.setValue("Seleccion..");
 
+		tipoTextoStringNumerico(txtId);
+		tipoTextoString(txtnombre);
+		tipoTextoString(txtIdioma);
+		tipoTextoString(txtMarca);
+		tipoTextoNumerico(txtMonto);
+		tipoTextoStringNumerico(txtVersion);
 
-  @Override
-  public void initialize(URL arg0, ResourceBundle arg1) {
+		tamañoCampo(txtId, 10);
+		tamañoCampo(txtMonto, 6);
+		tamañoCampo(txtnombre, 70);
+		tamañoCampo(txtVersion, 10);
+		tamañoCampo(txtMarca, 45);
+		tamañoCampo(txtIdioma, 45);
 
-    cbTipo.getItems().addAll("adquirido", "desarrollado", "donado", "particular", "asociado");
-    cbOrigen.getItems().addAll("tecnico", "laboratorio", "administrativo", "investigacion");
-
-    LicenciaDao lic = new LicenciaDao();
-    List<String> listaIdLicencia = lic.obtenerIdLicencia();
-
-    for (String id : listaIdLicencia) {
-      cbLicencia.getItems().add(id);
-    }
-
-    cbTipo.setValue("Seleccion..");
-    cbOrigen.setValue("Seleccion..");
-    cbLicencia.setValue("Seleccion..");
-
-    tipoTextoStringNumerico(txtId);
-    tipoTextoString(txtnombre);
-    tipoTextoString(txtIdioma);
-    tipoTextoString(txtMarca);
-    tipoTextoNumerico(txtMonto);
-    tipoTextoStringNumerico(txtVersion);
-
-    tamañoCampo(txtId, 10);
-    tamañoCampo(txtMonto, 6);
-    tamañoCampo(txtnombre, 70);
-    tamañoCampo(txtVersion, 10);
-    tamañoCampo(txtMarca, 45);
-    tamañoCampo(txtIdioma, 45);
-
-  }
+	}
 
 }

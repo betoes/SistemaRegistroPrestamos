@@ -181,6 +181,7 @@ public class SoftwareDao implements ISoftwareDao {
 	 * Metodo para agregar una software a la base de datos.
 	 * 
 	 * @param software objeto de tipo Software y idLicencia de tipo String
+	 * @return agregado un boolean que asigna true o false si se agregó con exito
 	 */
 	@Override
 	public boolean agregarSoftware(Software software, String idLicencia) {
@@ -214,9 +215,10 @@ public class SoftwareDao implements ISoftwareDao {
 	}
 
 	/**
-	 * Metodo para modificar una licencia de la base de datos.
+	 * Metodo para modificar una software de la base de datos.
 	 * 
-	 * @param licencia objeto de tipo licencia
+	 * @param licencia objeto de tipo software
+	 * @return editado un boolean que asigna true o false si se edito con exito
 	 */
 	@Override
 	public boolean modificarSoftware(Software software, String idLicencia) {
@@ -253,7 +255,7 @@ public class SoftwareDao implements ISoftwareDao {
 	}
 
 	/**
-	 * metodo para eliminar una licencia de la base de datos.
+	 * metodo para eliminar una software de la base de datos.
 	 * 
 	 * @param id de la licencia a eliminar
 	 */

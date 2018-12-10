@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.PantallaSoftwareAgregarControlador">
+   <children>
+      <AnchorPane layoutX="1.0" prefHeight="652.0" prefWidth="772.0">
+         <children>
+            <Label layoutX="29.0" layoutY="158.0" text="Descripción:" />
+            <Label layoutX="362.0" layoutY="82.0" prefHeight="0.0" prefWidth="35.0" text="ID:" />
+            <Label layoutX="353.0" layoutY="127.0" text="Tipo:" />
+            <Label layoutX="28.0" layoutY="107.0" text="Fecha:" />
+            <TextField fx:id="txtId" layoutX="413.0" layoutY="78.0" prefHeight="25.0" prefWidth="170.0" promptText="ID" style="-fx-border-radius: 15;" />
+            <TextField fx:id="txtFecha" layoutX="89.0" layoutY="103.0" prefHeight="25.0" prefWidth="220.0" promptText="Fecha" style="-fx-border-radius: 15;" />
+            <ComboBox fx:id="cbTipo" layoutX="413.0" layoutY="123.0" prefHeight="25.0" prefWidth="203.0" />
+            <Button fx:id="bGuardar" layoutX="676.0" layoutY="602.0" mnemonicParsing="false" onAction="#agregarSoftware" prefHeight="25.0" prefWidth="69.0" text="Guardar" />
+            <Button fx:id="bSalir" layoutX="591.0" layoutY="602.0" mnemonicParsing="false" onAction="#cargarPantallaSoftware" prefHeight="25.0" prefWidth="69.0" text="Salir" textFill="#a83636" />
+            <Label layoutX="-2.0" layoutY="-2.0" prefHeight="69.0" prefWidth="773.0" style="-fx-background-color: #0d47a1;" text="R E G I S T R A R   M A N T E N I M I E N T O" textFill="WHITE">
+               <padding>
+                  <Insets left="20.0" />
+               </padding>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <TextArea fx:id="txtDescripcion" layoutX="27.0" layoutY="179.0" prefHeight="44.0" prefWidth="728.0" />
+            <Label layoutX="30.0" layoutY="234.0" text="Observación:" />
+            <TextArea fx:id="txtObservacion" layoutX="28.0" layoutY="255.0" prefHeight="44.0" prefWidth="728.0" />
+            <TableView fx:id="tbHardware" layoutX="23.0" layoutY="309.0" prefHeight="134.0" prefWidth="736.0">
+               <columns>
+                  <TableColumn prefWidth="68.0" text="No. serie">
+                     <cellValueFactory>
+                        <PropertyValueFactory property="numeroSerie" />
+                     </cellValueFactory>
+                  </TableColumn>
+                  <TableColumn prefWidth="81.0" text="Tipo">
+                     <cellValueFactory>
+                        <PropertyValueFactory property="tipo" />
+                     </cellValueFactory>
+                  </TableColumn>
+                  <TableColumn prefWidth="96.0" text="Modelo">
+                     <cellValueFactory>
+                        <PropertyValueFactory property="modelo" />
+                     </cellValueFactory>
+                  </TableColumn>
+                  <TableColumn prefWidth="118.0" text="No. inventario">
+                     <cellValueFactory>
+                        <PropertyValueFactory property="numeroInventario" />
+                     </cellValueFactory>
+                  </TableColumn>
+                  <TableColumn prefWidth="170.0" text="Estado">
+                     <cellValueFactory>
+                        <PropertyValueFactory property="estado" />
+                     </cellValueFactory>
+                  </TableColumn>
+                  <TableColumn minWidth="7.0" prefWidth="215.0" text="Descripción">
+                     <cellValueFactory>
+                        <PropertyValueFactory property="descripcion" />
+                     </cellValueFactory>
+                  </TableColumn>
+               </columns>
+            </TableView>
+            <TableView fx:id="tbTecnico" layoutX="23.0" layoutY="443.0" prefHeight="134.0" prefWidth="736.0">
+               <columns>
+                  <TableColumn prefWidth="100.0" text="No. Personal">
+                     <cellValueFactory>
+                        <PropertyValueFactory property="numeroSerie" />
+                     </cellValueFactory>
+                  </TableColumn>
+                  <TableColumn prefWidth="213.0" text="Nombre">
+                     <cellValueFactory>
+                        <PropertyValueFactory property="tipo" />
+                     </cellValueFactory>
+                  </TableColumn>
+                  <TableColumn minWidth="0.0" prefWidth="103.0" text="Telefono">
+                     <cellValueFactory>
+                        <PropertyValueFactory property="modelo" />
+                     </cellValueFactory>
+                  </TableColumn>
+                  <TableColumn prefWidth="184.0" text="Correo">
+                     <cellValueFactory>
+                        <PropertyValueFactory property="numeroInventario" />
+                     </cellValueFactory>
+                  </TableColumn>
+                  <TableColumn prefWidth="135.0" text="Entidad Academica">
+                     <cellValueFactory>
+                        <PropertyValueFactory property="estado" />
+                     </cellValueFactory>
+                  </TableColumn>
+               </columns>
+            </TableView>
+            
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
