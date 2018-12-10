@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="372.0" prefWidth="617.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.PantallaHardwareBuscarControlador">
+   <children>
+      <Button fx:id="bregresar" layoutX="538.0" layoutY="336.0" mnemonicParsing="false" onAction="#cargarPantallaHardware" text="Regresar" />
+      <TextField fx:id="txtNumeroSerie" layoutX="421.0" layoutY="168.0" prefHeight="25.0" prefWidth="185.0" />
+      <TextField fx:id="txtTipo" layoutX="384.0" layoutY="110.0" prefHeight="25.0" prefWidth="223.0" />
+      <TextField fx:id="txtEstado" layoutX="136.0" layoutY="232.0" prefHeight="25.0" prefWidth="171.0" />
+      <TextField fx:id="txtModelo" layoutX="136.0" layoutY="168.0" prefHeight="25.0" prefWidth="171.0" />
+      <TextField fx:id="txtNumeroInventario" layoutX="144.0" layoutY="110.0" prefHeight="25.0" prefWidth="162.0" />
+      <Label layoutX="346.0" layoutY="236.0" text="Descripción:" />
+      <Label layoutX="348.0" layoutY="172.0" text="No. de serie:" />
+      <Label layoutX="346.0" layoutY="114.0" text="Tipo:" />
+      <Label layoutX="41.0" layoutY="236.0" text="Estado:" />
+      <Label layoutX="41.0" layoutY="172.0" text="Modelo:" />
+      <Label layoutX="40.0" layoutY="114.0" text="No. de inventario:" />
+      <Button fx:id="bbuscar" layoutX="533.0" layoutY="40.0" mnemonicParsing="false" onAction="#buscarHardware" prefHeight="25.0" prefWidth="62.0" text="Buscar" />
+      <TextField fx:id="txtBuscarNumeroInventario" layoutX="346.0" layoutY="40.0" prefHeight="25.0" prefWidth="177.0" promptText="Número de inventario" />
+      <Label layoutX="40.0" layoutY="36.0" text="Buscar hardware" textFill="#6531d7">
+         <font>
+            <Font name="Century" size="26.0" />
+         </font>
+      </Label>
+      <TextArea fx:id="txtDescripcion" layoutX="423.0" layoutY="236.0" prefHeight="73.0" prefWidth="177.0" />
+   </children>
+</AnchorPane>
