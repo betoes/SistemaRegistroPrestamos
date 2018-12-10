@@ -190,9 +190,10 @@ public class PantallaLicenciaAgregarControlador implements Initializable {
     boolean vacio = false;
 
     if (txtidLicencia.getText().equals("") || txtNoLicencias.getText().equals("")
-        || txtClave.getText().equals("") || cbProveedor.getValue().equals(SELECCTION)
-        || txtCaracter.getText().equals("") || cbTipoLicencia.getValue().equals(SELECCTION)
-        || regresarFecha(dpFechaAgregado) == null || regresarFecha(dpFechaExpiracion) == null) {
+        || txtNoLicencias.getText().equals("0") || txtClave.getText().equals("")
+        || cbProveedor.getValue().equals(SELECCTION) || txtCaracter.getText().equals("")
+        || cbTipoLicencia.getValue().equals(SELECCTION) || regresarFecha(dpFechaAgregado) == null
+        || regresarFecha(dpFechaExpiracion) == null) {
 
       Alert alert = new Alert(Alert.AlertType.INFORMATION);
       alert.setTitle(INFORMATION);

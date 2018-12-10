@@ -1,16 +1,32 @@
 package gui;
 
 import dao.HardwareDao;
+import dao.LicenciaDao;
 import domain.Hardware;
+import java.io.IOException;
 import java.net.URL;
+import java.util.Iterator;
+import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
+/**
+ * Sirve para iniciar la ventana que registra un hardware.
+ * @author Angel Sanchez
+ * @version 1.0
+ *
+ */
 public class PantallaHardwareAgregarControlador implements Initializable {
 
   private String numeroSerie;
@@ -27,6 +43,9 @@ public class PantallaHardwareAgregarControlador implements Initializable {
 
   @FXML
   private ComboBox<String> cbTipo;
+  
+  @FXML
+  private ComboBox<String> cbIdLicencia;
 
   @FXML
   private TextField txtModelo;
@@ -41,14 +60,42 @@ public class PantallaHardwareAgregarControlador implements Initializable {
   private TextField txtDescripcion;
 
   @FXML
-  private Button bGuardar;
+  private Button bguardar;
 
   @FXML
-  private Button bSalir;
+  private Button bsalir;
+  
+  /**
+   * Inicia los componentes de la pantalla porincipal del hardware.
+   */
+  @FXML
+  public void cargarPantallaHardware() {
+    Stage stage = new Stage();
+    try {
+      Parent root = FXMLLoader.load(getClass().getResource("PantallaHardware.fxml"));
+      Scene scene = new Scene(root);
+
+      stage.setScene(scene);
+      stage.show();
+      closeButtonAction();
+
+    } catch (IOException ex) {
+      Logger.getLogger(PantallaHardwareAgregarControlador.class.getName()).log(Level.SEVERE, null,
+          ex);
+    }
+  }
+  
+  /**
+   * Da funcionamiento al botón Cancelar.
+   */
+  @FXML
+  private void closeButtonAction() {
+    Stage stage = (Stage) bsalir.getScene().getWindow();
+    stage.close();
+  }
 
   @FXML
   public boolean agregarHardware() {
-
     boolean agregado = false;
 
     if (validarTextoVacio() == false) {
@@ -62,9 +109,8 @@ public class PantallaHardwareAgregarControlador implements Initializable {
         descripcion = txtDescripcion.getText();
 
         hardware = new Hardware(numeroSerie, tipo, modelo, numeroInventario, estado, descripcion);
-
-        hardwareDao.registrarHardware(hardware);
-        agregado = true;
+        agregado = hardwareDao.registrarHardware(hardware);
+        
       } else {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Informacion");
@@ -88,6 +134,10 @@ public class PantallaHardwareAgregarControlador implements Initializable {
     return agregado;
   }
 
+  /**
+   * Valida que ninún campo esté vacío.
+   * @return true Si todos los campos están llenos
+   */
   public boolean validarTextoVacio() {
 
     boolean vacio = true;
@@ -115,7 +165,12 @@ public class PantallaHardwareAgregarControlador implements Initializable {
 
     cbEstado.getItems().addAll("Nuevo", "En resguardo", "De baja", "En mantenimiento");
     cbTipo.getItems().addAll("CPU", "Video proyector", "LAPTOP", "Impresora");
-
+    LicenciaDao licencias = new LicenciaDao();
+    List<String> idLicencias = licencias.obtenerIdLicencia();
+    for (String id : idLicencias) {
+      cbIdLicencia.getItems().add(id);
+    }
+    
   }
 
 }

@@ -1,24 +1,26 @@
 package gui;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import dao.HardwareDao;
 import domain.Hardware;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 public class PantallaHardwareModificarControlador implements Initializable {
 
-  private String numeroSerie;
-  private String tipo;
-  private String modelo;
-  private String numeroInventario;
-  private String estado;
-  private String descripcion;
   private Hardware hardware;
   private HardwareDao hardwareDao = new HardwareDao();
 
@@ -26,7 +28,7 @@ public class PantallaHardwareModificarControlador implements Initializable {
   private TextField txtBuscarNumeroInventario;
 
   @FXML
-  private Button bBuscar;
+  private Button bbuscar;
 
   @FXML
   private TextField txtNumeroSerie;
@@ -47,10 +49,35 @@ public class PantallaHardwareModificarControlador implements Initializable {
   private TextField txtDescripcion;
 
   @FXML
-  private Button bGuardar;
+  private Button bguardar;
 
   @FXML
-  private Button bSalir;
+  private Button bsalir;
+
+  @FXML
+  public void cargarPantallaHardware() {
+    Stage stage = new Stage();
+    try {
+      Parent root = FXMLLoader.load(getClass().getResource("pantallaHardware.fxml"));
+      Scene scene = new Scene(root);
+
+      stage.setScene(scene);
+      stage.show();
+      closeButtonAction();
+
+    } catch (IOException ex) {
+      Logger.getLogger(PantallaHardwareModificarControlador.class.getName()).log(Level.SEVERE, 
+          null, ex);
+    }
+  }
+
+  @FXML
+  private void closeButtonAction() {
+
+    Stage stage = (Stage) bbuscar.getScene().getWindow();
+
+    stage.close();
+  }
 
   @FXML
   public void buscarHardware() {
@@ -72,12 +99,12 @@ public class PantallaHardwareModificarControlador implements Initializable {
 
     if (validarTextoVacio() == false) {
 
-      numeroSerie = txtNumeroSerie.getText();
-      tipo = cbTipo.getValue();
-      modelo = txtModelo.getText();
-      numeroInventario = txtNumeroInventario.getText();
-      estado = cbEstado.getValue();
-      descripcion = txtDescripcion.getText();
+      String numeroSerie = txtNumeroSerie.getText();
+      String tipo = cbTipo.getValue();
+      String modelo = txtModelo.getText();
+      String numeroInventario = txtNumeroInventario.getText();
+      String estado = cbEstado.getValue();
+      String descripcion = txtDescripcion.getText();
 
       hardware = new Hardware(numeroSerie, tipo, modelo, numeroInventario, estado, descripcion);
 
@@ -88,7 +115,7 @@ public class PantallaHardwareModificarControlador implements Initializable {
 
     if (modificado == true) {
       Alert alert = new Alert(Alert.AlertType.INFORMATION);
-      alert.setTitle("Informacion");
+      alert.setTitle("Información");
       alert.setHeaderText("Agregado");
       alert.setContentText("El hardware se ha agregado");
 
@@ -108,7 +135,7 @@ public class PantallaHardwareModificarControlador implements Initializable {
       Alert alert = new Alert(Alert.AlertType.INFORMATION);
       alert.setTitle("Informacion");
       alert.setHeaderText("Campos vacios");
-      alert.setContentText("No puede dejar ningun campo vacio");
+      alert.setContentText("No puede dejar ningún campo vacío");
 
       alert.showAndWait();
     } else {

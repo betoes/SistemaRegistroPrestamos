@@ -18,6 +18,7 @@ public class Licencia {
   private String proveedor;
   private String caracter;
   private String tipoLicenciamiento;
+  private static final int PARTES = 4;
 
   /**
    * Constructor de licencia.
@@ -107,6 +108,43 @@ public class Licencia {
     this.tipoLicenciamiento = tipoLicenciamiento;
   }
 
+  /**
+   * Metodo para agregarle guiones a la clave
+   * 
+   * @param clave
+   * @return cadenaGuion regresa la clave con guiones
+   */
+  public String claveGuion(String c) {
 
+    String cadena = c;
+    char[] caracterCadena = cadena.toCharArray();
+    String cadenaGuion = "";
+
+    for (int x = 0; x < caracterCadena.length; x++) {
+      cadenaGuion += caracterCadena[x];
+      if (x == 3 || x == 7 || x == 11) {
+        cadenaGuion += "-";
+      }
+    }
+
+    return cadenaGuion;
+  }
+
+  /**
+   * Metodo para regresar la clave sin guiones
+   * 
+   * @param clave recibe una clave con guiones
+   * @return claveG regresa la clave sin guiones
+   */
+  public String claveSinGuion(String c) {
+
+    String[] parts = c.split("-");
+    String claveG = "";
+    for (int part = 0; part < PARTES; part++) {
+      claveG += parts[part];
+    }
+
+    return claveG;
+  }
 
 }

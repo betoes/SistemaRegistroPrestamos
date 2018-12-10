@@ -25,7 +25,10 @@
       <ComboBox fx:id="cbEstado" layoutX="389.0" layoutY="90.0" prefWidth="150.0" promptText="Seleccionar uno" />
       <ComboBox fx:id="cbTipo" layoutX="389.0" layoutY="146.0" prefWidth="150.0" promptText="Seleccionar uno" />
       <Label layoutX="335.0" layoutY="150.0" text="Estado:" />
-      <Button fx:id="bGuardar" layoutX="357.0" layoutY="339.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="87.0" text="Guardar" />
-      <Button fx:id="bSalir" layoutX="452.0" layoutY="339.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="87.0" text="Cancelar" />
+      <Button fx:id="bguardar" layoutX="357.0" layoutY="339.0" mnemonicParsing="false" onAction="#agregarHardware" prefHeight="25.0" prefWidth="87.0" text="Guardar" />
+      <Button fx:id="bsalir" layoutX="452.0" layoutY="339.0" mnemonicParsing="false" onAction="#cargarPantallaHardware" prefHeight="25.0" prefWidth="87.0" text="Cancelar" />
+      <Label layoutX="21.0" layoutY="343.0" text="id Licencia" />
+      <ComboBox fx:id="cbIdLicencia" layoutX="101.0" layoutY="339.0" prefWidth="150.0" />
+      <ComboBox fx:id="cbIdArea" layoutX="89.0" layoutY="306.0" prefWidth="150.0" />
    </children>
 </AnchorPane>

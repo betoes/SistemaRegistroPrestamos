@@ -239,7 +239,7 @@ public class LicenciaDao implements ILicenciaDao {
   /**
    * Metodo para verificar si existe una licencia.
    * 
-   * @param id de la licencia
+   * @param id identificador de la licencia
    */
   @Override
   public boolean existe(String id) {
@@ -265,7 +265,5 @@ public class LicenciaDao implements ILicenciaDao {
 
     return existe;
   }
-
-
 
 }
