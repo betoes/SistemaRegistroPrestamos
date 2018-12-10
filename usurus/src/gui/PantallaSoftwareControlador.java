@@ -17,6 +17,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class PantallaSoftwareControlador implements Initializable {
@@ -38,6 +39,9 @@ public class PantallaSoftwareControlador implements Initializable {
 
   @FXML
   private Button bSalir;
+
+  @FXML
+  private TextField txtBusqueda;
 
   /*
    * Metodo para cargar pantalla Agregar Software
@@ -83,20 +87,21 @@ public class PantallaSoftwareControlador implements Initializable {
    * Metodo para cargar pantalla Eliminar Software
    */
   @FXML
-  public void cargarPantallaSoftwareEliminar() {
-    Stage stage = new Stage();
-    try {
-      Parent root = FXMLLoader.load(getClass().getResource("PantallaSoftwareEliminar.fxml"));
-      Scene scene = new Scene(root);
+  public void eliminarSoftwareSeleccionado() {
+    SoftwareDao softwaredao = new SoftwareDao();
+    Software softwareSeleccionado;
+    softwareSeleccionado = tbSoftware.getSelectionModel().getSelectedItem();
+    softwaredao.eliminarSoftware(softwareSeleccionado.getIdSoftware());
+    desplegarTabla();
+  }
 
-
-      stage.setScene(scene);
-      stage.show();
-      closeButtonAction();
-
-    } catch (IOException ex) {
-      Logger.getLogger(PantallaSoftwareControlador.class.getName()).log(Level.SEVERE, null, ex);
-    }
+  @FXML
+  public void buscarPorNombre() {
+    ISoftwareDao softwareDao = new SoftwareDao();
+    ObservableList<Software> listaObservable = FXCollections
+        .observableArrayList(softwareDao.obtenerSoftwarePorNombre(txtBusqueda.getText()));
+    tbSoftware.setItems(listaObservable);
+    tbSoftware.setDisable(false);
   }
 
   /*
@@ -104,12 +109,22 @@ public class PantallaSoftwareControlador implements Initializable {
    */
   @FXML
   public void cargarPantallaSoftwareModificar() {
+
+    Software softwareSeleccionado;
+    softwareSeleccionado = tbSoftware.getSelectionModel().getSelectedItem();
+
     Stage stage = new Stage();
     try {
-      Parent root = FXMLLoader.load(getClass().getResource("PantallaSoftwareModificar.fxml"));
-      Scene scene = new Scene(root);
 
+      FXMLLoader loader = new FXMLLoader(getClass().getResource("PantallaSoftwareModificar.fxml"));
 
+      Parent sceneMain = loader.load();
+
+      PantallaSoftwareModificarControlador pm =
+          loader.<PantallaSoftwareModificarControlador>getController();
+      pm.asignarInfo(softwareSeleccionado);
+
+      Scene scene = new Scene(sceneMain);
       stage.setScene(scene);
       stage.show();
       closeButtonAction();
@@ -134,12 +149,19 @@ public class PantallaSoftwareControlador implements Initializable {
   @Override
   public void initialize(URL arg0, ResourceBundle arg1) {
 
+    desplegarTabla();
+
+  }
+
+  ObservableList<Software> desplegarTabla() {
+
     ISoftwareDao softwareDao = new SoftwareDao();
     ObservableList<Software> listaObservable =
         FXCollections.observableArrayList(softwareDao.obtenerSoftwares());
     tbSoftware.setItems(listaObservable);
     tbSoftware.setDisable(false);
 
+    return listaObservable;
   }
 
 }

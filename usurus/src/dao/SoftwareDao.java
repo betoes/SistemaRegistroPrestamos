@@ -72,7 +72,7 @@ public class SoftwareDao implements ISoftwareDao {
       }
 
     } catch (SQLException ex) {
-      Logger.getLogger(LicenciaDao.class.getName()).log(Level.SEVERE, null, ex);
+      Logger.getLogger(SoftwareDao.class.getName()).log(Level.SEVERE, null, ex);
     } finally {
       DataBase.closeConnection();
     }
@@ -108,20 +108,78 @@ public class SoftwareDao implements ISoftwareDao {
       origen = result.getString("origen");
       tipo = result.getString("tipo");
 
-      switch (origen) {
-
-      }
       software = new Software(idSoftware, nombre, version, monto, marca, idioma, descripcion,
           origen, tipo);
 
 
     } catch (SQLException ex) {
-      Logger.getLogger(LicenciaDao.class.getName()).log(Level.SEVERE, null, ex);
+      Logger.getLogger(SoftwareDao.class.getName()).log(Level.SEVERE, null, ex);
     } finally {
       DataBase.closeConnection();
     }
 
     return software;
+  }
+
+  public String obtenerLicenciaSoftware(String softwareId) {
+    String licencia = "";
+    query = "Select Licencia_idLicencia from software where idSoftware = ?";
+    connection = DataBase.getDataBaseConnection();
+    try {
+      PreparedStatement statement = connection.prepareStatement(query);
+      statement.setString(1, softwareId);
+
+      ResultSet result = statement.executeQuery();
+      while (result.next()) {
+        licencia = result.getString("Licencia_idLicencia");
+      }
+
+    } catch (SQLException ex) {
+      Logger.getLogger(SoftwareDao.class.getName()).log(Level.SEVERE, null, ex);
+    } finally {
+      DataBase.closeConnection();
+    }
+    return licencia;
+
+  }
+
+  @Override
+  public List<Software> obtenerSoftwarePorNombre(String nombre) {
+    listaSoftware = new ArrayList<>();
+    query = "select * from software where nombre LIKE '%?%'";
+
+    connection = DataBase.getDataBaseConnection();
+    try {
+      PreparedStatement statement = connection.prepareStatement(query);
+      statement.setString(1, nombre);
+
+      ResultSet result = statement.executeQuery();
+      while (result.next()) {
+
+        idSoftware = result.getString("idSoftware");
+        nombre = result.getString("nombre");
+        version = result.getString("version");
+        monto = result.getDouble("monto");
+        marca = result.getString("marca");
+        idioma = result.getString("idioma");
+        descripcion = result.getString("descripcion");
+        origen = result.getString("origen");
+        tipo = result.getString("tipo");
+
+
+        software = new Software(idSoftware, nombre, version, monto, marca, idioma, descripcion,
+            origen, tipo);
+
+        listaSoftware.add(software);
+      }
+
+    } catch (SQLException ex) {
+      Logger.getLogger(SoftwareDao.class.getName()).log(Level.SEVERE, null, ex);
+    } finally {
+      DataBase.closeConnection();
+    }
+
+    return listaSoftware;
   }
 
   /**
@@ -154,7 +212,7 @@ public class SoftwareDao implements ISoftwareDao {
       statement.executeUpdate();
       agregado = true;
     } catch (SQLException ex) {
-      Logger.getLogger(LicenciaDao.class.getName()).log(Level.SEVERE, null, ex);
+      Logger.getLogger(SoftwareDao.class.getName()).log(Level.SEVERE, null, ex);
     } finally {
       DataBase.closeConnection();
     }
@@ -167,11 +225,11 @@ public class SoftwareDao implements ISoftwareDao {
    * @param licencia objeto de tipo licencia
    */
   @Override
-  public boolean modificarSoftware(Software software) {
+  public boolean modificarSoftware(Software software, String idLicencia) {
 
     boolean editado = false;
     query = "UPDATE software set nombre = ?, version = ?, monto = ?, marca = ?,"
-        + " idioma = ?, descripcion = ?, origen = ?, tipo = ? where idSoftware = ?";
+        + " idioma = ?, descripcion = ?, origen = ?, tipo = ?, Licencia_idLicencia = ? where idSoftware = ?";
     connection = DataBase.getDataBaseConnection();
 
     try {
@@ -185,14 +243,14 @@ public class SoftwareDao implements ISoftwareDao {
       statement.setString(6, software.getDescripcion());
       statement.setString(7, software.getOrigen());
       statement.setString(8, software.getTipo());
-
-      statement.setString(9, software.getIdSoftware());
+      statement.setString(9, idLicencia);
+      statement.setString(10, software.getIdSoftware());
 
       statement.executeUpdate();
 
       editado = true;
     } catch (SQLException ex) {
-      Logger.getLogger(LicenciaDao.class.getName()).log(Level.SEVERE, null, ex);
+      Logger.getLogger(SoftwareDao.class.getName()).log(Level.SEVERE, null, ex);
     } finally {
       DataBase.closeConnection();
     }
@@ -220,7 +278,7 @@ public class SoftwareDao implements ISoftwareDao {
 
       borrado = true;
     } catch (SQLException ex) {
-      Logger.getLogger(LicenciaDao.class.getName()).log(Level.SEVERE, null, ex);
+      Logger.getLogger(SoftwareDao.class.getName()).log(Level.SEVERE, null, ex);
     } finally {
       DataBase.closeConnection();
     }

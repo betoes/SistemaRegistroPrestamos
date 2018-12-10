@@ -11,6 +11,7 @@ public class Software {
   private String origen;
   private String tipo;
 
+
   public Software(String idSoftware, String nombre, String version, double monto, String marca,
       String idioma, String descripcion, String origen, String tipo) {
     this.idSoftware = idSoftware;

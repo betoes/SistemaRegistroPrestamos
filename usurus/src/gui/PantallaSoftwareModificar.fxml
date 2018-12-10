@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="420.0" prefWidth="642.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="462.0" prefWidth="642.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.PantallaSoftwareModificarControlador">
    <children>
       <Label prefHeight="69.0" prefWidth="642.0" style="-fx-background-color: #0d47a1;" text="M O D I F I C A R  S O F T W A R E" textFill="WHITE">
          <padding>
@@ -19,12 +19,10 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="txtBuscarId" layoutX="338.0" layoutY="22.0" prefHeight="25.0" prefWidth="177.0" promptText="Buscar ej. &quot;Visual Code Studio&quot;" />
-      <Button fx:id="bBuscar" layoutX="527.0" layoutY="22.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="62.0" text="Buscar" />
       <TextField fx:id="txtnombre" layoutX="85.0" layoutY="81.0" prefHeight="25.0" prefWidth="496.0" promptText="Nombre Software" style="-fx-border-radius: 15;" />
       <Label layoutX="22.0" layoutY="85.0" text="Nombre:" />
       <Label layoutX="24.0" layoutY="128.0" text="Versión:" />
-      <Label layoutX="24.0" layoutY="270.0" text="Descripción:" />
+      <Label layoutX="24.0" layoutY="300.0" text="Descripción:" />
       <Label layoutX="357.0" layoutY="203.0" text="Tipo:" />
       <Label layoutX="24.0" layoutY="173.0" text="Monto:" />
       <Label layoutX="357.0" layoutY="243.0" text="Origen:" />
@@ -32,12 +30,14 @@
       <TextField fx:id="txtMonto" layoutX="85.0" layoutY="169.0" prefHeight="25.0" prefWidth="220.0" promptText="Monto" style="-fx-border-radius: 15;" />
       <ComboBox fx:id="cbTipo" layoutX="408.0" layoutY="199.0" prefHeight="25.0" prefWidth="203.0" />
       <ComboBox fx:id="cbOrigen" layoutX="408.0" layoutY="239.0" prefHeight="25.0" prefWidth="203.0" />
-      <TextArea fx:id="txtDescripcion" editable="false" layoutX="22.0" layoutY="291.0" prefHeight="75.0" prefWidth="593.0" />
-      <Label layoutX="24.0" layoutY="223.0" text="Idioma:" />
-      <TextField fx:id="txtIdioma" layoutX="85.0" layoutY="219.0" prefHeight="25.0" prefWidth="220.0" promptText="Idioma" style="-fx-border-radius: 15;" />
-      <Button fx:id="bGuardar" layoutX="543.0" layoutY="376.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="69.0" text="Modificar" />
-      <Button fx:id="bSalir" layoutX="458.0" layoutY="376.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="69.0" text="Salir" textFill="#a83636" />
+      <TextArea fx:id="txtDescripcion" editable="false" layoutX="22.0" layoutY="331.0" prefHeight="75.0" prefWidth="593.0" />
+      <Label layoutX="24.0" layoutY="213.0" text="Idioma:" />
+      <TextField fx:id="txtIdioma" layoutX="85.0" layoutY="209.0" prefHeight="25.0" prefWidth="220.0" promptText="Idioma" style="-fx-border-radius: 15;" />
+      <Button fx:id="bGuardar" layoutX="543.0" layoutY="416.0" mnemonicParsing="false" onAction="#modificarSoftware" prefHeight="25.0" prefWidth="69.0" text="Modificar" />
+      <Button fx:id="bSalir" layoutX="458.0" layoutY="416.0" mnemonicParsing="false" onAction="#cargarPantallaSoftware" prefHeight="25.0" prefWidth="69.0" text="Salir" textFill="#a83636" />
       <Label layoutX="357.0" layoutY="149.0" text="Licencia Asignada:" />
       <ComboBox fx:id="cbLicencia" layoutX="458.0" layoutY="145.0" prefHeight="25.0" prefWidth="118.0" />
+      <Label layoutX="24.0" layoutY="253.0" text="Marca:" />
+      <TextField fx:id="txtMarca" layoutX="85.0" layoutY="249.0" prefHeight="25.0" prefWidth="220.0" promptText="Marca" style="-fx-border-radius: 15;" />
    </children>
 </AnchorPane>
