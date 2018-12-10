@@ -1,6 +1,7 @@
 package domain;
 
 public class Software {
+  private String idSoftware;
   private String nombre;
   private String version;
   private double monto;
@@ -9,84 +10,92 @@ public class Software {
   private String descripcion;
   private String origen;
   private String tipo;
-  
-  public Software(String nombre, String version, double monto, String marca, String idioma, String descripcion,
-		String origen, String tipo) {
-	this.nombre = nombre;
-	this.version = version;
-	this.monto = monto;
-	this.marca = marca;
-	this.idioma = idioma;
-	this.descripcion = descripcion;
-	this.origen = origen;
-	this.tipo = tipo;
+
+  public Software(String idSoftware, String nombre, String version, double monto, String marca,
+      String idioma, String descripcion, String origen, String tipo) {
+    this.idSoftware = idSoftware;
+    this.nombre = nombre;
+    this.version = version;
+    this.monto = monto;
+    this.marca = marca;
+    this.idioma = idioma;
+    this.descripcion = descripcion;
+    this.origen = origen;
+    this.tipo = tipo;
+  }
+
+  public String getIdSoftware() {
+    return idSoftware;
+  }
+
+  public void setIdSoftware(String idSoftware) {
+    this.idSoftware = idSoftware;
   }
 
   public String getNombre() {
-	return nombre;
+    return nombre;
   }
 
   public void setNombre(String nombre) {
-	this.nombre = nombre;
+    this.nombre = nombre;
   }
 
   public String getVersion() {
-	return version;
+    return version;
   }
 
   public void setVersion(String version) {
-	this.version = version;
+    this.version = version;
   }
 
   public double getMonto() {
-	return monto;
+    return monto;
   }
 
   public void setMonto(double monto) {
-	this.monto = monto;
+    this.monto = monto;
   }
 
   public String getMarca() {
-	return marca;
+    return marca;
   }
 
   public void setMarca(String marca) {
-	this.marca = marca;
+    this.marca = marca;
   }
 
   public String getIdioma() {
-	return idioma;
+    return idioma;
   }
 
   public void setIdioma(String idioma) {
-	this.idioma = idioma;
+    this.idioma = idioma;
   }
 
   public String getDescripcion() {
-	return descripcion;
+    return descripcion;
   }
 
   public void setDescripcion(String descripcion) {
-	this.descripcion = descripcion;
+    this.descripcion = descripcion;
   }
 
   public String getOrigen() {
-	return origen;
+    return origen;
   }
 
   public void setOrigen(String origen) {
-	this.origen = origen;
+    this.origen = origen;
   }
 
   public String getTipo() {
-	return tipo;
+    return tipo;
   }
 
   public void setTipo(String tipo) {
-	this.tipo = tipo;
+    this.tipo = tipo;
   }
-  
-  
-  
-  
+
+
+
 }

@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.PantallaLicenciaAgregarControlador">
+<AnchorPane xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.PantallaLicenciaAgregarControlador">
    <children>
       <AnchorPane layoutX="2.0" prefHeight="431.0" prefWidth="646.0">
          <children>
