@@ -22,7 +22,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 /**
- * Sirve para iniciar la ventana que registra un hardware
+ * Sirve para iniciar la ventana que registra un hardware.
  * @author Angel Sanchez
  * @version 1.0
  *
@@ -65,6 +65,9 @@ public class PantallaHardwareAgregarControlador implements Initializable {
   @FXML
   private Button bsalir;
   
+  /**
+   * Inicia los componentes de la pantalla porincipal del hardware.
+   */
   @FXML
   public void cargarPantallaHardware() {
     Stage stage = new Stage();
@@ -82,6 +85,9 @@ public class PantallaHardwareAgregarControlador implements Initializable {
     }
   }
   
+  /**
+   * Da funcionamiento al botón Cancelar.
+   */
   @FXML
   private void closeButtonAction() {
     Stage stage = (Stage) bsalir.getScene().getWindow();
@@ -128,6 +134,10 @@ public class PantallaHardwareAgregarControlador implements Initializable {
     return agregado;
   }
 
+  /**
+   * Valida que ninún campo esté vacío.
+   * @return true Si todos los campos están llenos
+   */
   public boolean validarTextoVacio() {
 
     boolean vacio = true;
