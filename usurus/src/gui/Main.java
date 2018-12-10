@@ -70,7 +70,7 @@ public class Main extends Application {
 
     Stage stage = new Stage();
     try {
-      Parent root = FXMLLoader.load(getClass().getResource("pantallaSoftware.fxml"));
+      Parent root = FXMLLoader.load(getClass().getResource("PantallaSoftware.fxml"));
       Scene scene = new Scene(root);
 
       stage.setScene(scene);
