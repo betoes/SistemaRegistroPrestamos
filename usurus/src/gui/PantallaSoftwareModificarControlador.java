@@ -72,8 +72,16 @@ public class PantallaSoftwareModificarControlador implements Initializable {
     }
   }
 
+  /**
+   * Este metodo sirve para modificar un registro seleccionado.
+   * 
+   * @return boolean para ver si fue modificado
+   * @throws NumberFormatException
+   * @throws ParseException por el cambio de string a date
+   */
+
   @FXML
-  public boolean modificarSoftware() throws ParseException {
+  public boolean modificarSoftware() throws NumberFormatException, ParseException {
 
     boolean modificado = false;
 
@@ -90,15 +98,20 @@ public class PantallaSoftwareModificarControlador implements Initializable {
     if (modificado) {
       Alert alert = new Alert(Alert.AlertType.INFORMATION);
       alert.setTitle("Informacion");
-      alert.setHeaderText("Agregado");
+      alert.setHeaderText("Modificado");
       alert.setContentText("El registro se ha modificado");
 
       alert.showAndWait();
+      cargarPantallaSoftware();
+
     } else {
       Alert alert = new Alert(Alert.AlertType.INFORMATION);
       alert.setTitle("Informacion");
       alert.setHeaderText("No se pudó modificar el registro");
       alert.setContentText("El registro no se ha podido modificar");
+
+      alert.showAndWait();
+
     }
 
     return modificado;
@@ -113,6 +126,12 @@ public class PantallaSoftwareModificarControlador implements Initializable {
     stage.close();
   }
 
+  /**
+   * Metodo para validar si los campos se encuentran vacios.
+   * 
+   * @return boolean para ver si estan vacios o no los campos
+   * @throws ParseException cambio de variable string a date
+   */
   public boolean validarTextoVacio() throws ParseException {
 
     boolean vacio = true;

@@ -175,6 +175,8 @@ public class PantallaSoftwareAgregarControlador implements Initializable {
       alert.setContentText("El software se ha agregado");
 
       alert.showAndWait();
+
+      cargarPantallaSoftware();
     } else {
       Alert alert = new Alert(Alert.AlertType.INFORMATION);
       alert.setTitle("Informacion");

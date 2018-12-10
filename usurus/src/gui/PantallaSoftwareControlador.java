@@ -64,26 +64,6 @@ public class PantallaSoftwareControlador implements Initializable {
   }
 
   /*
-   * Metodo para cargar pantalla Buscar Software
-   */
-  @FXML
-  public void cargarPantallaLicenciaBuscar() {
-    Stage stage = new Stage();
-    try {
-      Parent root = FXMLLoader.load(getClass().getResource("pantallaLicenciaBuscar.fxml"));
-      Scene scene = new Scene(root);
-
-
-      stage.setScene(scene);
-      stage.show();
-      closeButtonAction();
-
-    } catch (IOException ex) {
-      Logger.getLogger(PantallaSoftwareControlador.class.getName()).log(Level.SEVERE, null, ex);
-    }
-  }
-
-  /*
    * Metodo para cargar pantalla Eliminar Software
    */
   @FXML
@@ -95,6 +75,9 @@ public class PantallaSoftwareControlador implements Initializable {
     desplegarTabla();
   }
 
+  /*
+   * Metodo para buscar un Registro por su nombre
+   */
   @FXML
   public void buscarPorNombre() {
     ISoftwareDao softwareDao = new SoftwareDao();
@@ -112,25 +95,47 @@ public class PantallaSoftwareControlador implements Initializable {
 
     Software softwareSeleccionado;
     softwareSeleccionado = tbSoftware.getSelectionModel().getSelectedItem();
+    if (softwareSeleccionado != null) {
+      Stage stage = new Stage();
+      try {
 
+        FXMLLoader loader =
+            new FXMLLoader(getClass().getResource("PantallaSoftwareModificar.fxml"));
+
+        Parent sceneMain = loader.load();
+
+        PantallaSoftwareModificarControlador pm =
+            loader.<PantallaSoftwareModificarControlador>getController();
+        pm.asignarInfo(softwareSeleccionado);
+
+        Scene scene = new Scene(sceneMain);
+        stage.setScene(scene);
+        stage.show();
+        closeButtonAction();
+
+      } catch (IOException ex) {
+        Logger.getLogger(PantallaSoftwareControlador.class.getName()).log(Level.SEVERE, null, ex);
+      }
+    }
+  }
+
+  /**
+   * Metodo para cargar la pantalla main
+   */
+  @FXML
+  public void cargarPantallaMain() {
     Stage stage = new Stage();
     try {
+      Parent root = FXMLLoader.load(getClass().getResource("pantallaMain.fxml"));
+      Scene scene = new Scene(root);
 
-      FXMLLoader loader = new FXMLLoader(getClass().getResource("PantallaSoftwareModificar.fxml"));
 
-      Parent sceneMain = loader.load();
-
-      PantallaSoftwareModificarControlador pm =
-          loader.<PantallaSoftwareModificarControlador>getController();
-      pm.asignarInfo(softwareSeleccionado);
-
-      Scene scene = new Scene(sceneMain);
       stage.setScene(scene);
       stage.show();
       closeButtonAction();
 
     } catch (IOException ex) {
-      Logger.getLogger(PantallaSoftwareControlador.class.getName()).log(Level.SEVERE, null, ex);
+      Logger.getLogger(PantallaLicenciaControlador.class.getName()).log(Level.SEVERE, null, ex);
     }
   }
 

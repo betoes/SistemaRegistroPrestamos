@@ -63,7 +63,7 @@
             <Button fx:id="bEliminar" layoutX="946.0" layoutY="95.0" mnemonicParsing="false" onAction="#eliminarSoftwareSeleccionado" prefHeight="39.0" prefWidth="116.0" text="Eliminar " />
             <Button fx:id="bModificar" layoutX="946.0" layoutY="144.0" mnemonicParsing="false" onAction="#cargarPantallaSoftwareModificar" prefHeight="39.0" prefWidth="116.0" text="Modificar " />
             <Button fx:id="bBuscar" layoutX="946.0" layoutY="258.0" mnemonicParsing="false" onAction="#buscarPorNombre" prefHeight="24.0" prefWidth="116.0" text="Buscar" />
-            <Button fx:id="bSalir" layoutX="946.0" layoutY="462.0" mnemonicParsing="false" onAction="#closeButtonAction" prefHeight="39.0" prefWidth="116.0" text="Salir" />
+            <Button fx:id="bSalir" layoutX="946.0" layoutY="462.0" mnemonicParsing="false" onAction="#cargarPantallaMain" prefHeight="39.0" prefWidth="116.0" text="Salir" />
             <Button layoutX="946.0" layoutY="46.0" mnemonicParsing="false" onAction="#cargarPantallaSoftwareAgregar" prefHeight="39.0" prefWidth="116.0" text="Agregar" />
             <TextField fx:id="txtBusqueda" layoutX="930.0" layoutY="220.0" promptText="Busqueda por nombre" />
          </children>
