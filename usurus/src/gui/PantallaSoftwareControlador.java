@@ -64,15 +64,17 @@ public class PantallaSoftwareControlador implements Initializable {
   }
 
   /*
-   * Metodo para cargar pantalla Eliminar Software
+   * Metodo para Eliminar un registro en la tabla de Software
    */
   @FXML
   public void eliminarSoftwareSeleccionado() {
     SoftwareDao softwaredao = new SoftwareDao();
     Software softwareSeleccionado;
     softwareSeleccionado = tbSoftware.getSelectionModel().getSelectedItem();
-    softwaredao.eliminarSoftware(softwareSeleccionado.getIdSoftware());
-    desplegarTabla();
+    if (softwareSeleccionado != null) {
+      softwaredao.eliminarSoftware(softwareSeleccionado.getIdSoftware());
+      desplegarTabla();
+    }
   }
 
   /*
