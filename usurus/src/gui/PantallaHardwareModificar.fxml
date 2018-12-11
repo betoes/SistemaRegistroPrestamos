@@ -6,7 +6,6 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="372.0" prefWidth="617.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.PantallaHardwareModificarControlador">
    <children>
       <Label layoutX="41.0" layoutY="26.0" text="Modificar hardware" textFill="#6531d7">
@@ -15,20 +14,20 @@
          </font>
       </Label>
       <TextField fx:id="txtBuscarNumeroInventario" layoutX="339.0" layoutY="30.0" prefHeight="25.0" prefWidth="178.0" promptText="Número de inventario" />
-      <Button fx:id="bbuscar" layoutX="526.0" layoutY="30.0" mnemonicParsing="false" text="Buscar" />
-      <Button fx:id="bsalir" layoutX="458.0" layoutY="333.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="87.0" text="Cancelar" />
-      <Button fx:id="bguardar" layoutX="363.0" layoutY="333.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="87.0" text="Guardar" />
+      <Button fx:id="bbuscar" layoutX="526.0" layoutY="30.0" mnemonicParsing="false" onAction="#buscarHardware" text="Buscar" />
+      <Button fx:id="bsalir" layoutX="458.0" layoutY="333.0" mnemonicParsing="false" onAction="#cargarPantallaHardware" prefHeight="25.0" prefWidth="87.0" text="Cancelar" />
+      <Button fx:id="bguardar" layoutX="363.0" layoutY="333.0" mnemonicParsing="false" onAction="#modificarHardware" prefHeight="25.0" prefWidth="87.0" text="Guardar" />
       <Label layoutX="341.0" layoutY="144.0" text="Estado:" />
-      <ComboBox fx:id="cbTipo" layoutX="395.0" layoutY="140.0" prefWidth="150.0" promptText="Seleccionar uno" />
-      <ComboBox fx:id="cbEstado" layoutX="395.0" layoutY="84.0" prefWidth="150.0" promptText="Seleccionar uno" />
+      <ComboBox fx:id="cbEstado" layoutX="395.0" layoutY="140.0" prefWidth="150.0" promptText="Seleccionar uno" />
+      <ComboBox fx:id="cbTipo" layoutX="395.0" layoutY="84.0" prefWidth="150.0" promptText="Seleccionar uno" />
       <Label layoutX="341.0" layoutY="88.0" text="Tipo:" />
       <Label layoutX="341.0" layoutY="190.0" text="Descripción:" />
-      <TextField fx:id="txtDescripcion" layoutX="341.0" layoutY="215.0" prefHeight="73.0" prefWidth="204.0" />
       <Label layoutX="41.0" layoutY="173.0" text="Modelo:" />
       <TextField fx:id="txtModelo" layoutX="117.0" layoutY="169.0" prefHeight="25.0" prefWidth="173.0" />
       <Label layoutX="41.0" layoutY="267.0" text="No. de inventario:" />
       <TextField fx:id="txtNumeroInventario" layoutX="143.0" layoutY="263.0" prefHeight="25.0" prefWidth="147.0" />
       <TextField fx:id="txtNumeroSerie" layoutX="117.0" layoutY="84.0" prefHeight="25.0" prefWidth="173.0" />
       <Label layoutX="41.0" layoutY="88.0" text="No. de serie:" />
+      <TextArea fx:id="txtDescripcion" layoutX="339.0" layoutY="224.0" prefHeight="77.0" prefWidth="239.0" />
    </children>
 </AnchorPane>

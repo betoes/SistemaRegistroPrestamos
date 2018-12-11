@@ -1,10 +1,5 @@
 package dao;
 
-import dao.HardwareDao;
-import datasource.DataBase;
-import domain.Hardware;
-import domain.Licencia;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,11 +8,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import datasource.DataBase;
+import domain.Hardware;
 
 /**
- * <h1>HardwareDao</h1> Clase que implementa los metodos de la interfaz
- * IHardwareDao para dar el funcionamiento adecuado a la conexión con la base de
- * datos.
+ * <h1>HardwareDao</h1> Clase que implementa los metodos de la interfaz IHardwareDao para dar el
+ * funcionamiento adecuado a la conexión con la base de datos.
  * 
  * @author Ángel Sánchez
  * @version 1.0
@@ -57,11 +53,11 @@ public class HardwareDao implements IHardwareDao {
       while (result.next()) {
 
         numeroSerie = result.getString("serie");
-        tipo = result.getString("numeroLicencias");
-        descripcion = result.getString("fechaInicio");
-        estado = result.getString("fechaFin");
-        modelo = result.getString("clave");
-        numeroInventario = result.getString("proveedor");
+        tipo = result.getString("tipo");
+        descripcion = result.getString("descripcion");
+        estado = result.getString("estado");
+        modelo = result.getString("modelo");
+        numeroInventario = result.getString("numeroInventario");
 
         hardware = new Hardware(numeroSerie, tipo, modelo, numeroInventario, estado, descripcion);
 
@@ -79,8 +75,7 @@ public class HardwareDao implements IHardwareDao {
   /**
    * Devuelve un solo registro de hardware, basandose en el parámetro recibido.
    * 
-   * @param noInventario Número de inventario que tiene asignado el hardware en la
-   *                     base de datos
+   * @param noInventario Número de inventario que tiene asignado el hardware en la base de datos
    * @return Objeto encontrado en la base de datos
    */
   @Override
@@ -124,7 +119,7 @@ public class HardwareDao implements IHardwareDao {
   @Override
   public boolean registrarHardware(Hardware nuevo) {
     boolean agregado = false;
-    query = "INSERT INTO hardware VALUES (?,?,?,?,?,?)";
+    query = "INSERT INTO hardware VALUES (?,?,?,?,?,?,?,?)";
     connection = DataBase.getDataBaseConnection();
 
     try {
@@ -136,10 +131,11 @@ public class HardwareDao implements IHardwareDao {
       statement.setString(4, nuevo.getEstado());
       statement.setString(5, nuevo.getModelo());
       statement.setString(6, nuevo.getNumeroInventario());
+      statement.setString(7, "Area1");
+      statement.setString(8, "licencia1");
 
       statement.executeUpdate();
       agregado = true;
-      return agregado;
 
     } catch (SQLException ex) {
       Logger.getLogger(Hardware.class.getName()).log(Level.SEVERE, null, ex);
@@ -154,13 +150,12 @@ public class HardwareDao implements IHardwareDao {
    * Borra un registro en la base de datos, basandose en el parámetro recibido.
    * 
    * @param noInventario Se usa para encontrar el hardware que se desea eliminar
-   * @return true en caso de realizar exitósamente la eliminación del registro de
-   *         hardware
+   * @return true en caso de realizar exitósamente la eliminación del registro de hardware
    */
   @Override
   public boolean eliminarHardware(String noInventario) {
     boolean eliminado = false;
-    query = "SELECT FROM hardware where numeroInventario = ?";
+    query = "Delete FROM hardware where numeroInventario = ?";
     connection = DataBase.getDataBaseConnection();
 
     try {
@@ -188,7 +183,8 @@ public class HardwareDao implements IHardwareDao {
   @Override
   public boolean modificarHardware(Hardware hardware) {
     boolean modificado = false;
-    query = "UPDATE hardware set serie = ?, tipo = ?, descripcion = ?, estado = ?, modelo = ?" + "nuneroInventario";
+    query = "UPDATE hardware set serie = ?, tipo = ?, descripcion = ?, estado = ?, modelo = ?"
+        + "nuneroInventario";
     connection = DataBase.getDataBaseConnection();
 
     try {
@@ -215,21 +211,19 @@ public class HardwareDao implements IHardwareDao {
   @Override
   public boolean validar(String noInventario) {
     boolean existe = false;
-    query = "SELECT * FROM licencia WHERE numeroInventario = ?";
+    query = "SELECT * FROM hardware WHERE numeroInventario = ?";
     connection = DataBase.getDataBaseConnection();
 
     try {
       PreparedStatement statement = connection.prepareStatement(query);
       statement.setString(1, noInventario);
-      statement.executeQuery();
-      existe = true;
-      return existe;
+      existe = statement.execute();
     } catch (SQLException ex) {
       Logger.getLogger(LicenciaDao.class.getName()).log(Level.SEVERE, null, ex);
     } finally {
       DataBase.closeConnection();
     }
-    
+
     return existe;
   }
 }

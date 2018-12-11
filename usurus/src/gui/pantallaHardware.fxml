@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.cell.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -44,11 +48,12 @@
                 </TableColumn>
               </columns>
             </TableView>
-            <Button fx:id="bagregar" layoutX="760.0" layoutY="73.0" mnemonicParsing="false" onAction="#cargarPantallaAgregarHardware" prefHeight="39.0" prefWidth="116.0" text="Agregar" />
-            <Button fx:id="beliminar" layoutX="760.0" layoutY="142.0" mnemonicParsing="false" onAction="#eliminarHardware" prefHeight="39.0" prefWidth="116.0" text="Eliminar " />
-            <Button fx:id="bmodificar" layoutX="760.0" layoutY="216.0" mnemonicParsing="false" onAction="#cargarPantallaModificarHardware" prefHeight="39.0" prefWidth="116.0" text="Modificar " />
-            <Button fx:id="bbuscar" layoutX="760.0" layoutY="284.0" mnemonicParsing="false" onAction="#cargarPantallaBuscarHardware" prefHeight="39.0" prefWidth="116.0" text="Buscar" />
-            <Button fx:id="bsalir" layoutX="760.0" layoutY="355.0" mnemonicParsing="false" onAction="#botonSalir" prefHeight="39.0" prefWidth="116.0" text="Salir" />
+            <Button fx:id="bagregar" layoutX="787.0" layoutY="76.0" mnemonicParsing="false" onAction="#cargarPantallaAgregarHardware" prefHeight="39.0" prefWidth="116.0" text="Agregar" />
+            <Button fx:id="beliminar" layoutX="787.0" layoutY="142.0" mnemonicParsing="false" onAction="#eliminarHardwareSeleccionado" prefHeight="39.0" prefWidth="116.0" text="Eliminar " />
+            <Button fx:id="bmodificar" layoutX="787.0" layoutY="215.0" mnemonicParsing="false" onAction="#cargarPantallaModificarHardware" prefHeight="39.0" prefWidth="116.0" text="Modificar " />
+            <Button fx:id="bbuscar" layoutX="787.0" layoutY="340.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="116.0" text="Buscar" />
+            <Button fx:id="bsalir" layoutX="787.0" layoutY="520.0" mnemonicParsing="false" onAction="#cargarPantallaPrincipal" prefHeight="39.0" prefWidth="116.0" text="Salir" />
+            <TextField layoutX="773.0" layoutY="308.0" promptText="Número de inventario" />
          </children>
       </AnchorPane>
    </children>

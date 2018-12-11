@@ -1,12 +1,15 @@
 package gui;
 
-import dao.HardwareDao;
-import domain.Hardware;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import dao.HardwareDao;
+import domain.Hardware;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -14,13 +17,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 /**
  * Clase que da funcionamiento a la pantalla principal del hardware.
+ * 
  * @author Ángel Sánchez
  * @version 1.0
  *
@@ -44,13 +48,55 @@ public class PantallaHardwareControlador implements Initializable {
 
   @FXML
   private Button bsalir;
-  
+
+  @FXML
+  private TextField txtBuscar;
+
   @FXML
   private void closeButtonAction() {
 
     Stage stage = (Stage) bbuscar.getScene().getWindow();
 
     stage.close();
+  }
+
+  /**
+   * Metodo para buscar un registro de hardware.
+   */
+  @FXML
+  public void buscar() {
+    HardwareDao hardwareDao = new HardwareDao();
+    ObservableList<Hardware> listaObservable = FXCollections
+        .observableArrayList(hardwareDao.obtenerHardware(txtBuscar.getText()));
+    tbHardware.setItems(listaObservable);
+    tbHardware.setDisable(false);
+  }
+
+  /**
+   * Da funcionamiento al botón "Buscar".
+   */
+  public void buscarHardware() {
+    HardwareDao hardwareDao = new HardwareDao();
+    List<Hardware> lista = new ArrayList<Hardware>();
+    lista.add(hardwareDao.obtenerHardware(txtBuscar.getText()));
+    ObservableList<Hardware> listaObservable = FXCollections.observableArrayList(lista);
+    tbHardware.setItems(listaObservable);
+    tbHardware.setDisable(false);
+    desplegarTabla();
+  }
+
+  /**
+   * Metodo para Eliminar un registro en la tabla de hardware.
+   */
+  @FXML
+  public void eliminarHardwareSeleccionado() {
+    HardwareDao hardwaredao = new HardwareDao();
+    Hardware hardwareSeleccionado;
+    hardwareSeleccionado = tbHardware.getSelectionModel().getSelectedItem();
+    if (hardwareSeleccionado != null) {
+      hardwaredao.eliminarHardware(hardwareSeleccionado.getNumeroInventario());
+      desplegarTabla();
+    }
   }
 
   /**
@@ -72,17 +118,16 @@ public class PantallaHardwareControlador implements Initializable {
     }
   }
 
-  /**
-   * Iniciar la pantalla para buscar registro en base de datos.
-   */
   @FXML
-  public void cargarPantallaBuscarHardware() {
+  public void cargarPantallaPrincipal() {
+
     Stage stage = new Stage();
     try {
-      Parent root = FXMLLoader.load(getClass().getResource("PantallaHardwareBuscar.fxml"));
+      Parent root = FXMLLoader.load(getClass().getResource("pantallaMain.fxml"));
       Scene scene = new Scene(root);
 
       stage.setScene(scene);
+
       stage.show();
       closeButtonAction();
 
@@ -91,45 +136,14 @@ public class PantallaHardwareControlador implements Initializable {
     }
   }
 
-  /**
-   * Inicia la pantalla cuando se desea eliminar un registro de hardware.
-   */
-  @FXML
-  public void cargarPantallaEliminarHardware() {
-    Stage stage = new Stage();
-    try {
-      Parent root = FXMLLoader.load(getClass().getResource("PantallaHardwareEliminar.fxml"));
-      Scene scene = new Scene(root);
-
-      stage.setScene(scene);
-      stage.show();
-      closeButtonAction();
-
-    } catch (IOException ex) {
-      Logger.getLogger(PantallaHardwareControlador.class.getName()).log(Level.SEVERE, null, ex);
-    }
-  }
-
-  
-  @FXML
-  public void eliminarHardware() {
-    Hardware hardware = tbHardware.getSelectionModel().getSelectedItem();
-    HardwareDao hardwareDao = new HardwareDao();
-    hardwareDao.eliminarHardware(hardware.getNumeroInventario());
-
-    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-    alert.setTitle("INFORMACIÓN");
-    alert.setHeaderText("Hardware Eliminado");
-    alert.setContentText("El hardware ha sido eliminada");
-
-    alert.showAndWait();
-  }
-  
   @FXML
   public void botonSalir() {
     System.exit(1);
   }
 
+  /**
+   * Inicia la pantalla para modificar un hardware.
+   */
   @FXML
   public void cargarPantallaModificarHardware() {
     Stage stage = new Stage();
@@ -150,10 +164,18 @@ public class PantallaHardwareControlador implements Initializable {
   public void initialize(URL arg0, ResourceBundle arg1) {
 
     HardwareDao hardwareDao = new HardwareDao();
-    ObservableList<Hardware> listaObservable = 
-        FXCollections.observableArrayList(hardwareDao.obtenerHardware());
+    ObservableList<Hardware> listaObservable = FXCollections.observableArrayList(hardwareDao.obtenerHardware());
     tbHardware.setItems(listaObservable);
     tbHardware.setDisable(false);
-    
+  }
+
+  ObservableList<Hardware> desplegarTabla() {
+
+    HardwareDao hardwareDao = new HardwareDao();
+    ObservableList<Hardware> listaObservable = FXCollections.observableArrayList(hardwareDao.obtenerHardware());
+    tbHardware.setItems(listaObservable);
+    tbHardware.setDisable(false);
+
+    return listaObservable;
   }
 }
