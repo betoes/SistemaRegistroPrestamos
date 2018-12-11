@@ -124,6 +124,12 @@ public class PantallaLicenciaModificarControlador implements Initializable {
         txtCaracter.setText(licencia.getCaracter());
         cbTipoLicencia.setPromptText(licencia.getTipoLicenciamiento());
 
+        txtIdLicencia.setDisable(false);
+        txtNoLicencia.setDisable(false);
+        txtClave.setDisable(false);
+        txtCaracter.setDisable(false);
+        btGuardar.setDisable(false);
+
       } else {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(INFORMACION);
@@ -356,6 +362,11 @@ public class PantallaLicenciaModificarControlador implements Initializable {
     tipoTextoStringNumerico(txtClave);
     tipoTextoString(txtCaracter);
 
+    txtIdLicencia.setDisable(true);
+    txtNoLicencia.setDisable(true);
+    txtClave.setDisable(true);
+    txtCaracter.setDisable(true);
+    btGuardar.setDisable(true);
   }
 
 }

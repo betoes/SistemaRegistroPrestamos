@@ -117,6 +117,7 @@ public class PantallaLicenciaEliminarControlador implements Initializable {
         txtProveedor.setText(licencia.getProveedor());
         txtCaracter.setText(licencia.getCaracter());
         txtTipoLicencia.setText(licencia.getTipoLicenciamiento());
+        btEliminar.setDisable(false);
       } else {
 
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -187,6 +188,7 @@ public class PantallaLicenciaEliminarControlador implements Initializable {
     txtProveedor.setDisable(true);
     txtCaracter.setDisable(true);
     txtTipoLicencia.setDisable(true);
+    btEliminar.setDisable(true);
 
   }
 

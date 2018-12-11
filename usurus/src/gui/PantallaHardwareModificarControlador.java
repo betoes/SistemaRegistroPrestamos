@@ -1,12 +1,12 @@
 package gui;
 
-import dao.HardwareDao;
-import domain.Hardware;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import dao.HardwareDao;
+import domain.Hardware;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -69,7 +69,8 @@ public class PantallaHardwareModificarControlador implements Initializable {
       closeButtonAction();
 
     } catch (IOException ex) {
-      Logger.getLogger(PantallaHardwareModificarControlador.class.getName()).log(Level.SEVERE, null, ex);
+      Logger.getLogger(PantallaHardwareModificarControlador.class.getName()).log(Level.SEVERE, null,
+          ex);
     }
   }
 
@@ -96,6 +97,12 @@ public class PantallaHardwareModificarControlador implements Initializable {
         txtNumeroInventario.setText(hardware.getNumeroInventario());
         cbEstado.setPromptText(hardware.getEstado());
         txtDescripcion.setText(hardware.getDescripcion());
+
+        txtDescripcion.setDisable(false);
+        txtModelo.setDisable(false);
+        txtNumeroInventario.setDisable(false);
+        txtNumeroSerie.setDisable(false);
+        bguardar.setDisable(false);
       }
     } catch (NullPointerException npe) {
       Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -150,7 +157,7 @@ public class PantallaHardwareModificarControlador implements Initializable {
   public boolean validarTextoVacio() {
     boolean vacio = true;
 
-    if (txtNumeroSerie.getText().equals("") 
+    if (txtNumeroSerie.getText().equals("")
         || cbTipo.getSelectionModel().getSelectedItem().equals(null)
         || txtModelo.getText().equals("") || txtNumeroInventario.getText().equals("")
         || cbEstado.getValue().equals("")) {
@@ -172,6 +179,13 @@ public class PantallaHardwareModificarControlador implements Initializable {
   public void initialize(URL arg0, ResourceBundle arg1) {
     cbTipo.getItems().addAll("CPU", "Video proyector", "LAPTOP", "Impresora");
     cbEstado.getItems().addAll("Nuevo", "En resguardo", "De baja", "En mantenimiento");
+
+    txtDescripcion.setDisable(true);
+    txtModelo.setDisable(true);
+    txtNumeroInventario.setDisable(true);
+    txtNumeroSerie.setDisable(true);
+    bguardar.setDisable(true);
+
   }
 
 }
