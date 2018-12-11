@@ -107,6 +107,7 @@ public class PantallaLicenciaEliminarControlador implements Initializable {
 
     if (!id.equals("")) {
       if (licenciaDao.existe(id)) {
+
         Licencia licencia = licenciaDao.obtenerLicencia(id);
 
         txtIdLicencia.setText(licencia.getIdLicencia());
@@ -118,6 +119,7 @@ public class PantallaLicenciaEliminarControlador implements Initializable {
         txtCaracter.setText(licencia.getCaracter());
         txtTipoLicencia.setText(licencia.getTipoLicenciamiento());
         btEliminar.setDisable(false);
+
       } else {
 
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -147,14 +149,25 @@ public class PantallaLicenciaEliminarControlador implements Initializable {
     String id = txtIdLicencia.getText();
 
     if (!id.equals("")) {
-      licenciaDao.eliminarLicencia(id);
+      if (licenciaDao.existeHardware(id) || licenciaDao.existeSoftware(id)) {
 
-      Alert alert = new Alert(Alert.AlertType.INFORMATION);
-      alert.setTitle(INFORMACION);
-      alert.setHeaderText("Licencia Eliminada");
-      alert.setContentText("La licencia ha sido eliminada");
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(INFORMACION);
+        alert.setHeaderText("Ocupado");
+        alert.setContentText("El identificador: " + id + " esta ocupado en hardware o software");
 
-      alert.showAndWait();
+        alert.showAndWait();
+
+      } else {
+        licenciaDao.eliminarLicencia(id);
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(INFORMACION);
+        alert.setHeaderText("Licencia Eliminada");
+        alert.setContentText("La licencia ha sido eliminada");
+
+        alert.showAndWait();
+      }
     } else {
       Alert alert = new Alert(Alert.AlertType.INFORMATION);
       alert.setTitle(INFORMACION);

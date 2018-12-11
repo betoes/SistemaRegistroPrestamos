@@ -266,4 +266,63 @@ public class LicenciaDao implements ILicenciaDao {
     return existe;
   }
 
+  /**
+   * metodo para verficar si existe licencia en hardware.
+   * 
+   * @param id identificador de la licencia
+   */
+  @Override
+  public boolean existeHardware(String id) {
+
+    boolean existe = false;
+    query = "Select * from hardware where Licencia_idLicencia = ?";
+    connection = DataBase.getDataBaseConnection();
+
+    try {
+      PreparedStatement statement = connection.prepareStatement(query);
+      statement.setString(1, id);
+
+      ResultSet result = statement.executeQuery();
+
+      existe = result.next();
+
+
+    } catch (SQLException ex) {
+      Logger.getLogger(LicenciaDao.class.getName()).log(Level.SEVERE, null, ex);
+    } finally {
+      DataBase.closeConnection();
+    }
+
+    return existe;
+  }
+
+  /**
+   * metodo para verficar si existe licencia en software.
+   * 
+   * @param id identificador de la licencia
+   */
+  @Override
+  public boolean existeSoftware(String id) {
+
+    boolean existe = false;
+    query = "Select * from software where Licencia_idLicencia = ?";
+    connection = DataBase.getDataBaseConnection();
+
+    try {
+      PreparedStatement statement = connection.prepareStatement(query);
+      statement.setString(1, id);
+
+      ResultSet result = statement.executeQuery();
+
+      existe = result.next();
+
+
+    } catch (SQLException ex) {
+      Logger.getLogger(LicenciaDao.class.getName()).log(Level.SEVERE, null, ex);
+    } finally {
+      DataBase.closeConnection();
+    }
+
+    return existe;
+  }
 }

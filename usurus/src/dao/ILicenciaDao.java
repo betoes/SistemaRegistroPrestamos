@@ -17,4 +17,8 @@ public interface ILicenciaDao {
 
   boolean existe(String id);
 
+  boolean existeHardware(String id);
+
+  boolean existeSoftware(String id);
+
 }
